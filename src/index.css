@@ -31,3 +31,23 @@
 }
 
 
+/* SERVICES OVERVIEW */
+/* Neumorphic Shadows */
+.shadow-soft {
+    box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff;
+}
+
+.shadow-softInset {
+    box-shadow: inset 8px 8px 16px #d1d9e6, inset -8px -8px 16px #ffffff;
+}
+
+/* Smooth transitions */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Custom background for cards */
+.bg-neuro-card {
+    background: linear-gradient(145deg, #ffffff, #f5f7fa);
+    border: 1px solid #e2e8f0;
+}

@@ -1,9 +1,11 @@
 import HeroSection from "../../components/home/HeroSection";
+import ServicesOverview from "../../components/home/ServicesOverview";
 
 const Home = () => {
     return (
-        <div className="pt-10 lg:pt-0">
+        <div className="pt-10 lg:pt-7">
             <HeroSection />
+            <ServicesOverview />
         </div>
     );
 };
