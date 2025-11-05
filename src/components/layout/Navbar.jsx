@@ -101,7 +101,7 @@ const Navbar = () => {
                     }`}
             >
                 <div className="flex flex-col h-full">
-                    <div className="px-5 py-2 border-b border-gray-300">
+                    <div className="px-5 py-2">
                         <div className="flex items-center space-x-3">
                             <div className="w-12 h-11 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
                                 {/* <span className="text-blue-600 font-semibold text-xl">MAK</span> */}
@@ -112,10 +112,11 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
+                    <div className='border-b border-gray-100 drop-shadow'></div>
 
                     <div className="flex-1 overflow-y-auto p-4">
                         <div onClick={closeSidebar}>
-                            <ul className="space-y-3 px-4 py-3 rounded-xl bg-[#e0e5ec] hover:shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] cursor-pointer">
+                            <ul className="space-y-3 cursor-pointer">
                                 <Sidebar />
                             </ul>
                         </div>
