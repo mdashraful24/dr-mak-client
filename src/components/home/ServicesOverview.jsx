@@ -90,7 +90,7 @@ const ServicesOverview = () => {
                             className="group bg-white rounded-3xl border border-gray-200 shadow-soft hover:shadow-softInset transition-all duration-500 transform hover:-translate-y-2 p-6"
                         >
                             {/* Icon Container */}
-                            <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 shadow-sm flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 shadow-neumorphic-inset flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300">
                                 {service.icon}
                             </div>
 
@@ -113,7 +113,7 @@ const ServicesOverview = () => {
                                     {service.procedures.map((procedure, idx) => (
                                         <span
                                             key={idx}
-                                            className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-200"
+                                            className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100 shadow-neumorphic-inset"
                                         >
                                             {procedure}
                                         </span>
@@ -125,26 +125,6 @@ const ServicesOverview = () => {
                             <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-blue-200 transition-all duration-300 pointer-events-none"></div>
                         </div>
                     ))}
-                </div>
-
-                {/* CTA Section */}
-                <div className="text-center mt-20">
-                    <div className="bg-linear-to-r from-blue-600 to-blue-700 rounded-3xl p-8 shadow-2xl">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                            Ready to Discuss Your Neurosurgical Needs?
-                        </h3>
-                        <p className="text-blue-100 text-lg mb-6 max-w-2xl mx-auto">
-                            Schedule a consultation with our board-certified neurosurgeon to explore your treatment options.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                                Book Consultation
-                            </button>
-                            <button className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-2xl hover:bg-white hover:text-blue-600 transition-all duration-300">
-                                Call Now: (555) 123-4567
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

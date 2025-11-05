@@ -41,9 +41,10 @@
     box-shadow: inset 8px 8px 16px #d1d9e6, inset -8px -8px 16px #ffffff;
 }
 
-/* Smooth transitions */
-* {
-    transition: all 0.3s ease;
+.neumorphic-card-inset {
+    background: #e6e9ef;
+    border-radius: 20px;
+    box-shadow: inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff;
 }
 
 /* Custom background for cards */
@@ -51,3 +52,5 @@
     background: linear-gradient(145deg, #ffffff, #f5f7fa);
     border: 1px solid #e2e8f0;
 }
+
+/*  CONTACT INFO SECTION */
