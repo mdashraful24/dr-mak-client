@@ -3,7 +3,7 @@ import ServicesOverview from "../../components/home/ServicesOverview";
 
 const Home = () => {
     return (
-        <div className="pt-10 lg:pt-7">
+        <div className="pt-24">
             <HeroSection />
             <ServicesOverview />
         </div>
