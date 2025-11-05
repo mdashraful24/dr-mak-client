@@ -1,9 +1,45 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Menu, Bell, User, LogOut } from 'lucide-react';
 import Sidebar from './Sidebar';
 
 const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const sidebarRef = useRef(null);
+
+    // Close sidebar when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setIsSidebarOpen(false);
+            }
+        };
+
+        // Close sidebar when pressing Escape key
+        const handleEscapeKey = (event) => {
+            if (event.key === 'Escape') {
+                setIsSidebarOpen(false);
+            }
+        };
+
+        if (isSidebarOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('keydown', handleEscapeKey);
+            // Prevent body scroll when sidebar is open on mobile
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keydown', handleEscapeKey);
+            document.body.style.overflow = 'unset';
+        };
+    }, [isSidebarOpen]);
+
+    const closeSidebar = () => {
+        setIsSidebarOpen(false);
+    };
 
     return (
         <>
@@ -21,7 +57,7 @@ const Navbar = () => {
 
                         <div className="flex items-center space-x-3">
                             <div className="w-11 h-10 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                <span className="text-blue-600 font-semibold text-lg">MAK</span>
+                                {/* <span className="text-blue-600 font-semibold text-lg">MAK</span> */}
                             </div>
                             <div className="hidden md:block">
                                 {/* <h1 className="text-xl font-bold">MediCare</h1>
@@ -60,6 +96,7 @@ const Navbar = () => {
 
             {/* Sidebar */}
             <div
+                ref={sidebarRef}
                 className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#e0e5ec] transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0 shadow-[6px_6px_8px_#babecc,-2px_-2px_2px_#ffffff]' : '-translate-x-full'
                     }`}
             >
@@ -67,7 +104,7 @@ const Navbar = () => {
                     <div className="px-5 py-2 border-b border-gray-300">
                         <div className="flex items-center space-x-3">
                             <div className="w-12 h-11 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                <span className="text-blue-600 font-semibold text-xl">MAK</span>
+                                {/* <span className="text-blue-600 font-semibold text-xl">MAK</span> */}
                             </div>
                             <div>
                                 {/* <h1 className="text-xl font-semibold">MediCare</h1>
@@ -76,25 +113,31 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    <div className="flex-1 overflow-y-auto p-4" onClick={() => setIsSidebarOpen(false)}>
-                        <ul className="space-y-3 px-4 py-3 rounded-xl bg-[#e0e5ec] hover:shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] cursor-pointer">
-                            <Sidebar />
-                        </ul>
+                    <div className="flex-1 overflow-y-auto p-4">
+                        <div onClick={closeSidebar}>
+                            <ul className="space-y-3 px-4 py-3 rounded-xl bg-[#e0e5ec] hover:shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] cursor-pointer">
+                                <Sidebar />
+                            </ul>
+                        </div>
                     </div>
 
-                    <div className="p-4 border-t border-gray-300" onClick={() => setIsSidebarOpen(false)}>
-                        <button className="w-full text-left px-4 py-3 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 font-medium transition duration-200 flex items-center gap-3 cursor-pointer">
-                            <LogOut size={18}/>
+                    <div className="p-4 border-t border-gray-300">
+                        <button
+                            onClick={closeSidebar}
+                            className="w-full text-left px-4 py-3 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 font-medium transition duration-200 flex items-center gap-3 cursor-pointer"
+                        >
+                            <LogOut size={18} />
                             <span>Logout</span>
                         </button>
                     </div>
                 </div>
             </div>
 
+            {/* Overlay */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 bg-white bg-opacity-30 z-40 lg:hidden"
-                    onClick={() => setIsSidebarOpen(false)}
+                    className="fixed inset-0 backdrop-blur-xs z-40"
+                    onClick={closeSidebar}
                 />
             )}
         </>
