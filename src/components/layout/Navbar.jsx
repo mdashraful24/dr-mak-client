@@ -112,7 +112,7 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='border-b border-gray-100 drop-shadow'></div>
+                    <div className='border-b border-gray-300 drop-shadow'></div>
 
                     <div className="flex-1 overflow-y-auto p-4">
                         <div onClick={closeSidebar}>
