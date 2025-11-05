@@ -1,2 +1,33 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+/* HERO SECTION */
+/* Neumorphic Shadows */
+.shadow-neumorphic {
+    box-shadow: 20px 20px 60px #d1d9e6, -20px -20px 60px #ffffff;
+}
+
+.shadow-neumorphic-inset {
+    box-shadow: inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff;
+}
+
+.shadow-neumorphic-soft {
+    box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff;
+}
+
+.shadow-neumorphic-soft-inset {
+    box-shadow: inset 8px 8px 16px #d1d9e6, inset -8px -8px 16px #ffffff;
+}
+
+/* Smooth transitions */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Custom background for neumorphic elements */
+.bg-neumorphic {
+    background: #e6e9ef;
+}
+
+

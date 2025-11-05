@@ -44,7 +44,7 @@ const Navbar = () => {
     return (
         <>
             {/* Navbar */}
-            <nav className="bg-[#e0e5ec] shadow-[5px_5px_6px_#babecc,-5px_-5px_5px_#ffffff] px-4 py-2">
+            <nav className="bg-[#e0e5ec] shadow-[5px_5px_6px_#babecc,-5px_-5px_5px_#ffffff] px-4 py-2.5">
                 <div className="flex items-center justify-between">
                     {/* Left side */}
                     <div className="flex items-center space-x-4">
