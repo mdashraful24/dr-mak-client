@@ -1,5 +1,6 @@
 import ContactInfo from "../../components/home/ContactInfo";
 import HeroSection from "../../components/home/HeroSection";
+import Reviews from "../../components/home/Reviews";
 import ServicesOverview from "../../components/home/ServicesOverview";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
             <HeroSection />
             <ServicesOverview />
             <ContactInfo />
+            <Reviews />
         </div>
     );
 };

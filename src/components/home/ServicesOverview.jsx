@@ -72,7 +72,7 @@ const ServicesOverview = () => {
                         <span className="text-sm font-medium text-blue-700">Specialized Neurosurgical Care</span>
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
                         Comprehensive <span className="text-blue-600">Neurosurgical</span> Services
                     </h2>
 
