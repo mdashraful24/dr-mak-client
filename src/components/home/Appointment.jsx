@@ -2,15 +2,15 @@ const Appointment = () => {
     return (
         <div className="bg-gray-100 py-20 px-4">
             <div className="container mx-auto">
-                <div className="rounded-3xl p-6 shadow-neumorphic border-l border-t border-gray-200">
+                <div className="md:rounded-3xl md:p-6 md:shadow-neumorphic md:border-l md:border-t md:border-gray-200">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Left Side - Information */}
                         <div className="space-y-8">
                             <div>
-                                <h1 className="text-4xl font-bold text-gray-800 mb-6">
+                                <h1 className="text-4xl md:text-5xl font-bold mb-6">
                                     Book Your <span className="text-blue-600">Appointment</span>
                                 </h1>
-                                <p className="text-gray-600 text-lg leading-relaxed">
+                                <p className="text-gray-700 text-lg leading-relaxed">
                                     Schedule your visit with our experienced healthcare professionals.
                                     We provide comprehensive medical care with a personal touch.
                                     Your health is our priority.
@@ -25,8 +25,8 @@ const Appointment = () => {
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-gray-500 text-sm">Call us</p>
-                                        <p className="text-gray-800 font-semibold text-lg">+1 (555) 123-4567</p>
+                                        <p className="text-gray-600 text-sm">Call us</p>
+                                        <p className="font-semibold text-lg">+1 (555) 123-4567</p>
                                     </div>
                                 </div>
 
@@ -38,15 +38,15 @@ const Appointment = () => {
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-gray-500 text-sm">Visit us</p>
-                                        <p className="text-gray-800 font-semibold text-lg">123 Healthcare St, Medical City</p>
+                                        <p className="text-gray-600 text-sm">Visit us</p>
+                                        <p className="font-semibold text-lg">123 Healthcare St, Medical City</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="p-6 rounded-2xl bg-gray-100 shadow-neumorphic">
-                                <h3 className="text-xl font-semibold text-gray-800 mb-4">Why Choose Us?</h3>
-                                <ul className="space-y-3 text-gray-600">
+                                <h3 className="text-xl font-semibold mb-4">Why Choose Us?</h3>
+                                <ul className="space-y-3 text-gray-700">
                                     <li className="flex items-center">
                                         <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
                                         Experienced medical professionals
@@ -76,7 +76,7 @@ const Appointment = () => {
                             <form className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-gray-600 text-sm font-medium mb-2">
+                                        <label className="block text-sm font-medium mb-2">
                                             Full Name
                                         </label>
                                         <input
@@ -87,7 +87,7 @@ const Appointment = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-gray-600 text-sm font-medium mb-2">
+                                        <label className="block text-sm font-medium mb-2">
                                             Email Address
                                         </label>
                                         <input
@@ -99,7 +99,7 @@ const Appointment = () => {
                                 </div>
 
                                 <div>
-                                    <label className="block text-gray-600 text-sm font-medium mb-2">
+                                    <label className="block text-sm font-medium mb-2">
                                         Mobile Number
                                     </label>
                                     <input
@@ -111,7 +111,7 @@ const Appointment = () => {
 
                                 {/* Custom Doctor Dropdown */}
                                 <div className="relative">
-                                    <label className="block text-gray-600 text-sm font-medium mb-2">
+                                    <label className="block text-sm font-medium mb-2">
                                         Select Doctor
                                     </label>
                                     <div className="relative">
@@ -135,7 +135,7 @@ const Appointment = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {/* Custom Date Picker */}
                                     <div className="relative">
-                                        <label className="block text-gray-600 text-sm font-medium mb-2">
+                                        <label className="block text-sm font-medium mb-2">
                                             Preferred Date
                                         </label>
                                         <div className="relative">
@@ -154,32 +154,12 @@ const Appointment = () => {
 
                                     {/* Custom Time Picker */}
                                     <div className="relative">
-                                        <label className="block text-gray-600 text-sm font-medium mb-2">
+                                        <label className="block text-sm font-medium mb-2">
                                             Preferred Time
                                         </label>
                                         <div className="relative">
                                             <select className="w-full px-4 py-3 rounded-xl bg-gray-100 shadow-neumorphic-inset border-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 appearance-none cursor-pointer custom-select">
                                                 <option value="">Select time</option>
-                                                <optgroup label="Morning" className="text-gray-700">
-                                                    <option value="08:00">8:00 AM</option>
-                                                    <option value="08:30">8:30 AM</option>
-                                                    <option value="09:00">9:00 AM</option>
-                                                    <option value="09:30">9:30 AM</option>
-                                                    <option value="10:00">10:00 AM</option>
-                                                    <option value="10:30">10:30 AM</option>
-                                                    <option value="11:00">11:00 AM</option>
-                                                    <option value="11:30">11:30 AM</option>
-                                                </optgroup>
-                                                <optgroup label="Afternoon" className="text-gray-700">
-                                                    <option value="12:00">12:00 PM</option>
-                                                    <option value="12:30">12:30 PM</option>
-                                                    <option value="13:00">1:00 PM</option>
-                                                    <option value="13:30">1:30 PM</option>
-                                                    <option value="14:00">2:00 PM</option>
-                                                    <option value="14:30">2:30 PM</option>
-                                                    <option value="15:00">3:00 PM</option>
-                                                    <option value="15:30">3:30 PM</option>
-                                                </optgroup>
                                                 <optgroup label="Evening" className="text-gray-700">
                                                     <option value="16:00">4:00 PM</option>
                                                     <option value="16:30">4:30 PM</option>
@@ -199,7 +179,7 @@ const Appointment = () => {
 
                                 {/* Custom Service Required Dropdown */}
                                 <div className="relative">
-                                    <label className="block text-gray-600 text-sm font-medium mb-2">
+                                    <label className="block text-sm font-medium mb-2">
                                         Service Required
                                     </label>
                                     <div className="relative">

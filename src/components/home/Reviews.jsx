@@ -133,7 +133,7 @@ const Reviews = () => {
                         <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-500 rounded-full mr-2"></div>
                         <span className="text-xs md:text-sm font-medium">Trusted Healthcare Since 2010</span>
                     </div>
-                    <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4 md:mb-6">
                         Patient Experiences
                     </h1>
                     <p className="text-base md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
