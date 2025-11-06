@@ -1,3 +1,4 @@
+import Appointment from "../../components/home/Appointment";
 import ContactInfo from "../../components/home/ContactInfo";
 import HeroSection from "../../components/home/HeroSection";
 import Reviews from "../../components/home/Reviews";
@@ -10,6 +11,7 @@ const Home = () => {
             <ServicesOverview />
             <ContactInfo />
             <Reviews />
+            <Appointment />
         </div>
     );
 };
