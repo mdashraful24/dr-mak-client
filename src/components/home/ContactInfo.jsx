@@ -22,7 +22,7 @@ const ContactInfo = () => {
                 {/* Information Boxes Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* Opening Hours Box */}
-                    <div className="bg-white rounded-3xl shadow-soft p-8 text-center group hover:shadow-softInset transition-all duration-300">
+                    <div className="bg-white rounded-3xl shadow-soft p-8 text-center group hover:shadow-softInset transition-all duration-300 border border-gray-200">
                         <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-green-50 to-green-100 border border-green-200 shadow-neumorphic-inset flex items-center justify-center text-green-600 mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -52,7 +52,7 @@ const ContactInfo = () => {
                     </div>
 
                     {/* Our Location Box */}
-                    <div className="bg-white rounded-3xl shadow-soft p-8 text-center group hover:shadow-softInset transition-all duration-300">
+                    <div className="bg-white rounded-3xl shadow-soft p-8 text-center group hover:shadow-softInset transition-all duration-300 border border-gray-200">
                         <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 shadow-neumorphic-inset flex items-center justify-center text-blue-600 mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -76,7 +76,7 @@ const ContactInfo = () => {
                     </div>
 
                     {/* Contact Us Box */}
-                    <div className="bg-white rounded-3xl shadow-soft p-8 text-center group hover:shadow-softInset transition-all duration-300">
+                    <div className="bg-white rounded-3xl shadow-soft p-8 text-center group hover:shadow-softInset transition-all duration-300 border border-gray-200">
                         <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-orange-50 to-orange-100 border border-orange-200 shadow-neumorphic-inset flex items-center justify-center text-orange-600 mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
                             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

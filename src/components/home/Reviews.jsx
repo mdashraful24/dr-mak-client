@@ -141,7 +141,7 @@ const Reviews = () => {
                     </p>
                 </div>
 
-                <div className='px-2'>
+                <div className='px-0 md:px-2 lg:px-0'>
                     {/* Carousel Container */}
                     <div className="relative h-80 md:h-96 lg:h-100 lg:mb-12">
                         <div className="absolute inset-0 flex items-center justify-center overflow-x-hidden">
@@ -154,7 +154,7 @@ const Reviews = () => {
                                     <div className={`rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 transition-all duration-500 
                                     ${index === activeIndex
                                             ? 'bg-linear-to-br from-white to-gray-100 shadow-soft-active md:scale-110'
-                                            : 'bg-linear-to-br from-gray-100 to-gray-200 shadow-soft'
+                                            : 'bg-linear-to-br from-gray-100 to-gray-200 shadow-soft-inactive'
                                         }`}>
 
                                         {/* User Header */}

@@ -55,12 +55,12 @@
 
 
 /*  REVIEWS SECTION */
-.shadow-soft {
-    box-shadow: 8px 8px 10px #d1d9e6, -8px -8px 10px #ffffff;
+.shadow-soft-inactive {
+    box-shadow: 8px 8px 10px #d1d9e6, -8px -8px 10px #d1d9e6;
 }
 
 .shadow-soft-active {
-    box-shadow: 8px 8px 10px #d1d9e6, -8px -8px 10px #ffffff,
+    box-shadow: 8px 8px 10px #d1d9e6, -8px -8px 10px #d1d9e6,
         0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 

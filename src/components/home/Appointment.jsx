@@ -2,7 +2,7 @@ const Appointment = () => {
     return (
         <div className="bg-gray-100 py-20 px-4">
             <div className="container mx-auto">
-                <div className="md:rounded-3xl md:p-6 md:shadow-neumorphic md:border-l md:border-t md:border-gray-200">
+                <div className="rounded-3xl p-6 neumorphic-card-inset border-r border-b border-gray-200">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Left Side - Information */}
                         <div className="space-y-8">
@@ -10,7 +10,7 @@ const Appointment = () => {
                                 <h1 className="text-4xl md:text-5xl font-bold mb-6">
                                     Book Your <span className="text-blue-600">Appointment</span>
                                 </h1>
-                                <p className="text-gray-700 text-lg leading-relaxed">
+                                <p className="text-gray-600 text-lg leading-relaxed">
                                     Schedule your visit with our experienced healthcare professionals.
                                     We provide comprehensive medical care with a personal touch.
                                     Your health is our priority.
@@ -18,33 +18,33 @@ const Appointment = () => {
                             </div>
 
                             <div className="space-y-6">
-                                <div className="flex items-center p-6 rounded-2xl bg-gray-100 shadow-neumorphic-inset hover:shadow-neumorphic transition-all duration-300">
-                                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100 shadow-neumorphic mr-4">
+                                <div className="flex items-center p-6 rounded-2xl bg-gray-100 shadow-neumorphic-inset transition-all duration-300">
+                                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100 shadow-neumorphic-inset mr-4">
                                         <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-gray-600 text-sm">Call us</p>
+                                        <p className="text-sm">Call us</p>
                                         <p className="font-semibold text-lg">+1 (555) 123-4567</p>
                                     </div>
                                 </div>
 
-                                <div className="flex items-center p-6 rounded-2xl bg-gray-100 shadow-neumorphic-inset hover:shadow-neumorphic transition-all duration-300">
-                                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100 shadow-neumorphic mr-4">
+                                <div className="flex items-center p-6 rounded-2xl bg-gray-100 shadow-neumorphic-inset transition-all duration-300">
+                                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gray-100  shadow-neumorphic-inset mr-4">
                                         <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-gray-600 text-sm">Visit us</p>
+                                        <p className="text-sm">Visit us</p>
                                         <p className="font-semibold text-lg">123 Healthcare St, Medical City</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="p-6 rounded-2xl bg-gray-100 shadow-neumorphic">
+                            <div className="p-6 rounded-2xl bg-gray-100 shadow-neumorphic-inset">
                                 <h3 className="text-xl font-semibold mb-4">Why Choose Us?</h3>
                                 <ul className="space-y-3 text-gray-700">
                                     <li className="flex items-center">
@@ -68,7 +68,7 @@ const Appointment = () => {
                         </div>
 
                         {/* Right Side - Appointment Form */}
-                        <div className="p-6 rounded-3xl bg-gray-100 shadow-neumorphic">
+                        <div className="p-6 rounded-3xl bg-gray-100 neumorphic-card-inset">
                             {/* <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">
                                 Schedule Appointment
                             </h2> */}
@@ -132,6 +132,31 @@ const Appointment = () => {
                                     </div>
                                 </div>
 
+                                {/* Custom Service Required Dropdown */}
+                                <div className="relative">
+                                    <label className="block text-sm font-medium mb-2">
+                                        Service Required
+                                    </label>
+                                    <div className="relative">
+                                        <select className="w-full px-4 py-3 rounded-xl bg-gray-100 shadow-neumorphic-inset border-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 appearance-none cursor-pointer custom-select">
+                                            <option value="">Select service type</option>
+                                            <option value="consultation">General Consultation</option>
+                                            <option value="checkup">Routine Check-up</option>
+                                            <option value="followup">Follow-up Visit</option>
+                                            <option value="emergency">Emergency Care</option>
+                                            <option value="specialist">Specialist Consultation</option>
+                                            <option value="surgery">Surgical Procedure</option>
+                                            <option value="therapy">Therapy Session</option>
+                                            <option value="diagnostic">Diagnostic Tests</option>
+                                        </select>
+                                        <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none transform transition-transform duration-300 custom-select-arrow">
+                                            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     {/* Custom Date Picker */}
                                     <div className="relative">
@@ -173,31 +198,6 @@ const Appointment = () => {
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Custom Service Required Dropdown */}
-                                <div className="relative">
-                                    <label className="block text-sm font-medium mb-2">
-                                        Service Required
-                                    </label>
-                                    <div className="relative">
-                                        <select className="w-full px-4 py-3 rounded-xl bg-gray-100 shadow-neumorphic-inset border-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 appearance-none cursor-pointer custom-select">
-                                            <option value="">Select service type</option>
-                                            <option value="consultation">General Consultation</option>
-                                            <option value="checkup">Routine Check-up</option>
-                                            <option value="followup">Follow-up Visit</option>
-                                            <option value="emergency">Emergency Care</option>
-                                            <option value="specialist">Specialist Consultation</option>
-                                            <option value="surgery">Surgical Procedure</option>
-                                            <option value="therapy">Therapy Session</option>
-                                            <option value="diagnostic">Diagnostic Tests</option>
-                                        </select>
-                                        <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none transform transition-transform duration-300 custom-select-arrow">
-                                            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                            </svg>
                                         </div>
                                     </div>
                                 </div>
