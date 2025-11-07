@@ -7,7 +7,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import AboutDoctor from "../components/home/AboutDoctor";
-import Dashboard from "../components/dashboard/doctorsdashboard/Dashboard";
+import DoctorDashboard from "../pages/Dashboard/DoctorDashboard/DoctorDashboard";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
         Component: DashboardLayout,
         errorElement: <ErrorPage />,
         children: [
-            { index: true, Component: Dashboard },
+            { index: true, Component: DoctorDashboard },
         ],
     },
 

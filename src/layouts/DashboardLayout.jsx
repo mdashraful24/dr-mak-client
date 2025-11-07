@@ -51,6 +51,11 @@ const DashboardLayout = () => {
         if (window.innerWidth < 1024) {
             setIsSidebarOpen(false);
         }
+
+        // Auto-collapse sidebar
+        if (window.innerWidth >= 768 && window.innerWidth < 1024) {
+            setIsSidebarCollapsed(true);
+        }
     };
 
     return (

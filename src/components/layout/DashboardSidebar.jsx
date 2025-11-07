@@ -31,7 +31,7 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
             `}>
                 {/* Navigation Menu - Allow scrolling but ensure footer stays visible */}
                 <div className="flex-1 overflow-y-auto overflow-x-hidden p-4">
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                         {dashboardMenuItems.map((item) => {
                             const IconComponent = item.icon;
                             return (
@@ -41,8 +41,8 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
                                         className={({ isActive }) =>
                                             `flex items-center gap-3 px-3 py-3 rounded-xl transition-all group relative ${isSidebarCollapsed ? 'justify-center' : ''
                                             } ${isActive
-                                                ? 'bg-[#e0e5ec] font-semibold text-blue-600 shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff]'
-                                                : 'bg-[#e0e5ec] hover:shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:text-blue-600'
+                                                ? 'bg-[#e0e5ec] font-semibold text-blue-700 shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff]'
+                                                : 'bg-[#e0e5ec] hover:shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff]'
                                             }`
                                         }
                                         end={item.path === "/dashboard"}

@@ -1,7 +1,7 @@
 const DoctorDashboard = () => {
     return (
         <div>
-            
+            <h1>This is Doctor's Dashboard</h1>
         </div>
     );
 };
