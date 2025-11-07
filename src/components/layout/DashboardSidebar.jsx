@@ -30,7 +30,7 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
                 ${isSidebarCollapsed ? "md:w-16 lg:w-16" : "w-64"} 
             `}>
                 {/* Navigation Menu - Allow scrolling but ensure footer stays visible */}
-                <div className="flex-1 overflow-y-auto overflow-x-hidden p-4">
+                <div className="flex-1 overflow-y-auto p-4 relative">
                     <ul className="space-y-3">
                         {dashboardMenuItems.map((item) => {
                             const IconComponent = item.icon;
@@ -56,9 +56,9 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
                                                 {item.label}
                                             </span>
                                         )}
-                                        {/* Tooltip for collapsed state - show on medium and large screens when collapsed */}
+                                        {/* Tooltip for collapsed state */}
                                         {isSidebarCollapsed && !isSidebarOpen && (
-                                            <div className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 whitespace-nowrap">
+                                            <div className="fixed left-16 ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 whitespace-nowrap">
                                                 {item.label}
                                             </div>
                                         )}
