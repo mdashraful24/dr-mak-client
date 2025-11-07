@@ -1,9 +1,34 @@
 import Lottie from "lottie-react";
 import errorAnimation from "../../assets/404/404";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Home, Phone } from "lucide-react";
 
 const ErrorPage = () => {
+    const navigate = useNavigate();
+
+    const handleReturnToClinic = () => {
+        // Check if user was previously on a valid route
+        const previousPath = document.referrer;
+        const currentDomain = window.location.origin;
+
+        // If coming from within the app, go back
+        if (previousPath.startsWith(currentDomain)) {
+            navigate(-1); // Go back to previous page
+        } else {
+            // Otherwise go to home or dashboard based on user role/authentication
+            const token = localStorage.getItem('authToken');
+            const userRole = localStorage.getItem('userRole');
+
+            if (token && userRole === 'doctor') {
+                navigate('/dashboard');
+            } else if (token && userRole === 'patient') {
+                navigate('/patient-dashboard');
+            } else {
+                navigate('/');
+            }
+        }
+    };
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-gray-100 to-blue-50 px-4 space-y-10">
             {/* Page Title */}
@@ -24,9 +49,13 @@ const ErrorPage = () => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-row gap-4 md:gap-8 justify-between items-center">
-                    {/* Home Button */}
+                    {/* Return (Link Onclick) */}
                     <Link
-                        to="/"
+                        to="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleReturnToClinic();
+                        }}
                         className="max-w-full w-full flex items-center justify-center gap-3 bg-linear-to-br from-cyan-600 to-blue-600 text-sm md:text-base text-white p-4 rounded-2xl shadow-[8px_8px_16px_#1a6a96,-5px_-5px_8px_#4ca1cf] hover:shadow-[4px_4px_8px_#1a6a96,-4px_-4px_8px_#4ca1cf] transition-all duration-300 transform hover:-translate-y-1 font-semibold"
                     >
                         <Home className="hidden md:block w-5 h-5" />

@@ -93,17 +93,6 @@
     box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
 }
 
-@layer utilities {
-    .shadow-neumorphic {
-        box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
-    }
-
-    .shadow-neumorphic-inset {
-        box-shadow: inset 20px 20px 60px #d9d9d9, inset -20px -20px 60px #ffffff;
-    }
-
-    .shadow-neumorphic-blue {
-        box-shadow: 10px 10px 10px #1e40af, -2px -2px 10px #3b82f6;
-    }
-
+.shadow-neumorphic-blue {
+    box-shadow: 10px 10px 10px #1e40af, -2px -2px 10px #3b82f6;
 }
