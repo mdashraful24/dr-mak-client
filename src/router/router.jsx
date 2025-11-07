@@ -3,10 +3,11 @@ import PublicLayout from "../layouts/PublicLayout";
 import Home from "../pages/Home/Home";
 import ErrorPage from "../components/common/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
-import DoctorDashboard from "../pages/Dashboard/DoctorDashboard/DoctorDashboard";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import AboutDoctor from "../components/home/AboutDoctor";
+import Dashboard from "../components/dashboard/doctorsdashboard/Dashboard";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { index: true, Component: Home },
+            { path: "about", Component: AboutDoctor }
         ],
     },
 
@@ -25,7 +27,7 @@ export const router = createBrowserRouter([
         Component: DashboardLayout,
         errorElement: <ErrorPage />,
         children: [
-            { index: true, Component: DoctorDashboard },
+            { index: true, Component: Dashboard },
         ],
     },
 
