@@ -1,6 +1,6 @@
 import { Bell, User, ChevronRight, ChevronLeft, Menu, LogOut } from 'lucide-react';
 
-const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSidebar }) => {
+const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSidebar, isSidebarOpen }) => {
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-[#e0e5ec] shadow-[5px_5px_6px_#babecc,-5px_-5px_5px_#ffffff] px-4 py-2.5">
             <div className="flex items-center justify-between">
@@ -51,7 +51,12 @@ const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSide
 
                         {/* Logout */}
                         {isSidebarCollapsed &&
-                            <button className="p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 transition duration-200">
+                            <button className="hidden md:block p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 transition duration-200">
+                                <LogOut size={20} />
+                            </button>
+                        }
+                        {!isSidebarOpen &&
+                            <button className="block md:hidden p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 transition duration-200">
                                 <LogOut size={20} />
                             </button>
                         }
@@ -63,4 +68,3 @@ const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSide
 };
 
 export default DashboardNavbar;
-

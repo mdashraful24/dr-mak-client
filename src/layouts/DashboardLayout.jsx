@@ -58,6 +58,7 @@ const DashboardLayout = () => {
             {/* Dashboard Navbar (Fixed top) */}
             <DashboardNavbar
                 isSidebarCollapsed={isSidebarCollapsed}
+                isSidebarOpen={isSidebarOpen}
                 toggleSidebar={toggleSidebar}
                 toggleCollapseSidebar={handleCollapseToggle}
             />

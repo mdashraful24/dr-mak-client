@@ -97,7 +97,7 @@ const Navbar = () => {
             {/* Sidebar */}
             <div
                 ref={sidebarRef}
-                className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#e0e5ec] transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0 shadow-[6px_6px_8px_#babecc,-2px_-2px_2px_#ffffff]' : '-translate-x-full'
+                className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#e0e5ec] transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0 shadow-[6px_6px_8px_#babecc,-2px_-2px_2px_#ffffff]' : '-translate-x-full'
                     }`}
             >
                 <div className="flex flex-col h-full">
