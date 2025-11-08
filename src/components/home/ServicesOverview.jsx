@@ -66,17 +66,17 @@ const ServicesOverview = () => {
         <div className="py-20 bg-gray-50">
             <div className="container mx-auto px-4">
                 {/* Header Section */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-12">
                     <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
                         <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
-                        <span className="text-sm font-medium text-blue-700">Specialized Neurosurgical Care</span>
+                        <span className="text-sm font-medium">Specialized Neurosurgical Care</span>
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">
                         Comprehensive <span className="text-blue-600">Neurosurgical</span> Services
                     </h2>
 
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    <p className="md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
                         Offering advanced surgical solutions for complex neurological conditions with precision,
                         expertise, and compassionate patient care.
                     </p>
@@ -87,7 +87,7 @@ const ServicesOverview = () => {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="group bg-white rounded-3xl border border-gray-200 shadow-soft hover:shadow-softInset transition-all duration-500 transform hover:-translate-y-2 p-6"
+                            className="group bg-white rounded-3xl border border-gray-200 shadow-soft hover:shadow-softInset transition-all duration-500 transform hover:-translate-y-2 p-6 flex flex-col h-full relative"
                         >
                             {/* Icon Container */}
                             <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 shadow-neumorphic-inset flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -100,12 +100,12 @@ const ServicesOverview = () => {
                             </h3>
 
                             {/* Service Description */}
-                            <p className="text-gray-700 mb-6 leading-relaxed">
+                            <p className="text-gray-700 mb-6 leading-relaxed grow">
                                 {service.description}
                             </p>
 
                             {/* Procedures List */}
-                            <div className="space-y-2">
+                            <div className="space-y-3 mt-auto">
                                 <h4 className="text-sm font-semibold uppercase tracking-wide">
                                     Common Procedures:
                                 </h4>

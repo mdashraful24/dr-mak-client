@@ -7,10 +7,10 @@ const Appointment = () => {
                         {/* Left Side - Information */}
                         <div className="space-y-8">
                             <div>
-                                <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">
                                     Book Your <span className="text-blue-600">Appointment</span>
                                 </h1>
-                                <p className="text-gray-600 text-lg leading-relaxed">
+                                <p className="md:text-lg text-gray-600 leading-relaxed">
                                     Schedule your visit with our experienced healthcare professionals.
                                     We provide comprehensive medical care with a personal touch.
                                     Your health is our priority.

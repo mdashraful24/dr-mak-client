@@ -11,7 +11,9 @@ const Home = () => {
             <ServicesOverview />
             <ContactInfo />
             <Reviews />
-            <Appointment />
+            <div id="appointment-section">
+                <Appointment />
+            </div>
         </div>
     );
 };

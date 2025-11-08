@@ -5,7 +5,7 @@ const HeroSection = () => {
         <div className="min-h-[90vh] container mx-auto flex flex-col lg:flex-row justify-between items-center gap-5 px-4">
 
             {/* Left Text Section */}
-            <div className="space-y-8 max-w-3xl">
+            <div className="space-y-4 lg:space-y-8 max-w-3xl">
                 {/* Badge */}
                 <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft">
                     <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
@@ -14,20 +14,20 @@ const HeroSection = () => {
 
                 {/* Main Heading */}
                 <div className="space-y-4">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
                         Exceptional
                         <span className="text-blue-600"> Medical Care</span>
                         {" "}for Your Entire Family
                     </h1>
 
-                    <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl">
+                    <p className="md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl">
                         Our team of board-certified physicians provides comprehensive,
                         personalized healthcare with cutting-edge technology and compassionate service.
                     </p>
                 </div>
 
                 {/* Stats */}
-                <div className="flex flex-wrap gap-6 py-4">
+                <div className="flex flex-wrap justify-center md:justify-start gap-6 py-4">
                     <div className="text-center">
                         <div className="text-2xl font-bold text-blue-600">50+</div>
                         <div className="text-sm text-gray-500">Expert Doctors</div>

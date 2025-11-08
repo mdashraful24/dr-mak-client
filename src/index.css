@@ -2,6 +2,24 @@
 @plugin "daisyui";
 
 
+/* Page Scrolling (Fade-in animation) */
+.page-fade {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* HERO SECTION */
 /* Neumorphic Shadows */
 .shadow-neumorphic {
