@@ -87,8 +87,8 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
                                 </div>
 
                                 <div className="flex-1 min-w-0">
-                                    <p className="font-semibold text-sm truncate">Dr. John Smith</p>
-                                    <p className="text-xs truncate">Cardiologist</p>
+                                    <p className="font-semibold text-sm truncate">Dr. Md. Abul Kashem Anik</p>
+                                    <p className="text-xs truncate">Neurologist & Surgeon</p>
                                 </div>
                             </div>
 

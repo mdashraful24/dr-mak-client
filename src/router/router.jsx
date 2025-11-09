@@ -9,6 +9,7 @@ import Register from "../pages/Auth/Register";
 import AboutDoctor from "../components/home/AboutDoctor";
 import DoctorDashboard from "../pages/Dashboard/DoctorDashboard/DoctorDashboard";
 import Services from "../pages/Services/Services";
+import Blogs from "../pages/Blogs/Blogs";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -19,7 +20,8 @@ export const router = createBrowserRouter([
         children: [
             { index: true, Component: Home },
             { path: "about", Component: AboutDoctor },
-            { path: "services", Component: Services }
+            { path: "services", Component: Services },
+            { path: "blog", Component: Blogs }
         ],
     },
 

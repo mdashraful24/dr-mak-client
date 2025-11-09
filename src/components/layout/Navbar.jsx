@@ -57,12 +57,12 @@ const Navbar = () => {
 
                         <div className="flex items-center space-x-3">
                             <div className="w-11 h-10 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                {/* <span className="text-blue-600 font-semibold text-lg">MAK</span> */}
+                                <span className="text-blue-600 font-semibold text-lg">MAK</span>
                             </div>
-                            <div className="hidden md:block">
-                                {/* <h1 className="text-xl font-bold">MediCare</h1>
-                                <p className="text-sm">Doctors Care</p> */}
-                            </div>
+                            {/* <div className="hidden md:block">
+                                <h1 className="text-xl font-bold">MediCare</h1>
+                                <p className="text-sm">Doctors Care</p>
+                            </div> */}
                         </div>
                     </div>
 
@@ -86,8 +86,8 @@ const Navbar = () => {
                             </div>
 
                             <div className="hidden lg:block text-right">
-                                {/* <p className="font-semibold">Dr. Md. Abul Kashem Anik</p>
-                                <p className="text-sm">Neurologist & Surgeon</p> */}
+                                <p className="font-semibold">Dr. Md. Abul Kashem Anik</p>
+                                <p className="text-sm">Neurologist & Surgeon</p>
                             </div>
                         </div>
                     </div>
@@ -104,11 +104,11 @@ const Navbar = () => {
                     <div className="px-5 py-2">
                         <div className="flex items-center space-x-3">
                             <div className="w-12 h-11 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                {/* <span className="text-blue-600 font-semibold text-xl">MAK</span> */}
+                                <span className="text-blue-600 font-semibold text-xl">MAK</span>
                             </div>
                             <div>
-                                {/* <h1 className="text-xl font-semibold">MediCare</h1>
-                                <p className="text-sm">Doctors Care</p> */}
+                                <h1 className="text-xl font-semibold">MediCare</h1>
+                                <p className="text-sm">Doctors Care</p>
                             </div>
                         </div>
                     </div>
