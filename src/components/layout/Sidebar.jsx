@@ -6,7 +6,7 @@ const Sidebar = () => {
         { path: "/", label: "Home", icon: Home },
         { path: "/about", label: "About", icon: Info },
         { path: "/services", label: "Services", icon: Briefcase },
-        { path: "/departments", label: "Departments", icon: Building },
+        // { path: "/departments", label: "Departments", icon: Building },
         { path: "/blog", label: "Blog", icon: BookOpen },
         { path: "/contact", label: "Contact", icon: Phone },
         { path: "/patients", label: "Patients", icon: Users },
