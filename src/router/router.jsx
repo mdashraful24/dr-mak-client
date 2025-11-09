@@ -8,6 +8,7 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import AboutDoctor from "../components/home/AboutDoctor";
 import DoctorDashboard from "../pages/Dashboard/DoctorDashboard/DoctorDashboard";
+import Services from "../pages/Services/Services";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -17,7 +18,8 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { index: true, Component: Home },
-            { path: "about", Component: AboutDoctor }
+            { path: "about", Component: AboutDoctor },
+            { path: "services", Component: Services }
         ],
     },
 

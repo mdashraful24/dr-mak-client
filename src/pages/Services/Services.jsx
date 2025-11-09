@@ -1,6 +1,4 @@
-import { Link } from "react-router";
-
-const ServicesOverview = () => {
+const Services = () => {
     const services = [
         {
             icon: (
@@ -41,6 +39,26 @@ const ServicesOverview = () => {
             title: "Pediatric Neurosurgery",
             description: "Specialized care for children with congenital and acquired neurological conditions.",
             procedures: ["Hydrocephalus", "Spina Bifida", "Pediatric Brain Tumors"]
+        },
+        {
+            icon: (
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            ),
+            title: "Neurotrauma",
+            description: "Emergency and critical care for head injuries, traumatic brain injuries, and spinal cord injuries.",
+            procedures: ["ICP Monitoring", "Decompressive Craniectomy", "Trauma Surgery"]
+        },
+        {
+            icon: (
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+            ),
+            title: "Functional Neurosurgery",
+            description: "Advanced procedures for movement disorders, epilepsy, and chronic pain conditions.",
+            procedures: ["Deep Brain Stimulation", "Epilepsy Surgery", "Pain Management"]
         }
     ];
 
@@ -51,7 +69,7 @@ const ServicesOverview = () => {
                 <div className="text-center mb-12">
                     <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
                         <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
-                        <span className="text-sm font-medium">Specialized Neurosurgical Care</span>
+                        <span className="text-sm font-medium">All Services</span>
                     </div>
 
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">
@@ -66,7 +84,7 @@ const ServicesOverview = () => {
 
                 {/* Services Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {services.slice(0, 3).map((service, index) => (
+                    {services.map((service, index) => (
                         <div
                             key={index}
                             className="group bg-white rounded-3xl border border-gray-200 shadow-soft hover:shadow-softInset transition-all duration-500 transform hover:-translate-y-2 p-6 flex flex-col h-full relative"
@@ -77,14 +95,20 @@ const ServicesOverview = () => {
                             </div>
 
                             {/* Service Title */}
-                            <h3 className="text-xl font-bold mb-4 group-hover:text-blue-600 transition-colors duration-300">{service.title}</h3>
+                            <h3 className="text-xl font-bold mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                                {service.title}
+                            </h3>
 
                             {/* Service Description */}
-                            <p className="text-gray-700 mb-6 leading-relaxed grow">{service.description}</p>
+                            <p className="text-gray-700 mb-6 leading-relaxed grow">
+                                {service.description}
+                            </p>
 
                             {/* Procedures List */}
                             <div className="space-y-3 mt-auto">
-                                <h4 className="text-sm font-semibold uppercase tracking-wide">Common Procedures:</h4>
+                                <h4 className="text-sm font-semibold uppercase tracking-wide">
+                                    Common Procedures:
+                                </h4>
                                 <div className="flex flex-wrap gap-2">
                                     {service.procedures.map((procedure, idx) => (
                                         <span
@@ -102,18 +126,9 @@ const ServicesOverview = () => {
                         </div>
                     ))}
                 </div>
-
-                {/* Neumorphic See More Card */}
-                <div className="w-full flex justify-end pt-10">
-                    <Link to="/services">
-                        <span className="text-lg font-semibold text-blue-600 group-hover:tracking-wide transition-all duration-300">
-                            View All Services →
-                        </span>
-                    </Link>
-                </div>
             </div>
         </div>
     );
 };
 
-export default ServicesOverview;
+export default Services;
