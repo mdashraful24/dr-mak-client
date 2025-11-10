@@ -1,4 +1,5 @@
-import { HashLink as Link } from 'react-router-hash-link';
+// import { HashLink as Link } from 'react-router-hash-link';
+import { Link } from "react-router";
 import dr from "../../assets/dr/dr.png"
 import Button from "../common/Button";
 
@@ -114,7 +115,7 @@ const AboutDoctor = () => {
                                 </div>
                             </div>
 
-                            <Link to="/#appointment-section" smooth>
+                            <Link to="/appointments" smooth>
                                 <Button text="Book Appointment" />
                             </Link>
                         </div>

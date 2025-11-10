@@ -94,8 +94,7 @@
 }
 
 .neumorphic-input,
-.neumorphic-item,
-.neumorphic-btn {
+.neumorphic-item {
     background: #e0e0e0;
     border-radius: 12px;
     box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
@@ -107,10 +106,38 @@
     box-shadow: inset 4px 4px 10px #bebebe, inset -4px -4px 10px #ffffff;
 }
 
-.neumorphic-btn:hover {
-    box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
+/* CONTACT PAGE */
+.neumorphic-inset {
+    background: linear-gradient(145deg, #f0f5ff, #e6ecf2);
+    box-shadow: inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff;
 }
 
-.shadow-neumorphic-blue {
-    box-shadow: 10px 10px 10px #1e40af, -2px -2px 10px #3b82f6;
+.neumorphic-time-slots {
+    background: linear-gradient(145deg, #e6f0ff, #ffffff);
+    box-shadow: 5px 5px 10px #d1d9e6, -5px -5px 10px #ffffff;
+}
+
+.neumorphic-btn {
+    background: linear-gradient(145deg, #e6f0ff, #ffffff);
+    box-shadow: 5px 5px 10px #d1d9e6, -5px -5px 10px #ffffff;
+    transition: all 0.2s ease;
+}
+
+.neumorphic-btn:hover {
+    box-shadow: 2px 2px 5px #d1d9e6, -2px -2px 5px #ffffff;
+}
+
+.neumorphic-btn:active {
+    box-shadow: inset 2px 2px 5px #d1d9e6, inset -2px -2px 5px #ffffff;
+}
+
+.neumorphic-pressed {
+    box-shadow: inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff;
+}
+
+.neumorphic-icon {
+    padding: 8px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #e6f0ff, #ffffff);
+    box-shadow: 3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff;
 }

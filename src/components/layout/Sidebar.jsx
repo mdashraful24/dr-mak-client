@@ -1,18 +1,16 @@
 import { NavLink } from "react-router";
-import { Home, Users, Calendar, FileText, BarChart3, Settings, LayoutDashboard, Info, Briefcase, Building, BookOpen, Phone } from 'lucide-react';
+import { Home, Users, Calendar, FileText, BarChart3, Settings, LayoutDashboard, Info, Briefcase, BookOpen } from 'lucide-react';
 
 const Sidebar = () => {
     const menuItems = [
         { path: "/", label: "Home", icon: Home },
         { path: "/about", label: "About", icon: Info },
         { path: "/services", label: "Services", icon: Briefcase },
-        // { path: "/departments", label: "Departments", icon: Building },
-        { path: "/blog", label: "Blog", icon: BookOpen },
-        { path: "/contact", label: "Contact", icon: Phone },
-        { path: "/patients", label: "Patients", icon: Users },
         { path: "/appointments", label: "Appointments", icon: Calendar },
+        { path: "/patients", label: "Patients", icon: Users },
         { path: "/prescriptions", label: "Prescriptions", icon: FileText },
         { path: "/reports", label: "Reports", icon: BarChart3 },
+        { path: "/blog", label: "Blog", icon: BookOpen },
         { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
         { path: "/settings", label: "Settings", icon: Settings },
     ];
