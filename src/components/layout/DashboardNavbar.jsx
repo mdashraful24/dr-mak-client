@@ -2,10 +2,10 @@ import { Bell, User, ChevronRight, ChevronLeft, Menu, LogOut } from 'lucide-reac
 
 const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSidebar, isSidebarOpen }) => {
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#e0e5ec] shadow-[5px_5px_6px_#babecc,-5px_-5px_5px_#ffffff] px-4 py-2.5">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#e0e5ec] shadow-[5px_5px_6px_#babecc,-5px_-5px_5px_#ffffff] px-3 py-2.5">
             <div className="flex items-center justify-between">
                 {/* Left side */}
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-5">
                     {/* Desktop Sidebar Toggle Button */}
                     <button
                         onClick={toggleCollapseSidebar}

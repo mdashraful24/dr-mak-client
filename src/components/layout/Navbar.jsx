@@ -77,7 +77,7 @@ const Navbar = () => {
                         </button>
 
                         {/* Profile */}
-                        <div className="flex items-center space-x-3 cursor-pointer">
+                        <div className="flex items-center space-x-3 cursor-default">
                             <div className="relative">
                                 <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
                                     <User size={20} />

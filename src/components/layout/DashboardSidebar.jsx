@@ -27,10 +27,10 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
                 fixed md:relative bg-[#e0e5ec] shadow-[5px_0_15px_#babecc,-2px_0_5px_#ffffff] h-full flex flex-col transition-all duration-300 ease-in-out z-40
                 ${isSidebarOpen ? "w-64 translate-x-0" : "-translate-x-full"} 
                 ${!isSidebarOpen && "md:translate-x-0 md:flex"} 
-                ${isSidebarCollapsed ? "md:w-16 lg:w-16" : "w-64"} 
+                ${isSidebarCollapsed ? "md:w-16 lg:w-18" : "w-64"} 
             `}>
                 {/* Navigation Menu - Allow scrolling but ensure footer stays visible */}
-                <div className="flex-1 overflow-y-auto p-4 relative">
+                <div className="flex-1 overflow-y-auto p-3 lg:p-4 relative">
                     <ul className="space-y-3">
                         {dashboardMenuItems.map((item) => {
                             const IconComponent = item.icon;
@@ -70,15 +70,18 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
                 </div>
 
                 {/* Sidebar Footer */}
-                {!isSidebarCollapsed &&
-                    <div className="mb-15 md:mb-0 shrink-0 p-4 border-t border-gray-300 mt-auto">
-                        <div
-                            className="bg-[#e0e5ec] rounded-xl p-4 shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff]"
-                        >
+                <div className="mb-15 md:mb-0 shrink-0 p-3 lg:p-4 border-t border-gray-300 mt-auto">
+                    {isSidebarCollapsed ? (
+                        <div className="relative flex justify-center">
+                            <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                <User size={20} />
+                            </div>
+                            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#e0e5ec]" />
+                        </div>
+                    ) : (
+                        <div className="bg-[#e0e5ec] rounded-xl p-3 lg:p-4 shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff]">
                             {/* Profile Section */}
-                            <div
-                                className={`flex items-center gap-3 mb-3`}
-                            >
+                            <div className="flex items-center gap-3 mb-3">
                                 <div className="relative">
                                     <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
                                         <User size={20} />
@@ -100,8 +103,8 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
                                 <span>Logout</span>
                             </button>
                         </div>
-                    </div>
-                }
+                    )}
+                </div>
             </div>
 
             {/* Overlay for mobile */}
