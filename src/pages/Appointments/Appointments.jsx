@@ -166,7 +166,7 @@ const Appointments = () => {
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6">
                         Book Your <span className="text-blue-600">Appointment</span>
                     </h1>
-                    <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    <p className="md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
                         Schedule your appointment and visit our modern healthcare facility.
                         We're committed to providing you with the best medical care.
                     </p>
@@ -231,7 +231,7 @@ const Appointments = () => {
                         </div>
 
                         {/* Emergency Notice */}
-                        <div className="bg-red-50 shadow-soft p-6 rounded-3xl border-l-4 border-red-500">
+                        <div className="bg-red-50 shadow-soft p-6 rounded-2xl border-l-4 border-red-500">
                             <div className="flex items-center space-x-3">
                                 <div className="neumorphic-icon bg-red-100">
                                     <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

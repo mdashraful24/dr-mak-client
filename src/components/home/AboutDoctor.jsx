@@ -56,7 +56,7 @@ const AboutDoctor = () => {
                         Dr. MAK
                     </h2>
 
-                    <p className="text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
+                    <p className="md:text-lg max-w-3xl mx-auto leading-relaxed">
                         Pioneering minimally invasive neurosurgical techniques with over 12 years of specialized experience
                         in complex brain and spinal procedures.
                     </p>
