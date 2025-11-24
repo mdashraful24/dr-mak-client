@@ -1,19 +1,6 @@
 # File Tree: dr-mak-client
 
 ```
-├── public
-│   ├── _redirects
-│   └── vite.svg
-├── src
-│   ├── assets
-│   │   ├── 404
-│   │   │   ├── 404.json
-│   │   │   └── 404.lottie
-│   │   ├── dr
-│   │   │   └── dr.png
-│   │   ├── icons
-│   │   ├── logo
-│   │   └── react.svg
 │   ├── components
 │   │   ├── common
 │   │   │   ├── Button.jsx
