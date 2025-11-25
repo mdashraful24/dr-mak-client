@@ -1,10 +1,10 @@
-# Dr. MAK Client
+# Dr. Leo Clinical Management System
 
 <div align="center">
   <img height="500" src="https://drive.google.com/uc?export=view&id=1_amwLQREZtzbUBTwAap0UOOe8aCIdvYV" />
 </div>
 
-**Dr. MAK Clinical Management System**, a full-featured digital platform designed for a doctor's chamber where the doctor can manage and track patient records, appointments, treatment history, and clinic workflows., a professional medical portfolio and appointment management interface designed for a neurosurgeon. The project is built with modern React tooling, performance-focused architecture, and scalable UI components.
+**Dr. Leo Clinical Management System**, a full-featured digital platform designed for a doctor's chamber where the doctor can manage and track patient records, appointments, treatment history, and clinic workflows., a professional medical portfolio and appointment management interface designed for a neurosurgeon. The project is built with modern React tooling, performance-focused architecture, and scalable UI components.
 
 ---
 
@@ -98,7 +98,7 @@ src/
 
 ```sh
 git clone <repo-url>
-cd dr-mak-client
+cd dr-leo-client
 ```
 
 ### **2️⃣ Install dependencies**
@@ -164,10 +164,10 @@ This project is private and intended for professional showcasing only.
 
 ---
 
-## 👤 **Author**
+<!-- ## 👤 **Author**
 
-**Dr. M.A.K Portfolio – Developed by Frontend Engineer**
+**Dr. M.A.K Care – Developed by Frontend Engineer**
 
-For professional inquiries or collaboration opportunities, please get in touch.
+For professional inquiries or collaboration opportunities, please get in touch. -->
 
 ---
