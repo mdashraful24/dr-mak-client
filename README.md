@@ -168,6 +168,6 @@ This project is private and intended for professional showcasing only.
 
 **Dr. M.A.K Care – Developed by Frontend Engineer**
 
-For professional inquiries or collaboration opportunities, please get in touch. -->
+For professional inquiries or collaboration opportunities, please get in touch.
 
----
+--- -->
