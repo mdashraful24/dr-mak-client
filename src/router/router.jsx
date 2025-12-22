@@ -11,6 +11,7 @@ import DoctorDashboard from "../pages/Dashboard/DoctorDashboard/DoctorDashboard"
 import Services from "../pages/Services/Services";
 import Blogs from "../pages/Blogs/Blogs";
 import Appointments from "../pages/Appointments/Appointments";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -45,6 +46,7 @@ export const router = createBrowserRouter([
         children: [
             { path: "login", Component: Login },
             { path: "register", Component: Register },
+            { path: "forgot-password", Component: ForgotPassword }
         ],
     },
 
