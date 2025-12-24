@@ -28,6 +28,7 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [loginError, setLoginError] = useState('');
+    const [emailValue, setEmailValue] = useState('');
     const [passwordStrength, setPasswordStrength] = useState({
         score: 0,
         message: ''
@@ -115,31 +116,13 @@ const Login = () => {
         }
     };
 
-    const handleForgotPassword = async () => {
-        const email = watch('email');
+    // Watch email field
+    const email = watch('email');
 
-        if (!email || errors.email) {
-            // Trigger email validation
-            await trigger('email');
-            if (errors.email) {
-                setLoginError('Please enter a valid email address to reset password');
-            } else {
-                setLoginError('Please enter your email address');
-            }
-            return;
-        }
-
-        try {
-            setIsLoading(true);
-            // Simulate forgot password API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            alert(`Password reset link sent to ${email}`);
-        } catch (error) {
-            setLoginError('Failed to send reset link. Please try again.');
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    // Update emailValue when email changes
+    useEffect(() => {
+        setEmailValue(email);
+    }, [email]);
 
     const handleGoogleLogin = () => {
         console.log('Google login clicked');
@@ -255,6 +238,7 @@ const Login = () => {
                         </label>
                         <Link
                             to="/auth/forgot-password"
+                            state={{ email: emailValue }}
                             className="text-blue-500 hover:text-blue-600 text-sm font-medium transition-colors"
                         >
                             Forgot password?
