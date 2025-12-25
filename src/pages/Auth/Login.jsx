@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Eye, EyeOff, Mail, Lock, Loader2, AlertCircle, CheckCircle, Facebook } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, Loader2, AlertCircle, CheckCircle, Facebook, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Define validation schema with Yup
@@ -137,6 +137,17 @@ const Login = () => {
     return (
         <div className="md:min-h-screen flex items-center justify-center p-4">
             <div className="w-full max-w-md">
+                {/* Return to Home Button */}
+                <div className="mb-6">
+                    <Link
+                        to="/"
+                        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors group"
+                    >
+                        <Home size={18} className="group-hover:-translate-x-1 transition-transform" />
+                        <span>Return to Home</span>
+                    </Link>
+                </div>
+
                 {/* Header */}
                 <div className="text-center mb-6">
                     <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
