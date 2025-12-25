@@ -138,7 +138,7 @@ const Login = () => {
         <div className="md:min-h-screen flex items-center justify-center p-4">
             <div className="w-full max-w-md">
                 {/* Header */}
-                <div className="text-center mb-8">
+                <div className="text-center mb-6">
                     <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
                     <p>Sign in to your account to continue</p>
                 </div>
