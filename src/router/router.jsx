@@ -12,6 +12,7 @@ import Services from "../pages/Services/Services";
 import Blogs from "../pages/Blogs/Blogs";
 import Appointments from "../pages/Appointments/Appointments";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
+import Settings from "../pages/Control/Settings";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -24,7 +25,8 @@ export const router = createBrowserRouter([
             { path: "about", Component: AboutDoctor },
             { path: "services", Component: Services },
             { path: "blog", Component: Blogs },
-            { path: "appointments", Component: Appointments }
+            { path: "appointments", Component: Appointments },
+            { path: "settings", Component: Settings },
         ],
     },
 
