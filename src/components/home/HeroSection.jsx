@@ -46,14 +46,13 @@ const HeroSection = () => {
                 {/* CTA Buttons */}
                 <div className="flex flex-row justify-center md:justify-start gap-4">
                     <Link to="/appointments">
-                        <button className="flex-1 md:flex-none p-4 rounded-2xl bg-blue-700 text-white font-semibold shadow-neumorphic-soft hover:shadow-neumorphic-soft-inset transition-all duration-300 transform hover:-translate-y-1">
+                        <button className="flex-1 md:flex-none p-3 rounded-xl bg-blue-700 text-white font-semibold shadow-neumorphic-soft hover:shadow-neumorphic-soft-inset transition-all duration-300 transform hover:-translate-y-1">
                             <span className="flex justify-center items-center gap-0 md:gap-1">
-                                <span className="hidden md:block">Book</span>
-                                <span>Appointment Now</span>
+                                <span>Book Appointment Now</span>
                             </span>
                         </button>
                     </Link>
-                    <button className="flex-1 md:flex-none p-4 rounded-2xl bg-neumorphic shadow-neumorphic-soft hover:shadow-neumorphic-soft-inset transition-all duration-300 hover:-translate-y-1 font-semibold">
+                    <button className="flex-1 md:flex-none p-3 rounded-xl bg-neumorphic shadow-neumorphic-soft hover:shadow-neumorphic-soft-inset transition-all duration-300 hover:-translate-y-1 font-semibold">
                         All Service
                     </button>
                 </div>
