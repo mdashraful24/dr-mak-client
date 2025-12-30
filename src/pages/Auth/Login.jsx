@@ -151,7 +151,7 @@ const Login = () => {
                 {/* Header */}
                 <div className="text-center mb-6">
                     <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
-                    <p>Sign in to your account to continue</p>
+                    <p>Login to your account to continue</p>
                 </div>
 
                 {/* Login Form */}
@@ -279,7 +279,7 @@ const Login = () => {
                             </span>
                         ) : (
                             <span className="flex items-center justify-center">
-                                Sign In
+                                Login
                                 {isValid && (
                                     <CheckCircle className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                                 )}
@@ -334,7 +334,7 @@ const Login = () => {
                                 to="/auth/register"
                                 className={`font-medium transition-colors ${isLoading ? "pointer-events-none" : "text-blue-500 hover:text-blue-600"}`}
                             >
-                                Sign up
+                                Register
                             </Link>
                         </p>
                     </div>

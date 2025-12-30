@@ -445,7 +445,7 @@ const Register = () => {
                                 to="/auth/login"
                                 className={`font-medium transition-colors ${isLoading ? "pointer-events-none" : "text-blue-500 hover:text-blue-600"}`}
                             >
-                                Sign in here
+                                Login here
                             </Link>
                         </p>
                     </div>
