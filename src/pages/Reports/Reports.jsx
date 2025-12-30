@@ -637,7 +637,7 @@ const Reports = () => {
                                     className="flex items-center justify-between p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl border border-gray-100 hover:border-gray-200 transition-colors"
                                 >
                                     <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-                                        <div className="p-1.5 sm:p-2 rounded-lg bg-gray-50 flex-shrink-0">
+                                        <div className="p-1.5 sm:p-2 rounded-lg bg-gray-50 shrink-0">
                                             {activity.icon}
                                         </div>
                                         <div className="min-w-0 flex-1">
@@ -647,7 +647,7 @@ const Reports = () => {
                                             <p className="text-gray-600 text-xs sm:text-sm truncate">{activity.target} • {activity.time}</p>
                                         </div>
                                     </div>
-                                    <button className="p-1.5 sm:p-2 rounded-lg hover:bg-gray-50 transition-colors flex-shrink-0 ml-2">
+                                    <button className="p-1.5 sm:p-2 rounded-lg hover:bg-gray-50 transition-colors shrink-0 ml-2">
                                         <Eye className="w-4 h-4 text-gray-500" />
                                     </button>
                                 </div>
@@ -673,7 +673,7 @@ const Reports = () => {
                                     className="flex items-center justify-between p-2 sm:p-3 rounded-lg border border-gray-100 hover:border-gray-200 transition-colors"
                                 >
                                     <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-                                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-linear-to-r from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-linear-to-r from-blue-500 to-blue-600 flex items-center justify-center shrink-0">
                                             <span className="text-white text-xs sm:text-sm font-bold">{product.id}</span>
                                         </div>
                                         <div className="min-w-0 flex-1">
@@ -681,7 +681,7 @@ const Reports = () => {
                                             <p className="text-gray-600 text-xs sm:text-sm truncate">{product.sales} sold</p>
                                         </div>
                                     </div>
-                                    <div className="text-right flex-shrink-0 ml-2">
+                                    <div className="text-right shrink-0 ml-2">
                                         <p className="font-semibold text-gray-800 text-sm sm:text-base">{product.revenue}</p>
                                         <p className={`text-xs sm:text-sm ${product.growth.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
                                             {product.growth}
