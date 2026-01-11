@@ -14,6 +14,14 @@ import Appointments from "../pages/Appointments/Appointments";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Settings from "../pages/Control/Settings";
 import Reports from "../pages/Reports/Reports";
+import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
+import PatientDashboard from "../pages/Dashboard/PatientDashboard/PatientDashboard";
+import Patients from "../pages/Dashboard/Patients/Patients";
+import Prescriptions from "../pages/Dashboard/Prescriptions/Prescriptions";
+import MedicalRecords from "../pages/Dashboard/MedicalRecords/MedicalRecords";
+import Doctors from "../pages/Dashboard/Doctors/Doctors";
+import Departments from "../pages/Dashboard/Departments/Departments";
+import Schedule from "../pages/Dashboard/Schedule/Schedule";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -38,6 +46,17 @@ export const router = createBrowserRouter([
         Component: DashboardLayout,
         errorElement: <ErrorPage />,
         children: [
+            { path: "doctor", Component: DoctorDashboard },
+            { path: "admin", Component: AdminDashboard },
+            { path: "patient", Component: PatientDashboard },
+            { path: "patients", Component: Patients },
+            { path: "prescriptions", Component: Prescriptions },
+            { path: "medical-records", Component: MedicalRecords },
+            { path: "reports", Component: Reports },
+            { path: "doctors", Component: Doctors },
+            { path: "departments", Component: Departments },
+            { path: "schedule", Component: Schedule },
+            { path: "settings", Component: Settings },
             { index: true, Component: DoctorDashboard },
         ],
     },

@@ -7,8 +7,6 @@ const Sidebar = () => {
         { path: "/about", label: "About", icon: Info },
         { path: "/services", label: "Services", icon: Briefcase },
         { path: "/appointments", label: "Appointments", icon: Calendar },
-        { path: "/patients", label: "Patients", icon: Users },
-        { path: "/prescriptions", label: "Prescriptions", icon: FileText },
         { path: "/reports", label: "Reports", icon: BarChart3 },
         { path: "/blog", label: "Blog", icon: BookOpen },
         { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
