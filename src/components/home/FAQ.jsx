@@ -1,11 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const FAQ = () => {
     const [activeIndex, setActiveIndex] = useState(null);
+    const faqRef = useRef(null);
 
     const toggleFAQ = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
+
+    const handleClickOutside = (event) => {
+        if (faqRef.current && !faqRef.current.contains(event.target)) {
+            setActiveIndex(null);
+        }
+    };
+
+    useEffect(() => {
+        // Add event listener when component mounts
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Clean up event listener when component unmounts
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const faqData = [
         {
@@ -59,8 +76,8 @@ const FAQ = () => {
                     </p>
                 </div>
 
-                {/* FAQ Items */}
-                <div className="space-y-4">
+                {/* FAQ Items - Add ref here */}
+                <div ref={faqRef} className="space-y-4">
                     {faqData.map((faq, index) => (
                         <div
                             key={index}
@@ -92,11 +109,11 @@ const FAQ = () => {
                             </button>
 
                             <div
-                                className={`px-6 transition-all duration-300 overflow-hidden ${activeIndex === index ? 'pb-6' : 'max-h-0'
+                                className={`px-3 md:px-6 transition-all duration-300 overflow-hidden ${activeIndex === index ? 'pb-6' : 'max-h-0'
                                     }`}
                             >
                                 <div className="border-t border-gray-200 pt-4">
-                                    <p className="text-gray-600 leading-relaxed">
+                                    <p className="leading-relaxed">
                                         {faq.answer}
                                     </p>
                                 </div>
