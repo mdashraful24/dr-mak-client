@@ -295,12 +295,20 @@ const Reports = () => {
     };
 
     return (
-        <div className="py-20 bg-gray-50 min-h-screen">
-            <div className="container mx-auto px-4">
+        <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 px-4 py-6 mt-14">
+            <div>
+
                 {/* Header */}
                 <div className="mb-6 sm:mb-8">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                         <div>
+                            <Link
+                                to="/"
+                                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors group mb-3 sm:mb-4"
+                            >
+                                <Home size={16} className="group-hover:-translate-x-1 transition-transform" />
+                                <span className="text-sm sm:text-base">Return to Home</span>
+                            </Link>
                             <div className="flex items-center gap-3 mb-2">
                                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-linear-to-r from-gray-800 to-blue-600 bg-clip-text text-transparent">
                                     Analytics & Reports

@@ -81,7 +81,7 @@ const DashboardLayout = () => {
                 {/* Main Content Area */}
                 <main className={`flex-1 overflow-auto transition-all duration-300 ${isSidebarOpen ? 'backdrop-blur-xs md:backdrop-blur-0' : ''
                     }`}>
-                    <div className="p-4 md:p-6 lg:p-8">
+                    <div className="p-6">
                         <Outlet />
                     </div>
                 </main>

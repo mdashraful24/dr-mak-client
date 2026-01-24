@@ -288,12 +288,19 @@ const Settings = () => {
     };
 
     return (
-        <div className="py-20 bg-gray-50 min-h-screen">
-            <div className="container mx-auto px-4">
+        <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 p-4 md:p-8">
+            <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="mb-8">
                     <div className="flex items-center justify-between mb-6">
                         <div>
+                            <Link
+                                to="/"
+                                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors group mb-4"
+                            >
+                                <Home size={18} className="group-hover:-translate-x-1 transition-transform" />
+                                <span>Return to Home</span>
+                            </Link>
                             <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-linear-to-r from-gray-800 to-blue-600 bg-clip-text text-transparent">
                                 Settings
                             </h1>

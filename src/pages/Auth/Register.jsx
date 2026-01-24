@@ -168,7 +168,7 @@ const Register = () => {
     };
 
     return (
-        <div className="md:min-h-screen flex items-center justify-center p-4 py-8">
+        <div className="md:min-h-screen flex items-center justify-center p-4">
             <div className="w-full max-w-md">
                 {/* Header */}
                 <div className="text-center mb-6">

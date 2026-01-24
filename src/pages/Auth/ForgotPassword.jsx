@@ -111,7 +111,7 @@ const ForgotPassword = () => {
                 {/* Back to Login Button */}
                 <button
                     onClick={handleBackToLogin}
-                    className="text-blue-600 mb-6 flex items-center space-x-1 transition-colors group"
+                    className="mb-6 flex items-center space-x-1 transition-colors group"
                 >
                     <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     <span className="font-medium">Back to Login</span>
