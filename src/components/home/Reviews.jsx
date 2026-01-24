@@ -141,7 +141,7 @@ const Reviews = () => {
                     </p>
                 </div>
 
-                <div className='px-0 md:px-2 lg:px-0'>
+                <div className='px-1 md:px-2 lg:px-0'>
                     {/* Carousel Container */}
                     <div className="relative h-80 md:h-96 lg:h-100 lg:mb-12">
                         <div className="absolute inset-0 flex items-center justify-center overflow-x-hidden">
