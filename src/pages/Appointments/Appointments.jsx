@@ -372,7 +372,7 @@ const Appointments = () => {
                             </div>
 
                             {/* Map Controls */}
-                            <div className="absolute top-4 right-4 space-y-3">
+                            {/* <div className="absolute top-4 right-4 space-y-3">
                                 <button className="w-10 h-10 neumorphic-btn rounded-xl flex items-center justify-center border border-gray-300">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -383,7 +383,7 @@ const Appointments = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                                     </svg>
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 
