@@ -4,6 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, Phone, CheckCircle, AlertCircle, Loader2, Shield, ChevronRight } from 'lucide-react';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import useAuth from '../../hooks/useAuth';
 
 // Define validation schema with Yup
 const registerSchema = yup.object({
@@ -43,12 +45,15 @@ const registerSchema = yup.object({
 }).required();
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic();
+    const { createUser, updateUserProfile, setLoading } = useAuth();
     const [showPassword, setShowPassword] = useState({
         password: false,
         confirmPassword: false
     });
     const [isLoading, setIsLoading] = useState(false);
     const [registerError, setRegisterError] = useState('');
+    const [registerSuccess, setRegisterSuccess] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState({
         score: 0,
         message: '',
@@ -68,7 +73,6 @@ const Register = () => {
         handleSubmit,
         watch,
         formState: { errors, isValid, isDirty },
-        reset
     } = useForm({
         resolver: yupResolver(registerSchema),
         mode: 'onChange',
@@ -127,38 +131,137 @@ const Register = () => {
         checkPasswordStrength(passwordValue);
     }, [passwordValue]);
 
-    // Handle form submission
+    // Handle form submission - TWO OPTIONS:
+    // Option 1: With Firebase Authentication + Database storage (RECOMMENDED)
+    // Option 2: Custom authentication with database only
+    
+    // Using Option 1: Firebase + Database
     const onSubmit = async (data) => {
         setIsLoading(true);
         setRegisterError('');
+        setRegisterSuccess(false);
 
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            // OPTION 1: With Firebase Authentication
+            // Step 1: Create user in Firebase
+            const userCredential = await createUser(data.email, data.password);
+            const firebaseUser = userCredential.user;
 
-            console.log('Registration successful:', {
-                ...data,
-                // Remove confirmPassword from data sent to API
-                confirmPassword: undefined
+            // Step 2: Update profile in Firebase
+            await updateUserProfile({
+                displayName: data.fullName,
+                photoURL: '' // Add photo URL if needed
             });
 
-            // Show success message
-            alert('Registration successful! Welcome to our platform.');
+            // Step 3: Prepare user data for database (INCLUDING PASSWORD)
+            const userData = {
+                uid: firebaseUser.uid, // Store Firebase UID
+                email: data.email,
+                name: data.fullName,
+                phone: data.phone,
+                password: data.password, // Will be hashed in backend
+                role: 'user',
+                status: 'active',
+                newsletter: data.newsletter,
+                emailVerified: firebaseUser.emailVerified,
+                provider: 'email/password',
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
 
+            // Step 4: Save to database (password will be hashed in backend)
+            const dbResponse = await axiosPublic.post('/users', userData);
+            
+            if (!dbResponse.data.success) {
+                throw new Error(dbResponse.data.message || 'Failed to save user to database');
+            }
+
+            // Success
+            setRegisterSuccess(true);
+            setRegisterError('');
+            
             // Navigate to login page with pre-filled email
-            navigate('/auth/login', {
-                state: {
-                    email: data.email,
-                    registrationSuccess: true
-                }
-            });
+            setTimeout(() => {
+                navigate('/auth/login', {
+                    state: {
+                        email: data.email,
+                        registrationSuccess: true
+                    }
+                });
+            }, 2000);
 
         } catch (error) {
-            setRegisterError('Registration failed. Please try again.');
+            console.error('Registration error:', error);
+            
+            // Handle specific Firebase errors
+            let errorMessage = 'Registration failed. Please try again.';
+            
+            if (error.code === 'auth/email-already-in-use') {
+                errorMessage = 'This email is already registered. Please use a different email or try logging in.';
+            } else if (error.code === 'auth/weak-password') {
+                errorMessage = 'Password is too weak. Please choose a stronger password.';
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage = 'Invalid email address. Please enter a valid email.';
+            } else if (error.code === 'auth/network-request-failed') {
+                errorMessage = 'Network error. Please check your internet connection.';
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+            
+            setRegisterError(errorMessage);
         } finally {
             setIsLoading(false);
+            setLoading(false);
         }
     };
+
+    // ALTERNATIVE: Pure database registration (without Firebase)
+    // const onSubmit = async (data) => {
+    //     setIsLoading(true);
+    //     setRegisterError('');
+    //     setRegisterSuccess(false);
+
+    //     try {
+    //         // Prepare user data
+    //         const userData = {
+    //             email: data.email,
+    //             name: data.fullName,
+    //             phone: data.phone,
+    //             password: data.password, // Will be hashed in backend
+    //             role: 'user',
+    //             status: 'active',
+    //             newsletter: data.newsletter,
+    //             emailVerified: false,
+    //             provider: 'email/password',
+    //             createdAt: new Date().toISOString(),
+    //             updatedAt: new Date().toISOString()
+    //         };
+
+    //         // Save to database (password will be hashed in backend)
+    //         const response = await axiosPublic.post('/users', userData);
+            
+    //         if (!response.data.success) {
+    //             throw new Error(response.data.message);
+    //         }
+
+    //         setRegisterSuccess(true);
+            
+    //         // Navigate to login page
+    //         setTimeout(() => {
+    //             navigate('/auth/login', {
+    //                 state: {
+    //                     email: data.email,
+    //                     registrationSuccess: true
+    //                 }
+    //             });
+    //         }, 2000);
+
+    //     } catch (error) {
+    //         setRegisterError(error.message || 'Registration failed. Please try again.');
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
 
     const togglePasswordVisibility = (field) => {
         setShowPassword(prev => ({
@@ -178,6 +281,16 @@ const Register = () => {
                     <h1 className="text-3xl font-bold mb-2">Create Account</h1>
                     <p>Join our community today</p>
                 </div>
+
+                {/* Success Message */}
+                {registerSuccess && (
+                    <div className="mb-4 p-3 bg-linear-to-br from-green-50 to-green-100 border-l-4 border-green-500 rounded-lg shadow">
+                        <div className="flex items-center space-x-2 text-green-600">
+                            <CheckCircle size={18} />
+                            <p className="text-sm font-medium">Registration successful! Redirecting to login...</p>
+                        </div>
+                    </div>
+                )}
 
                 {/* Registration Form */}
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -458,7 +571,7 @@ const Register = () => {
                         <div>
                             <h3 className="font-semibold text-blue-800 mb-1">Your Security Matters</h3>
                             <p className="text-sm text-blue-700">
-                                We use industry-standard encryption to protect your data. Your password is never stored in plain text.
+                                Passwords are securely hashed using bcrypt before storage. We never store plain text passwords.
                             </p>
                         </div>
                     </div>
@@ -481,3 +594,4 @@ const Register = () => {
 };
 
 export default Register;
+
