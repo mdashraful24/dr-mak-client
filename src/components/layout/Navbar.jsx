@@ -46,17 +46,18 @@ const Navbar = () => {
         setIsSidebarOpen(false);
     };
 
-    const handleLogout = () => {
-        logOut()
-            .then(() => {
-                toast.success("User signed out successfully", {
-                    position: "top-right",
-                });
-                navigate("/");
-            })
-            .catch((error) => {
-                toast.error(error.message);
+    const handleLogout = async () => {
+        try {
+            await logOut();
+            // Close sidebar after successful logout
+            closeSidebar();
+            toast.success("User signed out successfully", {
+                position: "top-right",
             });
+            navigate("/");
+        } catch (error) {
+            toast.error(error.message);
+        }
     };
 
     // Format role for display (capitalize first letter)
