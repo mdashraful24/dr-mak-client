@@ -219,7 +219,7 @@ const Reports = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-            console.log('Data refreshed');
+            // console.log('Data refreshed');
         }, 1500);
     };
 

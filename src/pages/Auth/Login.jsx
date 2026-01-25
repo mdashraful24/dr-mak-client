@@ -106,7 +106,7 @@ const Login = () => {
     // Helper function to save user to database (for both Firebase and Google login)
     const saveUserToDatabase = async (userData) => {
         try {
-            console.log('Saving user to database:', userData);
+            // console.log('Saving user to database:', userData);
 
             // First check if user exists
             try {
@@ -118,11 +118,11 @@ const Login = () => {
                         ...userData,
                         updatedAt: new Date().toISOString()
                     });
-                    console.log('User updated in database:', updateResponse.data);
+                    // console.log('User updated in database:', updateResponse.data);
                     return { success: true, action: 'updated', data: updateResponse.data };
                 }
             } catch (checkError) {
-                console.log('User not found, will create new record');
+                // console.log('User not found, will create new record');
             }
 
             // User doesn't exist, create new
@@ -132,7 +132,7 @@ const Login = () => {
                 updatedAt: new Date().toISOString()
             });
 
-            console.log('User created in database:', createResponse.data);
+            // console.log('User created in database:', createResponse.data);
             return { success: true, action: 'created', data: createResponse.data };
 
         } catch (dbError) {

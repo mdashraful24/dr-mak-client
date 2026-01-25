@@ -149,7 +149,7 @@ const Appointments = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log('Appointment booked:', { ...formData, selectedDate, selectedTime });
+        // console.log('Appointment booked:', { ...formData, selectedDate, selectedTime });
         // Add your form submission logic here
     };
 

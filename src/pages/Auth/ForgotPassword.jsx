@@ -43,7 +43,7 @@ const ForgotPassword = () => {
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 1500));
 
-            console.log('Reset password request for:', data.email);
+            // console.log('Reset password request for:', data.email);
 
             // Show success state
             setIsSubmitted(true);

@@ -136,14 +136,14 @@ const Settings = () => {
                     id: 'emailNotifications',
                     label: 'Email Preferences',
                     type: 'link',
-                    onClick: () => console.log('Email preferences'),
+                    // onClick: () => console.log('Email preferences'),
                     icon: <Mail className="w-4 h-4 text-indigo-500" />
                 },
                 {
                     id: 'exportData',
                     label: 'Export Data',
                     type: 'link',
-                    onClick: () => console.log('Export data'),
+                    // onClick: () => console.log('Export data'),
                     icon: <Download className="w-4 h-4 text-green-500" />
                 }
             ]
