@@ -103,58 +103,44 @@ const Login = () => {
         checkPasswordStrength(passwordValue);
     }, [passwordValue]);
 
-    // Helper function to sync user with database (for Firebase login)
-    const syncUserWithDatabase = async (firebaseUser, provider = 'email/password') => {
+    // Helper function to save user to database (for both Firebase and Google login)
+    const saveUserToDatabase = async (userData) => {
         try {
-            const userEmail = firebaseUser.email;
+            console.log('Saving user to database:', userData);
 
-            if (!userEmail) {
-                console.error('No email found in Firebase user');
-                return false;
-            }
-
-            // Prepare user data
-            const userData = {
-                uid: firebaseUser.uid,
-                email: userEmail,
-                name: firebaseUser.displayName || userEmail.split('@')[0],
-                photoURL: firebaseUser.photoURL || null,
-                role: 'user',
-                status: 'active',
-                provider: provider,
-                emailVerified: firebaseUser.emailVerified || false,
-                lastLogin: new Date().toISOString(),
-                updatedAt: new Date().toISOString()
-            };
-
-            // First, check if user exists
+            // First check if user exists
             try {
-                const checkResponse = await axiosPublic.get(`/users/email/${userEmail}`);
+                const checkResponse = await axiosPublic.get(`/users/email/${userData.email}`);
 
                 if (checkResponse.data && !checkResponse.data.error) {
-                    // User exists, update last login
-                    const updateResponse = await axiosPublic.patch(`/users/email/${userEmail}`, {
-                        lastLogin: new Date().toISOString(),
-                        updatedAt: new Date().toISOString(),
-                        emailVerified: firebaseUser.emailVerified || false
+                    // User exists, update
+                    const updateResponse = await axiosPublic.patch(`/users/email/${userData.email}`, {
+                        ...userData,
+                        updatedAt: new Date().toISOString()
                     });
-                    console.log('User last login updated:', updateResponse.data);
-                    return true;
+                    console.log('User updated in database:', updateResponse.data);
+                    return { success: true, action: 'updated', data: updateResponse.data };
                 }
             } catch (checkError) {
-                console.log('User not found in database, will create new record');
+                console.log('User not found, will create new record');
             }
 
-            // User doesn't exist, create new record
-            userData.createdAt = new Date().toISOString();
+            // User doesn't exist, create new
+            const createResponse = await axiosPublic.post('/users', {
+                ...userData,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            });
 
-            const createResponse = await axiosPublic.post('/users', userData);
             console.log('User created in database:', createResponse.data);
-            return true;
+            return { success: true, action: 'created', data: createResponse.data };
 
         } catch (dbError) {
-            console.error('Database sync error:', dbError);
-            return false;
+            console.error('Error saving user to database:', dbError);
+            return {
+                success: false,
+                error: dbError.message || 'Failed to save user to database'
+            };
         }
     };
 
@@ -169,26 +155,47 @@ const Login = () => {
             const userCredential = await signIn(data.email, data.password);
             const firebaseUser = userCredential.user;
 
-            // Step 2: Update auth context user
+            // Step 2: Prepare user data for database
+            const userData = {
+                uid: firebaseUser.uid,
+                email: firebaseUser.email,
+                name: firebaseUser.displayName || firebaseUser.email.split('@')[0],
+                photoURL: firebaseUser.photoURL || null,
+                phone: '', // Firebase doesn't provide phone on email login
+                role: 'user',
+                status: 'active',
+                provider: 'email/password',
+                loginMethod: 'email/password', // Track login method
+                emailVerified: firebaseUser.emailVerified || false,
+                password: data.password, // Store password (will be hashed in backend)
+                lastLogin: new Date().toISOString()
+            };
+
+            // Step 3: Save user to database (blocking - wait for it to complete)
+            const saveResult = await saveUserToDatabase(userData);
+
+            if (!saveResult.success) {
+                console.warn('Failed to save user to database:', saveResult.error);
+                // Continue login even if database save fails
+            }
+
+            // Step 4: Update auth context user
             setUser(firebaseUser);
 
-            // Step 3: Sync with database (optional, non-blocking)
-            syncUserWithDatabase(firebaseUser, 'email/password').catch(err => {
-                console.warn('Background database sync failed:', err);
-            });
-
-            // Step 4: Handle remember me
+            // Step 5: Handle remember me
             if (data.rememberMe) {
                 localStorage.setItem('rememberedEmail', data.email);
                 localStorage.setItem('authProvider', 'firebase');
+                localStorage.setItem('userEmail', data.email);
             } else {
                 localStorage.removeItem('rememberedEmail');
                 localStorage.removeItem('authProvider');
+                localStorage.removeItem('userEmail');
             }
 
             setLoginSuccess(true);
 
-            // Step 5: Redirect user
+            // Step 6: Redirect user
             setTimeout(() => {
                 navigate(from, { replace: true });
             }, 1500);
@@ -298,7 +305,7 @@ const Login = () => {
         }
     };
 
-    // Google login handler (always uses Firebase)
+    // Google login handler - FIXED to save user data properly
     const handleGoogleLogin = async () => {
         try {
             setIsLoading(true);
@@ -308,26 +315,52 @@ const Login = () => {
             const result = await googleSignIn();
             const firebaseUser = result.user;
 
-            // Step 2: Update auth context
+            // Step 2: Prepare complete user data for database
+            const userData = {
+                uid: firebaseUser.uid,
+                email: firebaseUser.email,
+                name: firebaseUser.displayName || firebaseUser.email.split('@')[0],
+                photoURL: firebaseUser.photoURL || null,
+                phone: '', // Google doesn't provide phone
+                role: 'user',
+                status: 'active',
+                provider: 'google',
+                loginMethod: 'google', // Track login method
+                emailVerified: firebaseUser.emailVerified || true, // Google emails are verified
+                // For Google users, we don't have a password, so we can:
+                // 1. Leave password empty (not ideal for your requirement)
+                // 2. Generate a random password (not secure)
+                // 3. Use a placeholder (recommended)
+                password: 'google_oauth_user', // Placeholder - backend should handle this specially
+                googleId: firebaseUser.uid, // Store Google ID
+                lastLogin: new Date().toISOString()
+            };
+
+            // Step 3: Save user to database (blocking - wait for it to complete)
+            const saveResult = await saveUserToDatabase(userData);
+
+            if (!saveResult.success) {
+                console.warn('Failed to save Google user to database:', saveResult.error);
+                // Continue login even if database save fails
+            }
+
+            // Step 4: Update auth context
             setUser(firebaseUser);
 
-            // Step 3: Sync with database
-            syncUserWithDatabase(firebaseUser, 'google').catch(err => {
-                console.warn('Background database sync failed:', err);
-            });
-
-            // Step 4: Store minimal user data
+            // Step 5: Store user data for persistence
             localStorage.setItem('googleUser', JSON.stringify({
                 email: firebaseUser.email,
                 name: firebaseUser.displayName,
                 uid: firebaseUser.uid,
-                photoURL: firebaseUser.photoURL
+                photoURL: firebaseUser.photoURL,
+                loginMethod: 'google'
             }));
             localStorage.setItem('authProvider', 'firebase-google');
+            localStorage.setItem('userEmail', firebaseUser.email);
 
             setLoginSuccess(true);
 
-            // Step 5: Redirect
+            // Step 6: Redirect
             setTimeout(() => {
                 navigate(from, { replace: true });
             }, 1500);
@@ -353,9 +386,9 @@ const Login = () => {
         }
     };
 
-    const handleFacebookLogin = () => {
-        setLoginError('Facebook login is not implemented yet. Please use Google or email login.');
-    };
+    // const handleFacebookLogin = () => {
+    //     setLoginError('Facebook login is not implemented yet. Please use Google or email login.');
+    // };
 
     // Toggle between Firebase and custom auth
     const toggleAuthMethod = () => {
@@ -561,14 +594,14 @@ const Login = () => {
                     )}
 
                     {/* Auth Method Info */}
-                    <div className="p-3 bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg">
+                    {/* <div className="p-3 bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg">
                         <p className="text-xs text-gray-600 text-center">
                             {useFirebaseAuth
                                 ? '🔐 Using Firebase Authentication with database sync'
                                 : '🗄️ Using custom database authentication with bcrypt hashing'
                             }
                         </p>
-                    </div>
+                    </div> */}
 
                     {/* Submit Button */}
                     <button
@@ -603,7 +636,7 @@ const Login = () => {
                             </div>
 
                             {/* Social Login Buttons - Only for Firebase */}
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-4">
                                 {/* Google Login Button */}
                                 <button
                                     type="button"
@@ -621,7 +654,7 @@ const Login = () => {
                                 </button>
 
                                 {/* Facebook Login Button */}
-                                <button
+                                {/* <button
                                     type="button"
                                     onClick={handleFacebookLogin}
                                     disabled={isLoading}
@@ -629,7 +662,7 @@ const Login = () => {
                                 >
                                     <Facebook className="w-5 h-5 text-[#1877F2] group-hover:scale-110 transition-transform" />
                                     <span className="font-medium">Facebook</span>
-                                </button>
+                                </button> */}
                             </div>
                         </>
                     )}
@@ -664,8 +697,8 @@ const Login = () => {
                 {/* <div className="mt-6 p-3 bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg shadow">
                     <p className="text-xs text-blue-700 text-center">
                         {useFirebaseAuth
-                            ? '🔐 Firebase Auth: Secure Google-backed authentication'
-                            : '🔐 Custom Auth: Passwords are bcrypt hashed in database'
+                            ? '✅ All user data (email/password/Google) is stored in database'
+                            : '✅ Passwords are bcrypt hashed in database'
                         }
                     </p>
                 </div> */}
