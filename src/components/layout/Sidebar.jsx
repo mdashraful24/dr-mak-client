@@ -1,17 +1,28 @@
 import { NavLink } from "react-router";
 import { Home, Users, Calendar, FileText, BarChart3, Settings, LayoutDashboard, Info, Briefcase, BookOpen } from 'lucide-react';
+import useAuth from "../../hooks/useAuth";
+import useHiddenFeatures from "../../hooks/admin/useHiddenFeatures";
 
 const Sidebar = () => {
+    const { user } = useAuth();
+    const { isAdmin } = useHiddenFeatures();
+
     const menuItems = [
         { path: "/", label: "Home", icon: Home },
         { path: "/about", label: "About", icon: Info },
         { path: "/services", label: "Services", icon: Briefcase },
-        { path: "/appointments", label: "Appointments", icon: Calendar },
-        { path: "/patients", label: "Patients", icon: Users },
-        { path: "/prescriptions", label: "Prescriptions", icon: FileText },
-        { path: "/reports", label: "Reports", icon: BarChart3 },
+
+        ...(user ? [
+            { path: "/appointments", label: "Appointments", icon: Calendar },
+            { path: "/patients", label: "Patients", icon: Users },
+            { path: "/prescriptions", label: "Prescriptions", icon: FileText },
+            { path: "/reports", label: "Reports", icon: BarChart3 },
+        ] : []),
+
         { path: "/blog", label: "Blog", icon: BookOpen },
-        { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+
+        ...(isAdmin ? [{ path: "/dashboard", label: "Dashboard", icon: LayoutDashboard }] : []),
+
         { path: "/settings", label: "Settings", icon: Settings },
     ];
 
