@@ -474,8 +474,8 @@ const Register = () => {
                     {/* Terms and Newsletter */}
                     <div className="space-y-4">
                         {/* Terms Agreement */}
-                        <label className="flex items-start space-x-3 cursor-pointer group">
-                            <div className="relative mt-1">
+                        <label className="flex items-center space-x-3 cursor-pointer group">
+                            <div className="relative">
                                 <input
                                     {...register('agreeToTerms')}
                                     type="checkbox"
