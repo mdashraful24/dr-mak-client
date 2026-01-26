@@ -444,7 +444,7 @@ const Login = () => {
                     <p>Login to your account to continue</p>
 
                     {/* Auth Method Toggle */}
-                    <div className="mt-4 flex items-center justify-center space-x-2">
+                    {/* <div className="mt-4 flex items-center justify-center space-x-2">
                         <span className="text-sm text-gray-600">
                             Using:
                         </span>
@@ -459,7 +459,7 @@ const Login = () => {
                         <span className="text-xs text-gray-500">
                             ({useFirebaseAuth ? 'Recommended' : 'For testing'})
                         </span>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Success Message */}
@@ -612,11 +612,12 @@ const Login = () => {
                         {isLoading ? (
                             <span className="flex items-center justify-center">
                                 <Loader2 className="animate-spin mr-2" size={20} />
-                                {useFirebaseAuth ? 'Signing in with Firebase...' : 'Signing in...'}
+                                {useFirebaseAuth ? 'Signing in...' : 'Signing in...'}
                             </span>
                         ) : (
                             <span className="flex items-center justify-center">
-                                {useFirebaseAuth ? 'Login with Firebase' : 'Login with Database'}
+                                    {useFirebaseAuth ? 'Login now' : 'Login now'}
+                                {/* {useFirebaseAuth ? 'Login with Firebase' : 'Login with Database'} */}
                                 {isValid && (
                                     <CheckCircle className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                                 )}
