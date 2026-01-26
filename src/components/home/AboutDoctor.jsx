@@ -1,5 +1,4 @@
-// import { HashLink as Link } from 'react-router-hash-link';
-import { Link } from "react-router";
+import { HashLink as Link } from 'react-router-hash-link'; 
 import dr from "../../assets/dr/dr.png"
 import Button from "../common/Button";
 
