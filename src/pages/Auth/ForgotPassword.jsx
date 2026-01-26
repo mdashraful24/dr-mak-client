@@ -111,7 +111,7 @@ const ForgotPassword = () => {
                 {/* Back to Login Button */}
                 <button
                     onClick={handleBackToLogin}
-                    className="mb-6 flex items-center space-x-1 transition-colors group"
+                    className="mb-6 flex items-center text-blue-600 hover:text-blue-700 space-x-1 transition-colors group"
                 >
                     <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     <span className="font-medium">Back to Login</span>
@@ -250,12 +250,12 @@ const ForgotPassword = () => {
                         </button>
 
                         {/* Back to Login Button */}
-                        <button
+                        {/* <button
                             onClick={handleBackToLogin}
                             className="w-full py-3 bg-linear-to-br from-blue-50 to-blue-100 border border-blue-300 text-blue-700 font-semibold rounded-lg shadow-sm hover:shadow-md active:shadow-[inset_3px_3px_6px_#93c5fd,inset_-3px_-3px_6px_#dbeafe] transition-all duration-200"
                         >
                             Return to Login
-                        </button>
+                        </button> */}
 
                         {/* Didn't Receive Email? */}
                         <div className="text-center p-3 border border-gray-300 rounded-lg shadow">
