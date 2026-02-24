@@ -14,7 +14,7 @@ import Appointments from "../pages/Appointments/Appointments";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Settings from "../pages/Control/Settings";
 import Reports from "../pages/Reports/Reports";
-import PrivateRoute from "../utils/PrivateRoute";
+import PrivateRoute from "./Secure/PrivateRoute";
 
 export const router = createBrowserRouter([
     // Public Layout
