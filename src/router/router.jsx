@@ -14,6 +14,7 @@ import Appointments from "../pages/Appointments/Appointments";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Settings from "../pages/Control/Settings";
 import Reports from "../pages/Reports/Reports";
+import PrivateRoute from "../utils/PrivateRoute";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -35,10 +36,14 @@ export const router = createBrowserRouter([
     // Dashboard Layout
     {
         path: "dashboard",
-        Component: DashboardLayout,
+        element: (
+            <PrivateRoute>
+                <DashboardLayout />
+            </PrivateRoute>
+        ),
         errorElement: <ErrorPage />,
         children: [
-            { index: true, Component: DoctorDashboard },
+            { index: true, element: <DoctorDashboard /> },
         ],
     },
 
