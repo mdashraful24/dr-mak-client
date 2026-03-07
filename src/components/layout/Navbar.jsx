@@ -60,7 +60,20 @@ const Navbar = () => {
         }
     };
 
-    // Format role for display (capitalize first letter)
+    // Get user initials for avatar
+    const getUserInitials = () => {
+        if (user?.displayName) {
+            return user.displayName
+                .split(' ')
+                .map(word => word[0])
+                .join('')
+                .toUpperCase()
+                .slice(0, 2);
+        }
+        return user?.email?.charAt(0).toUpperCase() || 'U';
+    };
+
+    // // Format role for display (capitalize first letter)
     // const formatRole = (role) => {
     //     if (!role) return '';
     //     return role.charAt(0).toUpperCase() + role.slice(1);
@@ -105,43 +118,48 @@ const Navbar = () => {
                                     <div className="relative">
                                         {user.photoURL ? (
                                             <img
-                                                src={user?.photoURL}
+                                                src={user.photoURL}
                                                 alt={user?.name || 'User'}
                                                 referrerPolicy="no-referrer"
                                                 className="w-10 h-10 rounded-full object-cover shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff]"
                                             />
                                         ) : (
                                             <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                                <User size={20} />
+                                                <span className="font-semibold">
+                                                    {getUserInitials()}
+                                                </span>
                                             </div>
                                         )}
                                         <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
                                     </div>
 
-                                    <div className="hidden md:block ext-right">
+                                    {/* <div className="hidden md:block text-right">
                                         <p className="font-semibold truncate max-w-[150px]">
                                             {user?.name || user?.displayName || 'User'}
                                         </p>
-                                        {/* <p className="text-sm">
+                                        <p className="text-sm">
                                             {formatRole(user.role)}
                                             {user.email && (
                                                 <span className="block text-xs text-gray-600 truncate max-w-[180px]">
                                                     {user.email}
                                                 </span>
                                             )}
-                                        </p> */}
-                                    </div>
+                                        </p>
+                                    </div> */}
                                 </div>
                             </>
                         ) : (
                             // Before login - Not logged in state
-                            <Link
-                                to="/auth/login"
-                                className="px-4 py-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200 flex items-center gap-2 text-blue-600 font-medium"
-                            >
-                                <LogIn size={18} />
-                                <span>Login</span>
-                            </Link>
+                            // Only show Login button when sidebar is closed
+                            !isSidebarOpen && (
+                                <Link
+                                    to="/auth/login"
+                                    className="px-4 py-2 rounded-lg bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200 flex items-center gap-2 text-blue-600 font-medium"
+                                >
+                                    <LogIn size={18} />
+                                    <span>Login</span>
+                                </Link>
+                            )
                         )}
                     </div>
                 </div>
@@ -169,7 +187,7 @@ const Navbar = () => {
 
                     <div className="flex-1 overflow-y-auto p-4">
                         <div onClick={closeSidebar}>
-                            <ul className="space-y-3 cursor-pointer">
+                            <ul className="space-y-2 cursor-pointer">
                                 <Sidebar />
                             </ul>
                         </div>
@@ -177,17 +195,44 @@ const Navbar = () => {
 
                     <div className="p-4 border-t border-gray-300">
                         {user ? (
-                            // After login - User info and logout button in sidebar
-                            <>
-                                {/* Logout button */}
+                            // After login - Profile and Logout section
+                            <div className="bg-[#e0e5ec] rounded-xl p-3 lg:p-4 shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff]">
+                                {/* Profile Section */}
+                                <div className="flex items-center gap-3 mb-3">
+                                    <div className="relative">
+                                        {user.photoURL ? (
+                                            <img
+                                                src={user.photoURL}
+                                                alt={user?.name || 'User'}
+                                                className="w-10 h-10 rounded-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                                <User size={20} />
+                                            </div>
+                                        )}
+                                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#e0e5ec]" />
+                                    </div>
+
+                                    <div className="flex-1 min-w-0">
+                                        <p className="font-semibold text-sm truncate">
+                                            {user?.name || user?.displayName || 'User'}
+                                        </p>
+                                        <p className="text-xs truncate text-gray-600">
+                                            {user?.email || ''}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Logout Button */}
                                 <button
                                     onClick={handleLogout}
-                                    className="w-full text-left px-4 py-3 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 font-medium transition duration-200 flex items-center gap-3 cursor-pointer"
+                                    className="w-full px-4 py-3 rounded-lg bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 text-sm font-medium transition duration-200 flex items-center gap-3 cursor-pointer"
                                 >
                                     <LogOut size={18} />
                                     <span>Logout</span>
                                 </button>
-                            </>
+                            </div>
                         ) : (
                             // Before login - Login button in sidebar
                             <Link

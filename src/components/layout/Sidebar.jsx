@@ -1,11 +1,11 @@
 import { NavLink } from "react-router";
 import { Home, Users, Calendar, FileText, BarChart3, Settings, LayoutDashboard, Info, Briefcase, BookOpen } from 'lucide-react';
 import useAuth from "../../hooks/useAuth";
-import useHiddenFeatures from "../../hooks/admin/useHiddenFeatures";
+import useAdmin from "../../hooks/admin/useAdmin";
 
 const Sidebar = () => {
     const { user } = useAuth();
-    const { isAdmin } = useHiddenFeatures();
+    const { isAdmin } = useAdmin();
 
     const menuItems = [
         { path: "/", label: "Home", icon: Home },

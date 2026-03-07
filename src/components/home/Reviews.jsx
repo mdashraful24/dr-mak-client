@@ -53,7 +53,37 @@ const Reviews = () => {
             doctor: "Dr. Mark Anderson",
             specialty: "Neurology",
             avatar: "👩‍🎨"
-        }
+        },
+        {
+            id: 6,
+            name: "Lisa Thompson",
+            rating: 5,
+            date: "Jan 5, 2024",
+            comment: "Exceptional service! Dr. Anderson was patient, thorough, and really cared about my long-term health outcomes.",
+            doctor: "Dr. Mark Anderson",
+            specialty: "Neurology",
+            avatar: "👩‍🎨"
+        },
+        {
+            id: 7,
+            name: "Lisa Thompson",
+            rating: 5,
+            date: "Jan 5, 2024",
+            comment: "Exceptional service! Dr. Anderson was patient, thorough, and really cared about my long-term health outcomes.",
+            doctor: "Dr. Mark Anderson",
+            specialty: "Neurology",
+            avatar: "👩‍🎨"
+        },
+        {
+            id: 8,
+            name: "Lisa Thompson",
+            rating: 5,
+            date: "Jan 5, 2024",
+            comment: "Exceptional service! Dr. Anderson was patient, thorough, and really cared about my long-term health outcomes.",
+            doctor: "Dr. Mark Anderson",
+            specialty: "Neurology",
+            avatar: "👩‍🎨"
+        },
     ];
 
     const StarRating = ({ rating }) => {
@@ -148,7 +178,7 @@ const Reviews = () => {
                             {reviews.map((review, index) => (
                                 <div
                                     key={review.id}
-                                    className={`absolute w-[95%] md:max-w-sm lg:max-w-md transition-all duration-500 ease-in-out cursor-pointer ${getCardStyle(index)} ${getTransform(index)}`}
+                                    className={`absolute w-[95%] md:max-w-sm lg:max-w-md transition-all duration-500 ease-in-out ${getCardStyle(index)} ${getTransform(index)}`}
                                     onClick={() => handleCardClick(index)}
                                 >
                                     <div className={`rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 transition-all duration-500 

@@ -57,7 +57,7 @@ const FAQ = () => {
 
     return (
         <div className="bg-gray-50 py-20 px-4">
-            <div className="container mx-auto">
+            <div className="container max-w-5xl mx-auto">
                 {/* Header Section */}
                 <div className="text-center mb-12">
                     <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
@@ -81,13 +81,13 @@ const FAQ = () => {
                     {faqData.map((faq, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-xl shadow-soft border border-gray-200 overflow-hidden transition-all duration-300"
+                            className="bg-white rounded-lg shadow-soft border border-gray-200 overflow-hidden transition-all duration-300"
                         >
                             <button
                                 className="w-full p-3 md:px-6 md:py-3 text-left flex justify-between items-center focus:outline-none"
                                 onClick={() => toggleFAQ(index)}
                             >
-                                <h3 className="text-lg md:text-xl font-semibold text-gray-800 pr-4">
+                                <h3 className="text-lg font-medium text-gray-800 pr-4">
                                     {faq.question}
                                 </h3>
                                 <div className="shrink-0">

@@ -14,7 +14,7 @@ const Button = ({ text = "Click Me", bgColor = "blue", textColor = "white" }) =>
     const textClass = `text-${colors[textColor] || "white"}`;
 
     return (
-        <button className={`px-6 py-3 ${bgClass} ${textClass} font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full`}>
+        <button className={`px-6 py-3 ${bgClass} ${textClass} font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform w-full`}>
             {text}
         </button>
     );

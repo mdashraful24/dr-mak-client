@@ -565,7 +565,7 @@ const Register = () => {
                 </form>
 
                 {/* Security Information */}
-                <div className="mt-5 p-2 bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg shadow">
+                {/* <div className="mt-5 p-2 bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg shadow">
                     <div className="flex items-start space-x-3">
                         <Shield size={18} className="mt-0.5 text-blue-600 shrink-0" />
                         <div>
@@ -575,7 +575,7 @@ const Register = () => {
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Form Validation Status */}
                 {isDirty && (
