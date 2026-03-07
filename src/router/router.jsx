@@ -15,6 +15,7 @@ import ForgotPassword from "../pages/Auth/ForgotPassword";
 import Settings from "../pages/Control/Settings";
 import Reports from "../pages/Reports/Reports";
 import PrivateRoute from "./Secure/PrivateRoute";
+import AuthRouter from "./Secure/AuthRouter";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -53,9 +54,14 @@ export const router = createBrowserRouter([
         Component: AuthLayout,
         errorElement: <ErrorPage />,
         children: [
-            { path: "login", Component: Login },
-            { path: "register", Component: Register },
-            { path: "forgot-password", Component: ForgotPassword }
+            {
+                element: <AuthRouter />,
+                children: [
+                    { path: "login", Component: Login },
+                    { path: "register", Component: Register },
+                    { path: "forgot-password", Component: ForgotPassword }
+                ]
+            },
         ],
     },
 

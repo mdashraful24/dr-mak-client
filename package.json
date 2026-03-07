@@ -17,6 +17,7 @@
     "firebase": "^12.8.0",
     "flowbite": "^3.1.2",
     "framer-motion": "^12.23.24",
+    "jwt-decode": "^4.0.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.552.0",
     "motion": "^12.23.24",
