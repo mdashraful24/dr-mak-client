@@ -5,7 +5,7 @@ import useAdmin from "../../hooks/admin/useAdmin";
 
 const Sidebar = () => {
     const { user } = useAuth();
-    const { isAdmin } = useAdmin();
+    const [isAdmin] = useAdmin();
 
     const menuItems = [
         { path: "/", label: "Home", icon: Home },
