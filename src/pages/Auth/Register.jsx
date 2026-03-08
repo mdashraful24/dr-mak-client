@@ -81,7 +81,7 @@ const Register = () => {
         formState: { errors, isValid, isDirty },
     } = useForm({
         resolver: yupResolver(registerSchema),
-        mode: 'onChange', // Keep onChange for real-time validation but control error display
+        mode: 'onChange',
         defaultValues: {
             fullName: '',
             email: '',

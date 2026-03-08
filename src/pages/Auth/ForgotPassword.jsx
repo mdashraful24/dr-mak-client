@@ -19,6 +19,9 @@ const ForgotPassword = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState('');
     const [countdown, setCountdown] = useState(0);
+    const [touchedFields, setTouchedFields] = useState({
+        email: false
+    });
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -28,11 +31,19 @@ const ForgotPassword = () => {
 
     const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm({
         resolver: yupResolver(forgotPasswordSchema),
-        mode: 'onChange',
+        mode: 'onChange', // Keep onChange for real-time validation but control error display
         defaultValues: {
             email: emailFromState, // Pre-fill with email from login page
         }
     });
+
+    // Handle field blur to mark as touched
+    const handleFieldBlur = (fieldName) => {
+        setTouchedFields(prev => ({
+            ...prev,
+            [fieldName]: true
+        }));
+    };
 
     // Handle form submission
     const onSubmit = async (data) => {
@@ -100,22 +111,24 @@ const ForgotPassword = () => {
         }
     };
 
-    const handleBackToLogin = () => {
-        // Pass back the email to login page if needed
-        navigate('/auth/login', { state: { email: watch('email') } });
-    };
+    // const handleBackToLogin = () => {
+    //     // Pass back the email to login page if needed
+    //     navigate('/auth/login', { state: { email: watch('email') } });
+    // };
 
     return (
         <div className="md:min-h-screen flex items-center justify-center p-4">
             <div className="w-full max-w-md">
                 {/* Back to Login Button */}
-                <button
-                    onClick={handleBackToLogin}
+                <Link
+                    // onClick={handleBackToLogin}
+                    to="/auth/login"
+                    state={{ email: watch('email') }}
                     className="mb-6 flex items-center text-blue-600 hover:text-blue-700 space-x-1 transition-colors group"
                 >
                     <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     <span className="font-medium">Back to Login</span>
-                </button>
+                </Link>
 
                 {/* Header */}
                 <div className="text-center mb-8">
@@ -150,10 +163,12 @@ const ForgotPassword = () => {
                                     {...register('email')}
                                     type="email"
                                     placeholder="Enter your email address"
-                                    className="w-full pl-12 pr-4 py-3 border border-gray-300 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] placeholder-gray-600 transition-all duration-200"
+                                    className={`w-full pl-12 pr-4 py-3 border ${touchedFields.email && errors.email ? 'border-red-300' : 'border-gray-300'} bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] placeholder-gray-600 transition-all duration-200`}
+                                    onBlur={() => handleFieldBlur('email')}
                                 />
                             </div>
-                            {errors.email && (
+                            {/* Show error only if field has been touched */}
+                            {touchedFields.email && errors.email && (
                                 <div className="mt-2 flex items-center space-x-2 text-red-500 text-sm font-medium">
                                     <AlertCircle size={16} />
                                     <span>{errors.email.message}</span>
@@ -194,18 +209,18 @@ const ForgotPassword = () => {
 
                         {/* Tips */}
                         <div className="p-4 bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg">
-                            <h3 className="font-semibold text-blue-800 mb-2 flex items-center">
-                                <Shield size={16} className="mr-2" />
+                            <h3 className="text-sm font-semibold text-blue-800 mb-1 flex items-center">
+                                <Shield size={14} className="mr-2" />
                                 Password Reset Tips
                             </h3>
-                            <ul className="text-sm text-blue-700 space-y-1">
+                            <ul className="text-xs text-blue-700 space-y-1">
                                 <li className="flex items-start">
                                     <span className="mr-2">•</span>
                                     Check your spam folder if you don't see the email
                                 </li>
                                 <li className="flex items-start">
                                     <span className="mr-2">•</span>
-                                    Reset links expire after 1 hour
+                                    Reset links expire after 5 minutes
                                 </li>
                                 <li className="flex items-start">
                                     <span className="mr-2">•</span>
@@ -235,7 +250,7 @@ const ForgotPassword = () => {
                         <button
                             onClick={handleResendEmail}
                             disabled={isLoading || countdown > 0}
-                            className="w-full py-3 font-medium bg-linear-to-br from-gray-50 to-gray-100 border border-gray-300 rounded-lg shadow-sm hover:shadow-md active:shadow-[inset_3px_3px_6px_#bebebe,inset_-3px_-3px_6px_#ffffff] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full py-2.5 font-medium bg-linear-to-br from-gray-50 to-gray-100 border border-gray-300 rounded-lg shadow-sm hover:shadow-md active:shadow-[inset_3px_3px_6px_#bebebe,inset_-3px_-3px_6px_#ffffff] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {isLoading ? (
                                 <span className="flex items-center justify-center">
@@ -292,7 +307,7 @@ const ForgotPassword = () => {
                     <div className="flex items-start space-x-2">
                         <Shield size={14} className="mt-0.5 shrink-0" />
                         <p className="text-xs">
-                            For security reasons, password reset links expire after 1 hour.
+                            For security reasons, password reset links expire after 5 minutes.
                             Never share your reset link with anyone.
                         </p>
                     </div>
