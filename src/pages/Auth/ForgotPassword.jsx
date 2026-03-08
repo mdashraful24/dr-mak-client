@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Mail, ArrowLeft, CheckCircle, AlertCircle, Loader2, Shield } from 'lucide-react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Define validation schema
 const forgotPasswordSchema = yup.object({
@@ -18,24 +18,43 @@ const ForgotPassword = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState('');
+    const [infoMessage, setInfoMessage] = useState('');
+    const [resendSuccess, setResendSuccess] = useState(false);
     const [countdown, setCountdown] = useState(0);
     const [touchedFields, setTouchedFields] = useState({
         email: false
     });
-
-    const navigate = useNavigate();
+    const [showPrefilledMessage, setShowPrefilledMessage] = useState(false);
     const location = useLocation();
 
     // Get email from location state if available
     const emailFromState = location.state?.email || '';
 
-    const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm({
+    const { register, handleSubmit, watch, reset, formState: { errors, isValid } } = useForm({
         resolver: yupResolver(forgotPasswordSchema),
-        mode: 'onChange', // Keep onChange for real-time validation but control error display
+        mode: 'onChange',
         defaultValues: {
-            email: emailFromState, // Pre-fill with email from login page
+            email: emailFromState,
         }
     });
+
+    // Set showPrefilledMessage to true if emailFromState exists
+    useEffect(() => {
+        if (emailFromState) {
+            setShowPrefilledMessage(true);
+        }
+    }, [emailFromState]);
+
+    // Cleanup timer on unmount
+    useEffect(() => {
+        return () => {
+            if (countdown > 0) {
+                // Clear any existing timers
+                const timerId = setTimeout(() => { }, 0);
+                clearInterval(timerId);
+            }
+        };
+    }, [countdown]);
 
     // Handle field blur to mark as touched
     const handleFieldBlur = (fieldName) => {
@@ -45,32 +64,40 @@ const ForgotPassword = () => {
         }));
     };
 
+    // Start countdown timer
+    const startCountdown = () => {
+        setCountdown(60);
+        const timer = setInterval(() => {
+            setCountdown((prev) => {
+                if (prev <= 1) {
+                    clearInterval(timer);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+
+        // Store timer ID in a ref if needed for cleanup
+        return timer;
+    };
+
     // Handle form submission
     const onSubmit = async (data) => {
         setIsLoading(true);
         setError('');
+        setInfoMessage('');
+        setResendSuccess(false);
 
         try {
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 1500));
-
-            // console.log('Reset password request for:', data.email);
 
             // Show success state
             setIsSubmitted(true);
             setError('');
 
             // Start countdown for resend email
-            setCountdown(60);
-            const timer = setInterval(() => {
-                setCountdown((prev) => {
-                    if (prev <= 1) {
-                        clearInterval(timer);
-                        return 0;
-                    }
-                    return prev - 1;
-                });
-            }, 1000);
+            startCountdown();
 
         } catch (error) {
             setError('Failed to send reset link. Please try again later.');
@@ -83,27 +110,30 @@ const ForgotPassword = () => {
         if (countdown > 0) return;
 
         const email = watch('email');
-        if (!email || errors.email) return;
+        if (!email || errors.email) {
+            setError('Please enter a valid email address');
+            return;
+        }
 
         setIsLoading(true);
         setError('');
+        setInfoMessage('');
+        setResendSuccess(false);
 
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
 
             // Restart countdown
-            setCountdown(60);
-            const timer = setInterval(() => {
-                setCountdown((prev) => {
-                    if (prev <= 1) {
-                        clearInterval(timer);
-                        return 0;
-                    }
-                    return prev - 1;
-                });
-            }, 1000);
+            startCountdown();
 
-            alert(`Reset link has been resent to ${email}`);
+            // Show resend success message briefly
+            setResendSuccess(true);
+
+            // Auto-hide the success message after 3 seconds
+            setTimeout(() => {
+                setResendSuccess(false);
+            }, 4000);
+
         } catch (error) {
             setError('Failed to resend email. Please try again.');
         } finally {
@@ -111,27 +141,44 @@ const ForgotPassword = () => {
         }
     };
 
-    // const handleBackToLogin = () => {
-    //     // Pass back the email to login page if needed
-    //     navigate('/auth/login', { state: { email: watch('email') } });
-    // };
+    const handleTryAnotherEmail = () => {
+        // Reset the form to clear all fields and validation states
+        reset({
+            email: '' // Clear the email field
+        });
+
+        // Reset touched fields
+        setTouchedFields({
+            email: false
+        });
+
+        // Hide the pre-filled message
+        setShowPrefilledMessage(false);
+
+        // Clear all messages
+        setError('');
+        setInfoMessage('Enter a different email address');
+        setResendSuccess(false);
+
+        // Go back to the form state
+        setIsSubmitted(false);
+    };
 
     return (
         <div className="md:min-h-screen flex items-center justify-center p-4">
             <div className="w-full max-w-md">
-                {/* Back to Login Button */}
+                {/* Back to Login Link */}
                 <Link
-                    // onClick={handleBackToLogin}
                     to="/auth/login"
                     state={{ email: watch('email') }}
-                    className="mb-6 flex items-center text-blue-600 hover:text-blue-700 space-x-1 transition-colors group"
+                    className="mb-6 inline-flex items-center text-blue-600 hover:text-blue-700 space-x-1 transition-colors group cursor-pointer"
                 >
                     <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                     <span className="font-medium">Back to Login</span>
                 </Link>
 
                 {/* Header */}
-                <div className="text-center mb-8">
+                <div className="text-center mb-6">
                     <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-blue-50 to-blue-100 rounded-full mb-4 border border-gray-200 drop-shadow">
                         <Shield className="w-8 h-8 text-blue-600" />
                     </div>
@@ -142,13 +189,39 @@ const ForgotPassword = () => {
                             : 'Enter your email address and we\'ll send you a link to reset your password'
                         }
                     </p>
-                    {emailFromState && !isSubmitted && (
+                    {/* Pre-filled message */}
+                    {showPrefilledMessage && !isSubmitted && (
                         <p className="text-sm text-green-600 mt-2">
                             <CheckCircle size={14} className="inline mr-1" />
                             Email pre-filled from login attempt
                         </p>
                     )}
                 </div>
+
+                {/* Global Messages Section (only show on form state) */}
+                {(error || infoMessage) && !isSubmitted && (
+                    <div className="mb-6 space-y-3">
+                        {/* Error Message */}
+                        {error && (
+                            <div className="p-3 bg-linear-to-br from-red-50 to-red-100 border-l-4 border-red-500 rounded-lg shadow">
+                                <div className="flex items-center space-x-2 text-red-500">
+                                    <AlertCircle size={18} />
+                                    <p className="text-sm font-medium">{error}</p>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Info Message */}
+                        {infoMessage && (
+                            <div className="p-3 bg-linear-to-br from-blue-50 to-blue-100 border-l-4 border-blue-500 rounded-lg shadow">
+                                <div className="flex items-center space-x-2 text-blue-600">
+                                    <AlertCircle size={18} />
+                                    <p className="text-sm font-medium">{infoMessage}</p>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
 
                 {!isSubmitted ? (
                     /* Request Reset Form */
@@ -175,16 +248,6 @@ const ForgotPassword = () => {
                                 </div>
                             )}
                         </div>
-
-                        {/* Error Message */}
-                        {error && (
-                            <div className="p-3 bg-linear-to-br from-red-50 to-red-100 border-l-4 border-red-500 rounded-lg shadow">
-                                <div className="flex items-center space-x-2 text-red-500">
-                                    <AlertCircle size={18} />
-                                    <p className="text-sm font-medium">{error}</p>
-                                </div>
-                            </div>
-                        )}
 
                         {/* Submit Button */}
                         <button
@@ -233,18 +296,33 @@ const ForgotPassword = () => {
                     /* Success State */
                     <div className="space-y-6">
                         {/* Success Message */}
-                        <div className="p-3 bg-linear-to-br from-green-50 to-green-100 border border-green-300 rounded-lg drop-shadow">
+                        <div className="p-4 bg-linear-to-br from-green-50 to-green-100 border border-green-300 rounded-lg drop-shadow">
                             <div className="flex items-center space-x-3">
                                 <CheckCircle className="w-6 h-6 text-green-600 shrink-0" />
-                                <div>
-                                    <h3 className="font-semibold text-green-800">Check your email!</h3>
+                                <div className="flex-1">
+                                    <h3 className="font-semibold text-green-800">
+                                        {resendSuccess ? 'Reset Link Resent!' : 'Check your email!'}
+                                    </h3>
                                     <p className="text-sm text-green-700 mt-1">
-                                        We've sent a password reset link to{' '}
-                                        <span className="font-medium">{watch('email')}</span>
+                                        {resendSuccess ? (
+                                            <>A new password reset link has been sent to <span className="font-medium break-all">{watch('email')}</span></>
+                                        ) : (
+                                            <>We've sent a password reset link to <span className="font-medium break-all">{watch('email')}</span></>
+                                        )}
                                     </p>
                                 </div>
                             </div>
                         </div>
+
+                        {/* Error Message in Success State */}
+                        {error && (
+                            <div className="p-3 bg-linear-to-br from-red-50 to-red-100 border-l-4 border-red-500 rounded-lg shadow">
+                                <div className="flex items-center space-x-2 text-red-500">
+                                    <AlertCircle size={18} />
+                                    <p className="text-sm font-medium">{error}</p>
+                                </div>
+                            </div>
+                        )}
 
                         {/* Resend Email Button */}
                         <button
@@ -264,22 +342,14 @@ const ForgotPassword = () => {
                             )}
                         </button>
 
-                        {/* Back to Login Button */}
-                        {/* <button
-                            onClick={handleBackToLogin}
-                            className="w-full py-3 bg-linear-to-br from-blue-50 to-blue-100 border border-blue-300 text-blue-700 font-semibold rounded-lg shadow-sm hover:shadow-md active:shadow-[inset_3px_3px_6px_#93c5fd,inset_-3px_-3px_6px_#dbeafe] transition-all duration-200"
-                        >
-                            Return to Login
-                        </button> */}
-
                         {/* Didn't Receive Email? */}
-                        <div className="text-center p-3 border border-gray-300 rounded-lg shadow">
+                        <div className="text-center p-4 border border-gray-300 rounded-lg shadow">
                             <p className="text-sm mb-2">
                                 Didn't receive the email?
                             </p>
                             <button
-                                onClick={() => setIsSubmitted(false)}
-                                className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors"
+                                onClick={handleTryAnotherEmail}
+                                className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors cursor-pointer"
                             >
                                 Try another email address
                             </button>
