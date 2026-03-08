@@ -52,6 +52,14 @@ const Register = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [registerError, setRegisterError] = useState('');
     const [registerSuccess, setRegisterSuccess] = useState(false);
+    const [touchedFields, setTouchedFields] = useState({
+        fullName: false,
+        email: false,
+        phone: false,
+        password: false,
+        confirmPassword: false,
+        agreeToTerms: false
+    });
     const [passwordStrength, setPasswordStrength] = useState({
         score: 0,
         message: '',
@@ -73,7 +81,7 @@ const Register = () => {
         formState: { errors, isValid, isDirty },
     } = useForm({
         resolver: yupResolver(registerSchema),
-        mode: 'onChange',
+        mode: 'onChange', // Keep onChange for real-time validation but control error display
         defaultValues: {
             fullName: '',
             email: '',
@@ -88,6 +96,14 @@ const Register = () => {
     // Watch password fields
     const passwordValue = watch('password');
     const confirmPasswordValue = watch('confirmPassword');
+
+    // Handle field blur to mark as touched
+    const handleFieldBlur = (fieldName) => {
+        setTouchedFields(prev => ({
+            ...prev,
+            [fieldName]: true
+        }));
+    };
 
     // Password strength checker
     const checkPasswordStrength = (password) => {
@@ -145,14 +161,20 @@ const Register = () => {
                 role: 'user',
                 status: 'active',
                 newsletter: data.newsletter,
+                agreedToTerms: data.agreeToTerms,
                 emailVerified: false,
                 provider: 'email/password',
                 loginMethod: 'email/password',
+                agreedToTermsAt: data.agreeToTerms ? new Date().toISOString() : null,
                 createdAt: new Date().toISOString(),
                 updatedAt: new Date().toISOString()
             };
 
-            // console.log('Sending registration data:', { ...userData, password: '[HIDDEN]' });
+            // console.log('Sending registration data:', {
+            //     ...userData,
+            //     password: '[HIDDEN]',
+            //     agreedToTerms: userData.agreedToTerms // This will show true/false
+            // });
 
             // Save to database (password will be hashed in backend)
             const response = await axiosPublic.post('/users', userData);
@@ -235,11 +257,12 @@ const Register = () => {
                                 {...register('fullName')}
                                 type="text"
                                 placeholder="Full Name"
-                                className="w-full pl-12 pr-4 py-3 border border-gray-300 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200"
+                                className={`w-full pl-12 pr-4 py-3 border ${touchedFields.fullName && errors.fullName ? 'border-red-300' : 'border-gray-300'} bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200`}
                                 disabled={isLoading}
+                                onBlur={() => handleFieldBlur('fullName')}
                             />
                         </div>
-                        {errors.fullName && (
+                        {touchedFields.fullName && errors.fullName && (
                             <div className="mt-2 flex items-center space-x-2 text-red-500 text-sm font-medium">
                                 <AlertCircle size={16} />
                                 <span>{errors.fullName.message}</span>
@@ -257,11 +280,12 @@ const Register = () => {
                                 {...register('email')}
                                 type="email"
                                 placeholder="Email Address"
-                                className="w-full pl-12 pr-4 py-3 border border-gray-300 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200"
+                                className={`w-full pl-12 pr-4 py-3 border ${touchedFields.email && errors.email ? 'border-red-300' : 'border-gray-300'} bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200`}
                                 disabled={isLoading}
+                                onBlur={() => handleFieldBlur('email')}
                             />
                         </div>
-                        {errors.email && (
+                        {touchedFields.email && errors.email && (
                             <div className="mt-2 flex items-center space-x-2 text-red-500 text-sm font-medium">
                                 <AlertCircle size={16} />
                                 <span>{errors.email.message}</span>
@@ -279,11 +303,12 @@ const Register = () => {
                                 {...register('phone')}
                                 type="tel"
                                 placeholder="Phone Number"
-                                className="w-full pl-12 pr-4 py-3 border border-gray-300 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200"
+                                className={`w-full pl-12 pr-4 py-3 border ${touchedFields.phone && errors.phone ? 'border-red-300' : 'border-gray-300'} bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200`}
                                 disabled={isLoading}
+                                onBlur={() => handleFieldBlur('phone')}
                             />
                         </div>
-                        {errors.phone && (
+                        {touchedFields.phone && errors.phone && (
                             <div className="mt-2 flex items-center space-x-2 text-red-500 text-sm font-medium">
                                 <AlertCircle size={16} />
                                 <span>{errors.phone.message}</span>
@@ -301,8 +326,9 @@ const Register = () => {
                                 {...register('password')}
                                 type={showPassword.password ? 'text' : 'password'}
                                 placeholder="Create Password"
-                                className="w-full pl-12 pr-12 py-3 border border-gray-300 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200"
+                                className={`w-full pl-12 pr-12 py-3 border ${touchedFields.password && errors.password ? 'border-red-300' : 'border-gray-300'} bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200`}
                                 disabled={isLoading}
+                                onBlur={() => handleFieldBlur('password')}
                             />
                             <button
                                 type="button"
@@ -314,7 +340,7 @@ const Register = () => {
                             </button>
                         </div>
 
-                        {/* Password Strength Indicator */}
+                        {/* Password Strength Indicator - Always show when typing */}
                         {passwordValue && passwordValue.length > 0 && (
                             <div className="mt-3 space-y-2">
                                 <div className="flex items-center justify-between">
@@ -330,7 +356,7 @@ const Register = () => {
                                 </div>
 
                                 {/* Strength Bar */}
-                                <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
                                     <div
                                         className={`h-full transition-all duration-300 ${passwordStrength.score >= 4 ? 'w-full bg-green-500' :
                                             passwordStrength.score >= 3 ? 'w-3/4 bg-yellow-500' :
@@ -341,7 +367,7 @@ const Register = () => {
                                 </div>
 
                                 {/* Password Requirements */}
-                                <div className="grid grid-cols-2 gap-2 mt-3">
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                                     {Object.entries(passwordStrength.checks).map(([key, passed]) => (
                                         <div key={key} className="flex items-center space-x-2">
                                             {passed ? (
@@ -362,7 +388,8 @@ const Register = () => {
                             </div>
                         )}
 
-                        {errors.password && (
+                        {/* Show password error only if field has been touched */}
+                        {touchedFields.password && errors.password && (
                             <div className="mt-2 flex items-center space-x-2 text-red-500 text-sm font-medium">
                                 <AlertCircle size={16} />
                                 <span>{errors.password.message}</span>
@@ -380,8 +407,9 @@ const Register = () => {
                                 {...register('confirmPassword')}
                                 type={showPassword.confirmPassword ? 'text' : 'password'}
                                 placeholder="Confirm Password"
-                                className="w-full pl-12 pr-12 py-3 border border-gray-300 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200"
+                                className={`w-full pl-12 pr-12 py-3 border ${touchedFields.confirmPassword && errors.confirmPassword ? 'border-red-300' : 'border-gray-300'} bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200`}
                                 disabled={isLoading}
+                                onBlur={() => handleFieldBlur('confirmPassword')}
                             />
                             <button
                                 type="button"
@@ -393,15 +421,16 @@ const Register = () => {
                             </button>
                         </div>
 
-                        {errors.confirmPassword && (
+                        {/* Show confirm password error only if field has been touched */}
+                        {touchedFields.confirmPassword && errors.confirmPassword && (
                             <div className="mt-2 flex items-center space-x-2 text-red-500 text-sm font-medium">
                                 <AlertCircle size={16} />
                                 <span>{errors.confirmPassword.message}</span>
                             </div>
                         )}
 
-                        {/* Password Match Indicator */}
-                        {confirmPasswordValue && confirmPasswordValue.length > 0 && !errors.confirmPassword && (
+                        {/* Password Match Indicator - Always show when both fields have values */}
+                        {confirmPasswordValue && confirmPasswordValue.length > 0 && passwordValue && passwordValue.length > 0 && !errors.confirmPassword && (
                             <div className="mt-2 flex items-center space-x-2 text-green-600 text-sm font-medium">
                                 <CheckCircle size={16} />
                                 <span>Passwords match</span>
@@ -419,8 +448,9 @@ const Register = () => {
                                     type="checkbox"
                                     className="sr-only peer"
                                     disabled={isLoading}
+                                    onBlur={() => handleFieldBlur('agreeToTerms')}
                                 />
-                                <div className="w-5 h-5 bg-linear-to-br from-gray-100 to-gray-200 rounded shadow-[inset_2px_2px_4px_#bebebe,inset_2px_2px_4px_#bebebe] group-hover:shadow-[inset_1px_1px_2px_#bebebe,inset_-1px_-1px_2px_#ffffff] transition-all duration-200 peer-checked:shadow-[inset_3px_3px_6px_#60a5fa,inset_-3px_-3px_6px_#93c5fd]"></div>
+                                <div className={`w-5 h-5 bg-linear-to-br from-gray-100 to-gray-200 rounded shadow-[inset_2px_2px_4px_#bebebe,inset_2px_2px_4px_#bebebe] group-hover:shadow-[inset_1px_1px_2px_#bebebe,inset_-1px_-1px_2px_#ffffff] transition-all duration-200 peer-checked:shadow-[inset_3px_3px_6px_#60a5fa,inset_-3px_-3px_6px_#93c5fd] ${touchedFields.agreeToTerms && errors.agreeToTerms ? 'border-red-300' : ''}`}></div>
                                 <div className="absolute inset-0 flex items-center justify-center opacity-0 peer-checked:opacity-100 transition-opacity duration-200">
                                     <div className="w-3 h-3 bg-blue-500 rounded"></div>
                                 </div>
@@ -436,7 +466,7 @@ const Register = () => {
                                 </Link>
                             </span>
                         </label>
-                        {errors.agreeToTerms && (
+                        {touchedFields.agreeToTerms && errors.agreeToTerms && (
                             <div className="flex items-center space-x-2 text-red-500 text-sm font-medium">
                                 <AlertCircle size={16} />
                                 <span>{errors.agreeToTerms.message}</span>
@@ -475,7 +505,7 @@ const Register = () => {
                     <button
                         type="submit"
                         disabled={isLoading || !isValid}
-                        className="w-full py-3 bg-linear-to-br from-blue-700 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg active:shadow-[inset_5px_5px_10px_#2563eb,inset_-5px_-5px_10px_#3b82f6] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group"
+                        className="w-full py-3 bg-linear-to-br from-blue-700 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg active:shadow-[inset_5px_5px_10px_#2563eb,inset_-5px_-5px_10px_#3b82f6] cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group"
                     >
                         {isLoading ? (
                             <span className="flex items-center justify-center">
@@ -504,14 +534,12 @@ const Register = () => {
                     </div>
                 </form>
 
-                {/* Form Validation Status */}
-                {isDirty && (
-                    <div className="mt-4 p-3 bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg shadow">
+                {/* Form Validation Status - Only show when form is valid */}
+                {isValid && (
+                    <div className="mt-4 p-3 bg-linear-to-br from-green-50 to-green-100 border border-green-200 rounded-lg shadow">
                         <div className="flex items-center justify-between text-sm">
-                            <span>Registration Status:</span>
-                            <span className={`font-medium ${isValid ? 'text-green-600' : 'text-yellow-600'}`}>
-                                {isValid ? 'Ready to register ✓' : `${Object.keys(errors).length} error(s) to fix`}
-                            </span>
+                            <span className="font-medium text-green-700">✓ All requirements met!</span>
+                            <span className="font-medium text-green-600">Ready to register</span>
                         </div>
                     </div>
                 )}

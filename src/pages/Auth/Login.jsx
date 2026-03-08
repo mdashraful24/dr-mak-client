@@ -32,6 +32,10 @@ const Login = () => {
         score: 0,
         message: ''
     });
+    const [touchedFields, setTouchedFields] = useState({
+        email: false,
+        password: false
+    });
 
     // ✅ Add setAccessToken to destructuring
     const { setUser, setAccessToken, setLoading, googleSignIn } = useAuth();
@@ -56,6 +60,14 @@ const Login = () => {
     // Watch form fields
     const passwordValue = watch('password');
     const emailValue = watch('email');
+
+    // Handle field blur to mark as touched
+    const handleFieldBlur = (fieldName) => {
+        setTouchedFields(prev => ({
+            ...prev,
+            [fieldName]: true
+        }));
+    };
 
     // Password strength checker
     const checkPasswordStrength = (password) => {
@@ -226,7 +238,7 @@ const Login = () => {
                 )}
 
                 {/* Login Form */}
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
                     {/* Email Input */}
                     <div>
                         <div className="relative">
@@ -237,11 +249,13 @@ const Login = () => {
                                 {...register('email')}
                                 type="email"
                                 placeholder="Enter your email"
-                                className="w-full pl-12 pr-4 py-3 border border-gray-300 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200"
+                                className={`w-full pl-12 pr-4 py-3 border ${touchedFields.email && errors.email ? 'border-red-300' : 'border-gray-300'} bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200`}
                                 disabled={isLoading}
+                                onBlur={() => handleFieldBlur('email')}
                             />
                         </div>
-                        {errors.email && (
+                        {/* Show error only if field has been touched */}
+                        {touchedFields.email && errors.email && (
                             <div className="mt-2 flex items-center space-x-2 text-red-500 text-sm font-medium">
                                 <AlertCircle size={16} />
                                 <span>{errors.email.message}</span>
@@ -259,8 +273,9 @@ const Login = () => {
                                 {...register('password')}
                                 type={showPassword ? 'text' : 'password'}
                                 placeholder="Enter your password"
-                                className="w-full pl-12 pr-12 py-3 border border-gray-300 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200"
+                                className={`w-full pl-12 pr-12 py-3 border ${touchedFields.password && errors.password ? 'border-red-300' : 'border-gray-300'} bg-linear-to-br from-gray-50 to-gray-100 rounded-xl shadow-[inset_5px_5px_6px_#bebebe,inset_-5px_-5px_10px_#ffffff] focus:outline-none focus:shadow-[inset_5px_5px_10px_#bebebe,inset_-7px_-7px_14px_#ffffff] text-gray-800 placeholder-gray-600 transition-all duration-200`}
                                 disabled={isLoading}
+                                onBlur={() => handleFieldBlur('password')}
                             />
                             <button
                                 type="button"
@@ -272,8 +287,8 @@ const Login = () => {
                             </button>
                         </div>
 
-                        {/* Password Strength Indicator */}
-                        {passwordValue && passwordValue.length > 0 && (
+                        {/* Password Strength Indicator - Always show when typing */}
+                        {/* {passwordValue && passwordValue.length > 0 && (
                             <div className="mt-2 space-y-2">
                                 <div className="flex items-center justify-between">
                                     <span className={`text-xs font-medium ${passwordStrength.score >= 4 ? 'text-green-600' :
@@ -295,9 +310,10 @@ const Login = () => {
                                     />
                                 </div>
                             </div>
-                        )}
+                        )} */}
 
-                        {errors.password && (
+                        {/* Show password error only if field has been touched */}
+                        {touchedFields.password && errors.password && (
                             <div className="mt-2 flex items-center space-x-2 text-red-500 text-sm font-medium">
                                 <AlertCircle size={16} />
                                 <span>{errors.password.message}</span>
@@ -345,7 +361,7 @@ const Login = () => {
                     <button
                         type="submit"
                         disabled={isLoading || !isValid}
-                        className="w-full py-3 bg-linear-to-br from-blue-700 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg active:shadow-[inset_5px_5px_10px_#2563eb,inset_-5px_-5px_10px_#3b82f6] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group"
+                        className="w-full py-3 bg-linear-to-br from-blue-700 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg active:shadow-[inset_5px_5px_10px_#2563eb,inset_-5px_-5px_10px_#3b82f6] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed group mt-2"
                     >
                         {isLoading ? (
                             <span className="flex items-center justify-center">
@@ -363,7 +379,7 @@ const Login = () => {
                     </button>
 
                     {/* Sign Up Link */}
-                    <div className="text-center">
+                    <div className="text-sm text-center">
                         <p className={isLoading ? 'opacity-50' : ''}>
                             Don't have an account?{' '}
                             <Link
@@ -377,7 +393,7 @@ const Login = () => {
                 </form>
 
                 {/* Form Validation Status */}
-                {isDirty && (
+                {/* {isDirty && (
                     <div className="mt-6 p-3 bg-linear-to-br from-gray-50 to-gray-100 border border-gray-200 rounded-lg shadow">
                         <div className="flex items-center justify-between text-sm">
                             <span>Form Status:</span>
@@ -386,7 +402,7 @@ const Login = () => {
                             </span>
                         </div>
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     );
