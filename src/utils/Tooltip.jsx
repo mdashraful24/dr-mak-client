@@ -20,6 +20,8 @@ const Tooltip = ({ text, delay = 700, children, position = "" }) => {
         left: "right-full mr-3 top-1/2 -translate-y-1/2",
         top: "bottom-full mb-2 left-1/2 -translate-x-1/2",
         bottom: "top-full mt-2 left-1/2 -translate-x-1/2",
+        panelOC: "top-full mt-2 left-1/2 -translate-x-1/3",
+        notification: "top-full mt-2 left-2 -translate-x-1/2",
     };
 
     return (

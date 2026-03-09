@@ -3,8 +3,8 @@ import useAuth from "../hooks/useAuth";
 const GetUserInitials = () => {
     const { user } = useAuth();
 
-    if (user?.displayName) {
-        return user.displayName
+    if (user?.name) {
+        return user.name
             .split(" ")
             .map(word => word[0])
             .join("")

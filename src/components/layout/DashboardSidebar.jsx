@@ -26,7 +26,8 @@ const DashboardSidebar = ({
         { path: "/dashboard/departments", label: "Departments", icon: Hospital },
         { path: "/dashboard/schedule", label: "Schedule", icon: Clock },
         { path: "/dashboard/settings", label: "Settings", icon: Settings },
-        { path: "/", label: "Home", icon: Home },
+        // Add conditionally
+        ...(!isSidebarCollapsed ? [{ path: "/", label: "Home", icon: Home }] : []),
     ];
 
     // Dropdown menu items for profile
@@ -34,6 +35,7 @@ const DashboardSidebar = ({
         { path: "/profile", label: "View Profile", icon: User },
         { path: "/settings", label: "Settings", icon: SettingsIcon },
         { path: "/help", label: "Help", icon: HelpCircle },
+        { path: "/", label: "Home", icon: Home },
     ];
 
     const handleItemClick = () => {
@@ -52,8 +54,8 @@ const DashboardSidebar = ({
                 ${isSidebarCollapsed ? "md:w-16 lg:w-18" : "w-64"} 
             `}>
                 {/* Navigation Menu */}
-                <div className="flex-1 overflow-y-auto p-3 lg:p-4 relative">
-                    <ul className="space-y-3">
+                <div className="flex-1 overflow-y-auto p-3 lg:pt-7 lg:p-4 relative">
+                    <ul className="space-y-2">
                         {dashboardMenuItems.map((item) => {
                             const IconComponent = item.icon;
                             return (

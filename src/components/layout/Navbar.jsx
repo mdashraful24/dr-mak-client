@@ -54,7 +54,7 @@ const Navbar = () => {
                     {/* Left side */}
                     <div className="flex items-center space-x-4">
                         <Tooltip
-                            text="Logout"
+                            text="Menu"
                             position="bottom"
                         >
                             <button
@@ -149,7 +149,7 @@ const Navbar = () => {
                             !isSidebarOpen && (
                                 <Link
                                     to="/auth/login"
-                                    className="px-3 py-2 rounded-lg bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200 flex items-center gap-2 text-blue-600 font-medium"
+                                    className="px-3 py-2 rounded-lg bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200 flex items-center gap-2 text-blue-600 font-semibold"
                                 >
                                     <LogIn size={18} />
                                     <span>Login</span>

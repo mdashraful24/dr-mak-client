@@ -42,7 +42,7 @@ const ProfileDropdown = ({
 
     // Position classes
     const positionClasses = {
-        'bottom-left': 'bottom-14 left-0',
+        'bottom-left': 'bottom-13.5 left-0',
         'bottom-right': 'bottom-14 right-0',
         'top-left': 'top-14 left-0',
         'top-right': 'top-14 right-0',
@@ -63,21 +63,23 @@ const ProfileDropdown = ({
                         <div className="p-4 border-b border-gray-300">
                             <div className="flex items-center gap-3">
                                 <div className="relative">
-                                    <div className="w-16 h-16 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                    <div className="w-12 h-12 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
                                         <span className="font-bold text-xl">
                                             <GetUserInitials />
                                         </span>
                                     </div>
                                     <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full animate-pulse border-2 border-[#e0e5ec]" />
                                 </div>
-                                <div>
-                                    <h3 className="font-bold">{user?.displayName || user?.name || 'User'}</h3>
+                                <div className='space-y-0.5'>
+                                    <div className='flex items-center gap-2'>
+                                        <h3 className="font-bold">{user?.displayName || user?.name || 'User'}</h3>
+                                        {user?.role && (
+                                            <span className="inline-block px-2 py-0.5 text-sm text-gray-600 bg-[#e0e5ec] rounded-full shadow-[inset_2px_2px_4px_#babecc,inset_-2px_-2px_4px_#ffffff]">
+                                                {user.role}
+                                            </span>
+                                        )}
+                                    </div>
                                     <p className="text-gray-600 text-sm">{user?.email || 'user@example.com'}</p>
-                                    {user?.role && (
-                                        <span className="inline-block px-2 py-0.5 text-sm text-gray-600 bg-[#e0e5ec] rounded-full shadow-[inset_2px_2px_4px_#babecc,inset_-2px_-2px_4px_#ffffff]">
-                                            {user.role}
-                                        </span>
-                                    )}
                                 </div>
                             </div>
                         </div>
