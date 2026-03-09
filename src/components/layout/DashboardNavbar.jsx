@@ -50,45 +50,44 @@ const DashboardNavbar = ({
                         </span>
                     </button>
 
-                    {/* Profile and Logout */}
-                    <div className="flex items-center gap-4">
-                        <div className="relative">
-                            {user.photoURL ? (
-                                <img
-                                    src={user.photoURL}
-                                    alt={user?.name || 'User'}
-                                    referrerPolicy="no-referrer"
-                                    className="w-10 h-10 rounded-full object-cover shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff]"
-                                />
-                            ) : (
-                                <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                    <span className="font-semibold">
-                                        <GetUserInitials />
-                                    </span>
-                                </div>
-                            )}
-                            <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
-                        </div>
+                    {/* Profile and Logout (Conditional Logout Button based on sidebar state) */}
+                    {isSidebarCollapsed && (
+                        <>
+                            <div className="relative">
+                                {user.photoURL ? (
+                                    <img
+                                        src={user.photoURL}
+                                        alt={user?.name || 'User'}
+                                        referrerPolicy="no-referrer"
+                                        className="w-10 h-10 rounded-full object-cover shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff]"
+                                    />
+                                ) : (
+                                    <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                        <span className="font-semibold">
+                                            <GetUserInitials />
+                                        </span>
+                                    </div>
+                                )}
+                                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
+                            </div>
 
-                        {/* Conditional Logout Button based on sidebar state */}
-                        {isSidebarCollapsed && (
                             <LogoutButton
                                 variant="icon"
                                 className="hidden md:block"
                                 showIcon={true}
                                 showText={false}
                             />
-                        )}
+                        </>
+                    )}
 
-                        {!isSidebarOpen && (
-                            <LogoutButton
-                                variant="icon"
-                                className="block md:hidden"
-                                showIcon={true}
-                                showText={false}
-                            />
-                        )}
-                    </div>
+                    {!isSidebarOpen && (
+                        <LogoutButton
+                            variant="icon"
+                            className="block md:hidden"
+                            showIcon={true}
+                            showText={false}
+                        />
+                    )}
                 </div>
             </div>
         </nav>
