@@ -59,7 +59,7 @@ const FAQ = () => {
         <div className="bg-gray-50 py-20 px-4">
             <div className="container max-w-5xl mx-auto">
                 {/* Header Section */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-8">
                     <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
                         <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
                         <span className="text-sm font-medium text-blue-700">FAQ</span>
@@ -69,7 +69,7 @@ const FAQ = () => {
                         Frequently Asked <span className="text-blue-600">Questions</span>
                     </h1>
 
-                    <p className="md:text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    <p className="md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
                         Find answers to common questions about our services, appointments,
                         and healthcare procedures. Can't find what you're looking for?
                         Contact us directly.
@@ -81,18 +81,18 @@ const FAQ = () => {
                     {faqData.map((faq, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-lg shadow-soft border border-gray-200 overflow-hidden transition-all duration-300"
+                            className="bg-white rounded-lg shadow-soft border border-gray-200 overflow-hidden transition-all duration-300 hover:bg-gray-50"
                         >
                             <button
                                 className="w-full p-3 md:px-6 md:py-3 text-left flex justify-between items-center focus:outline-none"
                                 onClick={() => toggleFAQ(index)}
                             >
-                                <h3 className="text-lg font-medium text-gray-800 pr-4">
+                                <h3 className="text-sm md:text-lg font-medium pr-4">
                                     {faq.question}
                                 </h3>
                                 <div className="shrink-0">
                                     <svg
-                                        className={`w-6 h-6 text-blue-600 transition-transform duration-300 ${activeIndex === index ? 'transform rotate-180' : ''
+                                        className={`w-5 h-5 text-blue-500 transition-transform duration-300 ${activeIndex === index ? 'transform rotate-180' : ''
                                             }`}
                                         fill="none"
                                         stroke="currentColor"
@@ -113,7 +113,7 @@ const FAQ = () => {
                                     }`}
                             >
                                 <div className="border-t border-gray-200 pt-4">
-                                    <p className="leading-relaxed">
+                                    <p className="text-sm md:text-base leading-relaxed">
                                         {faq.answer}
                                     </p>
                                 </div>

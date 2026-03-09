@@ -14,98 +14,227 @@ const Footer = () => {
         <footer className="bg-[#e0e5ec] px-4">
 
             {/* Main Footer */}
-            <div className="container mx-auto py-7 md:py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 md:gap-10">
-
-                {/* Brand */}
-                <div>
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="w-12 h-11 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                            <span className="text-blue-600 font-bold text-xl">LEO</span>
+            <div className="container mx-auto py-10">
+                {/* Large screens: all in one line */}
+                <div className="hidden lg:grid lg:grid-cols-4 gap-7 md:gap-10">
+                    {/* Brand */}
+                    <div>
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-12 h-11 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                <span className="text-blue-600 font-bold">LEO</span>
+                            </div>
+                            <h2 className="text-xl font-semibold">MediCare</h2>
                         </div>
-                        <h2 className="text-xl font-semibold">MediCare</h2>
+                        <p className="leading-relaxed mb-5">
+                            Trusted healthcare with modern technology and compassionate doctors.
+                            Your health is our priority.
+                        </p>
+
+                        {/* Social Media */}
+                        <div className="flex gap-4">
+                            {socials.map(({ icon: Icon, color }, i) => (
+                                <a
+                                    key={i}
+                                    href="#"
+                                    className={`p-3 rounded-xl ${color} bg-[#e0e5ec] shadow-[3px_3px_6px_#babecc,-3px_-3px_6px_#ffffff] hover:shadow-inner transition`}
+                                >
+                                    <Icon size={18} />
+                                </a>
+                            ))}
+                        </div>
                     </div>
-                    <p className="text-sm leading-relaxed mb-5">
-                        Trusted healthcare with modern technology and compassionate doctors.
-                        Your health is our priority.
-                    </p>
 
-                    {/* Social Media */}
+                    {/* Quick Links */}
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+                        <ul className="space-y-3 text-sm">
+                            <li><Link to="/" className="hover:text-blue-600">Home</Link></li>
+                            <li><Link to="/about" className="hover:text-blue-600">Doctors</Link></li>
+                            <li><Link to="/appointments" className="hover:text-blue-600">Appointments</Link></li>
+                            <li><Link to="/contact" className="hover:text-blue-600">Contact</Link></li>
+                        </ul>
+                    </div>
 
-                    {/* <div className="flex gap-4">
-                        {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-                            <a
-                                key={i}
-                                href="#"
-                                className="p-3 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_6px_#babecc,-3px_-3px_6px_#ffffff] hover:shadow-inner transition"
-                            >
-                                <Icon size={18} />
-                            </a>
-                        ))}
-                    </div> */}
+                    {/* Contact */}
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4">Contact</h3>
+                        <ul className="space-y-3 text-sm">
+                            <li className="flex items-center gap-3">
+                                <MapPin size={16} />
+                                <span>123 Health Street, City</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Phone size={16} />
+                                <span>+1 234 567 890</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Mail size={16} />
+                                <span>support@medicare.com</span>
+                            </li>
+                        </ul>
+                    </div>
 
-                    <div className="flex gap-4">
-                        {socials.map(({ icon: Icon, color }, i) => (
-                            <a
-                                key={i}
-                                href="#"
-                                className={`p-3 rounded-xl ${color} bg-[#e0e5ec] shadow-[3px_3px_6px_#babecc,-3px_-3px_6px_#ffffff] hover:shadow-inner transition`}
-                            >
-                                <Icon size={18} />
-                            </a>
-                        ))}
+                    {/* Legal */}
+                    <div>
+                        <h3 className="text-lg font-semibold mb-4">Legal</h3>
+                        <ul className="space-y-3 text-sm">
+                            <li>
+                                <Link to="/terms" className="hover:text-blue-600">
+                                    Terms & Conditions
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/privacy" className="hover:text-blue-600">
+                                    Privacy Policy
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/refund" className="hover:text-blue-600">
+                                    Refund Policy
+                                </Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                {/* Quick Links */}
-                <div>
-                    <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-                    <ul className="space-y-3 text-sm">
-                        <li><Link to="/" className="hover:text-blue-600">Home</Link></li>
-                        <li><Link to="/about" className="hover:text-blue-600">Doctors</Link></li>
-                        <li><Link to="/appointments" className="hover:text-blue-600">Appointments</Link></li>
-                        <li><Link to="/contact" className="hover:text-blue-600">Contact</Link></li>
-                    </ul>
-                </div>
+                {/* Medium screens: Brand first, then Quick Links, Contact, Legal in second row */}
+                <div className="lg:hidden">
+                    {/* Brand */}
+                    <div className="text-center mb-8">
+                        <div className="flex items-center gap-3 mb-4 justify-center">
+                            <div className="w-12 h-11 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                <span className="text-blue-600 font-bold">LEO</span>
+                            </div>
+                            <h2 className="text-xl font-semibold">MediCare</h2>
+                        </div>
+                        <p className="leading-relaxed mb-5 max-w-md mx-auto">
+                            Trusted healthcare with modern technology and compassionate doctors.
+                            Your health is our priority.
+                        </p>
 
-                {/* Contact */}
-                <div>
-                    <h3 className="text-lg font-semibold mb-4">Contact</h3>
-                    <ul className="space-y-3 text-sm">
-                        <li className="flex items-center gap-3">
-                            <MapPin size={16} />
-                            <span>123 Health Street, City</span>
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <Phone size={16} />
-                            <span>+1 234 567 890</span>
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <Mail size={16} />
-                            <span>support@medicare.com</span>
-                        </li>
-                    </ul>
-                </div>
+                        {/* Social Media */}
+                        <div className="flex gap-4 justify-center">
+                            {socials.map(({ icon: Icon, color }, i) => (
+                                <a
+                                    key={i}
+                                    href="#"
+                                    className={`p-3 rounded-xl ${color} bg-[#e0e5ec] shadow-[3px_3px_6px_#babecc,-3px_-3px_6px_#ffffff] hover:shadow-inner transition`}
+                                >
+                                    <Icon size={18} />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
 
-                {/* Legal */}
-                <div>
-                    <h3 className="text-lg font-semibold mb-4">Legal</h3>
-                    <ul className="space-y-3 text-sm">
-                        <li>
-                            <Link to="/terms" className="hover:text-blue-600">
-                                Terms & Conditions
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/privacy" className="hover:text-blue-600">
-                                Privacy Policy
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/refund" className="hover:text-blue-600">
-                                Refund Policy
-                            </Link>
-                        </li>
-                    </ul>
+                    {/* Medium: Quick Links, Contact, Legal in one row */}
+                    <div className="hidden md:grid md:grid-cols-3 gap-7">
+                        {/* Quick Links */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+                            <ul className="space-y-3 text-sm">
+                                <li><Link to="/" className="hover:text-blue-600">Home</Link></li>
+                                <li><Link to="/about" className="hover:text-blue-600">Doctors</Link></li>
+                                <li><Link to="/appointments" className="hover:text-blue-600">Appointments</Link></li>
+                                <li><Link to="/contact" className="hover:text-blue-600">Contact</Link></li>
+                            </ul>
+                        </div>
+
+                        {/* Contact */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+                            <ul className="space-y-3 text-sm">
+                                <li className="flex items-center gap-3">
+                                    <MapPin size={16} />
+                                    <span>123 Health Street, City</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <Phone size={16} />
+                                    <span>+1 234 567 890</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <Mail size={16} />
+                                    <span>support@medicare.com</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Legal */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-4">Legal</h3>
+                            <ul className="space-y-3 text-sm">
+                                <li>
+                                    <Link to="/terms" className="hover:text-blue-600">
+                                        Terms & Conditions
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/privacy" className="hover:text-blue-600">
+                                        Privacy Policy
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/refund" className="hover:text-blue-600">
+                                        Refund Policy
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Small screens: Brand, then Quick Links, then Contact, then Legal */}
+                    <div className="md:hidden grid grid-cols-2 space-y-7">
+                        {/* Quick Links */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+                            <ul className="space-y-3 text-sm">
+                                <li><Link to="/" className="hover:text-blue-600">Home</Link></li>
+                                <li><Link to="/about" className="hover:text-blue-600">Doctors</Link></li>
+                                <li><Link to="/appointments" className="hover:text-blue-600">Appointments</Link></li>
+                                <li><Link to="/contact" className="hover:text-blue-600">Contact</Link></li>
+                            </ul>
+                        </div>
+
+                        {/* Contact */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+                            <ul className="space-y-3 text-sm">
+                                <li className="flex items-center gap-3">
+                                    <MapPin size={16} />
+                                    <span>123 Health Street, City</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <Phone size={16} />
+                                    <span>+1 234 567 890</span>
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <Mail size={16} />
+                                    <span>support@medicare.com</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Legal */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-4">Legal</h3>
+                            <ul className="space-y-3 text-sm">
+                                <li>
+                                    <Link to="/terms" className="hover:text-blue-600">
+                                        Terms & Conditions
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/privacy" className="hover:text-blue-600">
+                                        Privacy Policy
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/refund" className="hover:text-blue-600">
+                                        Refund Policy
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 

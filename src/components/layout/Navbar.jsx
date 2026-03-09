@@ -61,7 +61,7 @@ const Navbar = () => {
 
                         <div className="flex items-center space-x-3">
                             <div className="w-11 h-10 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                <span className="text-blue-600 font-semibold text-lg">LEO</span>
+                                <span className="text-blue-600 font-bold">LEO</span>
                             </div>
                         </div>
                     </div>
