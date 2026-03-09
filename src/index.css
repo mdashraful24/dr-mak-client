@@ -163,3 +163,31 @@
     background: linear-gradient(145deg, #e6f0ff, #ffffff);
     box-shadow: 3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff;
 }
+
+
+/* Navbar Logout Tooltip
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    background-color: #0e0d0d;
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+} */

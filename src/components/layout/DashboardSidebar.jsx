@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import ProfileSection from '../common/ProfileSection';
 import ProfileDropdown from '../common/ProfileDropdown';
 import CompactProfileTrigger from '../common/CompactProfileTrigger';
+import Tooltip from '../../utils/Tooltip';
 
 const DashboardSidebar = ({
     isSidebarCollapsed,
@@ -79,7 +80,7 @@ const DashboardSidebar = ({
                                         )}
                                         {/* Tooltip for collapsed state */}
                                         {isSidebarCollapsed && !isSidebarOpen && (
-                                            <div className="fixed left-16 ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 whitespace-nowrap">
+                                            <div className="fixed left-18 px-2 py-1 bg-black text-xs text-white rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 whitespace-nowrap">
                                                 {item.label}
                                             </div>
                                         )}
@@ -95,7 +96,14 @@ const DashboardSidebar = ({
                     {isSidebarCollapsed ? (
                         <ProfileDropdown
                             user={user}
-                            triggerComponent={<CompactProfileTrigger />}
+                            triggerComponent={
+                                <Tooltip
+                                    text="Profile"
+                                    position="right"
+                                >
+                                    <CompactProfileTrigger />
+                                </Tooltip>
+                            }
                             menuItems={dropMenuItems}
                             position="bottom-left"
                             onLinkClick={handleItemClick}
@@ -208,9 +216,9 @@ export default DashboardSidebar;
 //             {/* Sidebar */}
 //             <div className={`
 //                 fixed md:relative bg-[#e0e5ec] shadow-[5px_0_15px_#babecc,-2px_0_5px_#ffffff] h-full flex flex-col transition-all duration-300 ease-in-out z-40
-//                 ${isSidebarOpen ? "w-64 translate-x-0" : "-translate-x-full"} 
-//                 ${!isSidebarOpen && "md:translate-x-0 md:flex"} 
-//                 ${isSidebarCollapsed ? "md:w-16 lg:w-18" : "w-64"} 
+//                 ${isSidebarOpen ? "w-64 translate-x-0" : "-translate-x-full"}
+//                 ${!isSidebarOpen && "md:translate-x-0 md:flex"}
+//                 ${isSidebarCollapsed ? "md:w-16 lg:w-18" : "w-64"}
 //             `}>
 //                 {/* Navigation Menu */}
 //                 <div className="flex-1 overflow-y-auto p-3 lg:p-4 relative">

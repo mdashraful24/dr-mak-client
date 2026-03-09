@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import ProfileSection from '../common/ProfileSection';
 import LogoutButton from '../common/LogoutButton';
 import GetUserInitials from '../../utils/GetUserInitials';
+import Tooltip from '../../utils/Tooltip';
 
 const Navbar = () => {
     const { user } = useAuth();
@@ -52,12 +53,17 @@ const Navbar = () => {
                 <div className="flex items-center justify-between">
                     {/* Left side */}
                     <div className="flex items-center space-x-4">
-                        <button
-                            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className="p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200"
+                        <Tooltip
+                            text="Logout"
+                            position="bottom"
                         >
-                            <Menu size={22} />
-                        </button>
+                            <button
+                                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                                className="p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200 cursor-pointer"
+                            >
+                                <Menu size={22} />
+                            </button>
+                        </Tooltip>
 
                         <div className="flex items-center space-x-3">
                             <div className="w-11 h-10 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
@@ -72,41 +78,69 @@ const Navbar = () => {
                             // After login - Logged in state
                             <>
                                 {/* Bell Icon */}
-                                <button className="relative p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200">
-                                    <Bell size={20} />
-                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                                        3
-                                    </span>
-                                </button>
+                                <Tooltip
+                                    text="Notification"
+                                    position="bottom"
+                                >
+
+                                    <button className="relative p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200 cursor-pointer">
+                                        <Bell size={20} />
+                                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                                            3
+                                        </span>
+                                    </button>
+                                </Tooltip>
 
                                 {/* Mobile Profile and Logout */}
                                 {!isSidebarOpen && (
                                     <div className="flex items-center gap-4">
                                         {/* Profile Avatar */}
-                                        <div className="relative">
-                                            {user.photoURL ? (
-                                                <img
-                                                    src={user.photoURL}
-                                                    alt={user?.name || 'User'}
-                                                    referrerPolicy="no-referrer"
-                                                    className="w-10 h-10 rounded-full object-cover shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff]"
-                                                />
-                                            ) : (
-                                                <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                        <Tooltip
+                                            text={user?.name}
+                                            position="bottom"
+                                        >
+                                            <div className="relative">
+                                                <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center cursor-default">
                                                     <span className="font-semibold">
                                                         <GetUserInitials />
                                                     </span>
                                                 </div>
-                                            )}
-                                            <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
-                                        </div>
+                                                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
+                                            </div>
+                                        </Tooltip>
 
                                         {/* Logout Button */}
-                                        <LogoutButton
-                                            variant="icon"
-                                            showIcon={true}
-                                            showText={false}
-                                        />
+                                        <Tooltip
+                                            text="Logout"
+                                            position="bottom"
+                                        >
+                                            <LogoutButton
+                                                variant="icon"
+                                                showIcon={true}
+                                                showText={false}
+                                            />
+                                        </Tooltip>
+
+                                        {/* <div className="tooltip-container">
+                                            <LogoutButton
+                                                variant="icon"
+                                                showIcon={true}
+                                                showText={false}
+                                            />
+                                            <span className="tooltip-text">Logout</span>
+                                        </div>
+
+                                        {/* <div className="relative group">
+                                            <LogoutButton
+                                                variant="icon"
+                                                showIcon={true}
+                                                showText={false}
+                                            />
+
+                                            <span className="absolute top-full mb-2 hidden group-hover:block bg-black text-white text-xs px-2 py-1 rounded">
+                                                Logout
+                                            </span>
+                                        </div> */}
                                     </div>
                                 )}
                             </>
