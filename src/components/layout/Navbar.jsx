@@ -1,13 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
-import { Menu, Bell, User, LogIn, LogOut } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Menu, Bell, User, LogIn } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import useAuth from '../../hooks/useAuth';
-import toast from 'react-hot-toast';
+import ProfileSection from '../common/ProfileSection';
+import LogoutButton from '../common/LogoutButton';
+import GetUserInitials from '../../utils/GetUserInitials';
 
 const Navbar = () => {
-    const { user, logOut } = useAuth();
-    const navigate = useNavigate();
+    const { user } = useAuth();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const sidebarRef = useRef(null);
 
@@ -19,7 +20,6 @@ const Navbar = () => {
             }
         };
 
-        // Close sidebar when pressing Escape key
         const handleEscapeKey = (event) => {
             if (event.key === 'Escape') {
                 setIsSidebarOpen(false);
@@ -29,7 +29,6 @@ const Navbar = () => {
         if (isSidebarOpen) {
             document.addEventListener('mousedown', handleClickOutside);
             document.addEventListener('keydown', handleEscapeKey);
-            // Prevent body scroll when sidebar is open on mobile
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'unset';
@@ -45,39 +44,6 @@ const Navbar = () => {
     const closeSidebar = () => {
         setIsSidebarOpen(false);
     };
-
-    const handleLogout = async () => {
-        try {
-            await logOut();
-            // Close sidebar after successful logout
-            closeSidebar();
-            toast.success("User signed out successfully", {
-                position: "top-right",
-            });
-            navigate("/");
-        } catch (error) {
-            toast.error(error.message);
-        }
-    };
-
-    // Get user initials for avatar
-    const getUserInitials = () => {
-        if (user?.displayName) {
-            return user.displayName
-                .split(' ')
-                .map(word => word[0])
-                .join('')
-                .toUpperCase()
-                .slice(0, 2);
-        }
-        return user?.email?.charAt(0).toUpperCase() || 'U';
-    };
-
-    // // Format role for display (capitalize first letter)
-    // const formatRole = (role) => {
-    //     if (!role) return '';
-    //     return role.charAt(0).toUpperCase() + role.slice(1);
-    // };
 
     return (
         <>
@@ -101,11 +67,11 @@ const Navbar = () => {
                     </div>
 
                     {/* Right side - Conditional rendering based on auth state */}
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center gap-4">
                         {user ? (
                             // After login - Logged in state
                             <>
-                                {/* Bell */}
+                                {/* Bell Icon */}
                                 <button className="relative p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200">
                                     <Bell size={20} />
                                     <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -113,48 +79,43 @@ const Navbar = () => {
                                     </span>
                                 </button>
 
-                                {/* Profile */}
-                                <div className="flex items-center space-x-3 cursor-default">
-                                    <div className="relative">
-                                        {user.photoURL ? (
-                                            <img
-                                                src={user.photoURL}
-                                                alt={user?.name || 'User'}
-                                                referrerPolicy="no-referrer"
-                                                className="w-10 h-10 rounded-full object-cover shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff]"
-                                            />
-                                        ) : (
-                                            <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                                <span className="font-semibold">
-                                                    {getUserInitials()}
-                                                </span>
-                                            </div>
-                                        )}
-                                        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
-                                    </div>
-
-                                    {/* <div className="hidden md:block text-right">
-                                        <p className="font-semibold truncate max-w-[150px]">
-                                            {user?.name || user?.displayName || 'User'}
-                                        </p>
-                                        <p className="text-sm">
-                                            {formatRole(user.role)}
-                                            {user.email && (
-                                                <span className="block text-xs text-gray-600 truncate max-w-[180px]">
-                                                    {user.email}
-                                                </span>
+                                {/* Mobile Profile and Logout */}
+                                {!isSidebarOpen && (
+                                    <div className="flex items-center gap-4">
+                                        {/* Profile Avatar */}
+                                        <div className="relative">
+                                            {user.photoURL ? (
+                                                <img
+                                                    src={user.photoURL}
+                                                    alt={user?.name || 'User'}
+                                                    referrerPolicy="no-referrer"
+                                                    className="w-10 h-10 rounded-full object-cover shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff]"
+                                                />
+                                            ) : (
+                                                <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                                    <span className="font-semibold">
+                                                        <GetUserInitials />
+                                                    </span>
+                                                </div>
                                             )}
-                                        </p>
-                                    </div> */}
-                                </div>
+                                            <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
+                                        </div>
+
+                                        {/* Logout Button */}
+                                        <LogoutButton
+                                            variant="icon"
+                                            showIcon={true}
+                                            showText={false}
+                                        />
+                                    </div>
+                                )}
                             </>
                         ) : (
-                            // Before login - Not logged in state
-                            // Only show Login button when sidebar is closed
+                            // Before login - Only show Login button when sidebar is closed
                             !isSidebarOpen && (
                                 <Link
                                     to="/auth/login"
-                                    className="px-4 py-2 rounded-lg bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200 flex items-center gap-2 text-blue-600 font-medium"
+                                    className="px-3 py-2 rounded-lg bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200 flex items-center gap-2 text-blue-600 font-medium"
                                 >
                                     <LogIn size={18} />
                                     <span>Login</span>
@@ -195,46 +156,14 @@ const Navbar = () => {
 
                     <div className="p-4 border-t border-gray-300">
                         {user ? (
-                            // After login - Profile and Logout section
-                            <div className="bg-[#e0e5ec] rounded-xl p-3 lg:p-4 shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff]">
-                                {/* Profile Section */}
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="relative">
-                                        {user.photoURL ? (
-                                            <img
-                                                src={user.photoURL}
-                                                alt={user?.name || 'User'}
-                                                className="w-10 h-10 rounded-full object-cover"
-                                            />
-                                        ) : (
-                                            <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                                <User size={20} />
-                                            </div>
-                                        )}
-                                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#e0e5ec]" />
-                                    </div>
-
-                                    <div className="flex-1 min-w-0">
-                                        <p className="font-semibold text-sm truncate">
-                                            {user?.name || user?.displayName || 'User'}
-                                        </p>
-                                        <p className="text-xs truncate text-gray-600">
-                                            {user?.email || ''}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {/* Logout Button */}
-                                <button
-                                    onClick={handleLogout}
-                                    className="w-full px-4 py-3 rounded-lg bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 text-sm font-medium transition duration-200 flex items-center gap-3 cursor-pointer"
-                                >
-                                    <LogOut size={18} />
-                                    <span>Logout</span>
-                                </button>
-                            </div>
+                            // Profile Section in Sidebar
+                            <ProfileSection
+                                user={user}
+                                variant="sidebar"
+                                onLogout={closeSidebar}
+                            />
                         ) : (
-                            // Before login - Login button in sidebar
+                            // Login button in sidebar
                             <Link
                                 to="/auth/login"
                                 onClick={closeSidebar}

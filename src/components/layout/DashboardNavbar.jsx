@@ -1,6 +1,16 @@
-import { Bell, User, ChevronRight, ChevronLeft, Menu, LogOut } from 'lucide-react';
+import { Bell, ChevronRight, ChevronLeft, Menu } from 'lucide-react';
+import LogoutButton from '../common/LogoutButton';
+import useAuth from '../../hooks/useAuth';
+import GetUserInitials from '../../utils/GetUserInitials';
 
-const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSidebar, isSidebarOpen }) => {
+const DashboardNavbar = ({
+    isSidebarCollapsed,
+    toggleSidebar,
+    toggleCollapseSidebar,
+    isSidebarOpen
+}) => {
+    const { user } = useAuth();
+
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-[#e0e5ec] shadow-[5px_5px_6px_#babecc,-5px_-5px_5px_#ffffff] px-3 py-2.5">
             <div className="flex items-center justify-between">
@@ -11,7 +21,7 @@ const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSide
                         onClick={toggleCollapseSidebar}
                         className="hidden md:flex p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200"
                     >
-                        {isSidebarCollapsed ? <ChevronRight /> : <ChevronLeft />}
+                        {isSidebarCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
                     </button>
 
                     {/* Mobile Menu Button */}
@@ -19,7 +29,7 @@ const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSide
                         onClick={toggleSidebar}
                         className="p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200 md:hidden"
                     >
-                        <Menu />
+                        <Menu size={20} />
                     </button>
 
                     <div className="w-10 h-10 rounded-xl bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
@@ -31,7 +41,7 @@ const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSide
                 </div>
 
                 {/* Right side */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center gap-4">
                     {/* Notifications */}
                     <button className="relative p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner transition duration-200">
                         <Bell size={20} />
@@ -40,26 +50,44 @@ const DashboardNavbar = ({ isSidebarCollapsed, toggleSidebar, toggleCollapseSide
                         </span>
                     </button>
 
-                    {/* Profile */}
-                    <div className="flex items-center gap-3">
+                    {/* Profile and Logout */}
+                    <div className="flex items-center gap-4">
                         <div className="relative">
-                            <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                <User size={20} />
-                            </div>
-                            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#e0e5ec]" />
+                            {user.photoURL ? (
+                                <img
+                                    src={user.photoURL}
+                                    alt={user?.name || 'User'}
+                                    referrerPolicy="no-referrer"
+                                    className="w-10 h-10 rounded-full object-cover shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff]"
+                                />
+                            ) : (
+                                <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                    <span className="font-semibold">
+                                        <GetUserInitials />
+                                    </span>
+                                </div>
+                            )}
+                            <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
                         </div>
 
-                        {/* Logout */}
-                        {isSidebarCollapsed &&
-                            <button className="hidden md:block p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 transition duration-200">
-                                <LogOut size={20} />
-                            </button>
-                        }
-                        {!isSidebarOpen &&
-                            <button className="block md:hidden p-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 transition duration-200">
-                                <LogOut size={20} />
-                            </button>
-                        }
+                        {/* Conditional Logout Button based on sidebar state */}
+                        {isSidebarCollapsed && (
+                            <LogoutButton
+                                variant="icon"
+                                className="hidden md:block"
+                                showIcon={true}
+                                showText={false}
+                            />
+                        )}
+
+                        {!isSidebarOpen && (
+                            <LogoutButton
+                                variant="icon"
+                                className="block md:hidden"
+                                showIcon={true}
+                                showText={false}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

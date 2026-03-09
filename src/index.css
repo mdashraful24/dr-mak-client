@@ -2,6 +2,11 @@
 @plugin "daisyui";
 
 
+/* Tailwind v4 theme config */
+@theme {
+    --font-lora: "Lora", serif;
+}
+
 /* Page Scrolling (Fade-in animation) */
 .page-fade {
     animation: fadeIn 0.4s ease-in-out;

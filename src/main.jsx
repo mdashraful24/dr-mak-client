@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
-        <div className='min-h-screen bg-linear-to-br from-gray-100 to-blue-50 text-black'>
+        <div className='min-h-screen bg-linear-to-br from-gray-100 to-blue-50 text-black font-lora'>
           <RouterProvider router={router} />
           <Toaster
             position="top-right"

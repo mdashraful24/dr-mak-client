@@ -1,7 +1,17 @@
-import { BarChart3, Calendar, Clock, FileText, Home, Hospital, LayoutDashboard, LogOut, Pill, Settings, Stethoscope, User, Users } from 'lucide-react';
+import { BarChart3, Calendar, Clock, FileText, Home, Hospital, LayoutDashboard, Pill, Settings, Stethoscope, Users } from 'lucide-react';
 import { NavLink } from "react-router";
+import useAuth from '../../hooks/useAuth';
+import ProfileSection from '../common/ProfileSection';
+import GetUserInitials from '../../utils/GetUserInitials';
 
-const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, onMenuItemClick }) => {
+const DashboardSidebar = ({
+    isSidebarCollapsed,
+    isSidebarOpen,
+    toggleSidebar,
+    onMenuItemClick
+}) => {
+    const { user } = useAuth();
+
     const dashboardMenuItems = [
         { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
         { path: "/dashboard/patients", label: "Patients", icon: Users },
@@ -17,7 +27,16 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
     ];
 
     const handleItemClick = () => {
-        onMenuItemClick();
+        if (onMenuItemClick) {
+            onMenuItemClick();
+        }
+    };
+
+    // Mock user data for demo (replace with actual user from useAuth)
+    const mockUser = user || {
+        name: "Dr. Leo",
+        email: "Neurologist & Surgeon",
+        displayName: "Dr. Leo"
     };
 
     return (
@@ -29,7 +48,7 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
                 ${!isSidebarOpen && "md:translate-x-0 md:flex"} 
                 ${isSidebarCollapsed ? "md:w-16 lg:w-18" : "w-64"} 
             `}>
-                {/* Navigation Menu - Allow scrolling but ensure footer stays visible */}
+                {/* Navigation Menu */}
                 <div className="flex-1 overflow-y-auto p-3 lg:p-4 relative">
                     <ul className="space-y-3">
                         {dashboardMenuItems.map((item) => {
@@ -72,37 +91,31 @@ const DashboardSidebar = ({ isSidebarCollapsed, isSidebarOpen, toggleSidebar, on
                 {/* Sidebar Footer */}
                 <div className="mb-15 md:mb-0 shrink-0 p-3 lg:p-4 border-t border-gray-300 mt-auto">
                     {isSidebarCollapsed ? (
-                        <div className="relative flex justify-center">
-                            <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                <User size={20} />
+                        <div>
+                            <div className="relative">
+                                {user.photoURL ? (
+                                    <img
+                                        src={user.photoURL}
+                                        alt={user?.name || 'User'}
+                                        referrerPolicy="no-referrer"
+                                        className="w-10 h-10 rounded-full object-cover shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff]"
+                                    />
+                                ) : (
+                                    <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
+                                        <span className="font-semibold">
+                                            <GetUserInitials />
+                                        </span>
+                                    </div>
+                                )}
+                                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
                             </div>
-                            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#e0e5ec]" />
                         </div>
                     ) : (
-                        <div className="bg-[#e0e5ec] rounded-xl p-3 lg:p-4 shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff]">
-                            {/* Profile Section */}
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="relative">
-                                    <div className="w-10 h-10 rounded-full bg-[#e0e5ec] shadow-[inset_3px_3px_6px_#babecc,inset_-3px_-3px_6px_#ffffff] flex items-center justify-center">
-                                        <User size={20} />
-                                    </div>
-                                    <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#e0e5ec]" />
-                                </div>
-
-                                <div className="flex-1 min-w-0">
-                                    <p className="font-semibold text-sm truncate">Dr. Leo</p>
-                                    <p className="text-xs truncate">Neurologist & Surgeon</p>
-                                </div>
-                            </div>
-
-                            {/* Logout Button */}
-                            <button
-                                className="w-full px-3 py-2 rounded-lg bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-red-500 text-sm font-medium transition duration-200 flex items-center gap-3"
-                            >
-                                <LogOut size={18} />
-                                <span>Logout</span>
-                            </button>
-                        </div>
+                        <ProfileSection
+                            user={mockUser}
+                            variant="sidebar"
+                            onLogout={handleItemClick}
+                        />
                     )}
                 </div>
             </div>
