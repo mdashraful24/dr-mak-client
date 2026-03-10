@@ -21,9 +21,11 @@ const Sidebar = () => {
 
         { path: "/blog", label: "Blog", icon: BookOpen },
 
-        ...(isAdmin ? [{ path: "/dashboard", label: "Dashboard", icon: LayoutDashboard }] : []),
+        ...(user ? [
+            { path: "/settings", label: "Settings", icon: Settings },
+        ] : []),
 
-        { path: "/settings", label: "Settings", icon: Settings },
+        ...(isAdmin ? [{ path: "/dashboard", label: "Dashboard", icon: LayoutDashboard }] : []),
     ];
 
     return (

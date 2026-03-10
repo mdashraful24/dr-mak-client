@@ -75,33 +75,32 @@ const Blogs = () => {
     ];
 
     return (
-        <div className="py-20 bg-gray-50 min-h-screen">
+        <div className="py-24 bg-gray-50 min-h-screen">
             <div className="container mx-auto px-4">
                 {/* Header Section */}
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
+                <div className="text-center mb-10">
+                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-head-badge mb-6">
                         <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
                         <span className="text-sm font-medium">Professional Insights</span>
                     </div>
 
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
                         Neurosurgical <span className="text-blue-600">Blog</span>
                     </h1>
 
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                        Expert perspectives on neurological conditions, surgical innovations, patient care,
-                        and the latest advancements in neurosurgery.
+                    <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Expert perspectives on neurological conditions, surgical innovations, patient care, and the latest advancements in neurosurgery.
                     </p>
                 </div>
 
                 {/* Categories Filter */}
-                <div className="flex flex-wrap justify-center gap-5 mb-12">
+                <div className="flex flex-wrap justify-center gap-5 mb-10">
                     {categories.map((category, index) => (
                         <button
                             key={index}
                             className={`px-4 py-2 rounded-2xl transition-all duration-300 ${index === 0
-                                ? "bg-blue-600 text-white font-medium shadow-neumorphic-soft"
-                                : "bg-neumorphic shadow-neumorphic-soft hover:shadow-neumorphic-inset"
+                                ? "bg-blue-600 text-white font-medium shadow-head-badge"
+                                : "bg-neumorphic shadow-head-badge hover:shadow-neumorphic-inset"
                                 }`}
                         >
                             {category}

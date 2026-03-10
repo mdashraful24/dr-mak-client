@@ -6,7 +6,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
-import AboutDoctor from "../components/home/AboutDoctor";
+import AboutDoctor from "../pages/AboutDoctor/AboutDoctor";
 import DoctorDashboard from "../pages/Dashboard/DoctorDashboard/DoctorDashboard";
 import Services from "../pages/Services/Services";
 import Blogs from "../pages/Blogs/Blogs";
@@ -16,6 +16,12 @@ import Settings from "../pages/Control/Settings";
 import Reports from "../pages/Reports/Reports";
 import PrivateRoute from "./Secure/PrivateRoute";
 import AuthRouter from "./Secure/AuthRouter";
+import ProfileSettings from "../pages/Control/components/ProfileSettings";
+import PasswordSettings from "../pages/Control/components/PasswordSettings";
+import EmailPreferences from "../pages/Control/components/EmailPreferences";
+import NotificationSettings from "../pages/Control/components/NotificationSettings";
+import PrivacySettings from "../pages/Control/components/PrivacySettings";
+import DangerZone from "../pages/Control/components/DangerZone";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -30,7 +36,22 @@ export const router = createBrowserRouter([
             { path: "reports", Component: Reports },
             { path: "blog", Component: Blogs },
             { path: "appointments", Component: Appointments },
-            { path: "settings", Component: Settings },
+            {
+                path: "settings",
+                element: (
+                    <PrivateRoute>
+                        <Settings />
+                    </PrivateRoute>
+                ),
+                children: [
+                    { path: "profile-setting", Component: ProfileSettings },
+                    { path: "password-setting", Component: PasswordSettings },
+                    { path: "email-preferences", Component: EmailPreferences },
+                    { path: "notification-setting", Component: NotificationSettings },
+                    { path: "privacy-setting", Component: PrivacySettings },
+                    { path: "danger-zone", Component: DangerZone },
+                ]
+            },
         ],
     },
 

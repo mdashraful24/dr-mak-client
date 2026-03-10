@@ -5,8 +5,8 @@ const ContactInfo = () => {
         <div className="py-20 bg-white">
             <div className="container mx-auto px-4">
                 {/* Header Section */}
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
+                <div className="text-center mb-10">
+                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-head-badge mb-6">
                         <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
                         <span className="text-sm font-medium">Get In Touch</span>
                     </div>
@@ -15,7 +15,7 @@ const ContactInfo = () => {
                         We're Here to <span className="text-blue-600">Help You</span>
                     </h2>
 
-                    <p className="md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                         Conveniently located and ready to provide you with exceptional neurosurgical care.
                         Contact us today to schedule your consultation.
                     </p>

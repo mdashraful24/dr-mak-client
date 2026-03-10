@@ -158,16 +158,16 @@ const Reviews = () => {
             <div className="container mx-auto">
 
                 {/* Header */}
-                <div className="text-center lg:mb-12 px-4">
-                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
+                <div className="text-center lg:mb-10 px-4">
+                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-head-badge mb-6">
                         <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-500 rounded-full mr-2"></div>
                         <span className="text-xs md:text-sm font-medium">Our Patients Experiences</span>
                     </div>
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">
                         Patient Experiences
                     </h1>
-                    <p className="md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                        Discover what our patients say about their healthcare journey with our dedicated medical team
+                    <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                        Discover what our patients say about their healthcare journey with our dedicated medical team.
                     </p>
                 </div>
 

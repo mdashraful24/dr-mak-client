@@ -48,8 +48,8 @@ const ServicesOverview = () => {
         <div className="py-20 bg-gray-50">
             <div className="container mx-auto px-4">
                 {/* Header Section */}
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
+                <div className="text-center mb-10">
+                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-head-badge mb-6">
                         <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
                         <span className="text-sm font-medium">Specialized Neurosurgical Care</span>
                     </div>
@@ -58,7 +58,7 @@ const ServicesOverview = () => {
                         Comprehensive <span className="text-blue-600">Neurosurgical</span> Services
                     </h2>
 
-                    <p className="md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                         Offering advanced surgical solutions for complex neurological conditions with precision,
                         expertise, and compassionate patient care.
                     </p>
@@ -66,7 +66,7 @@ const ServicesOverview = () => {
 
                 {/* Services Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {services.slice(0, 3).map((service, index) => (
+                    {services.slice(0, 6).map((service, index) => (
                         <div
                             key={index}
                             className="group bg-white rounded-3xl border border-gray-200 shadow-soft hover:shadow-softInset transition-all duration-500 transform hover:-translate-y-2 p-6 flex flex-col h-full relative"

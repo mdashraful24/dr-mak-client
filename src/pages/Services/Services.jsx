@@ -63,22 +63,21 @@ const Services = () => {
     ];
 
     return (
-        <div className="py-20 bg-gray-50">
+        <div className="py-24 bg-gray-50">
             <div className="container mx-auto px-4">
                 {/* Header Section */}
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
+                <div className="text-center mb-10">
+                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-head-badge mb-4">
                         <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
                         <span className="text-sm font-medium">All Services</span>
                     </div>
 
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
                         Comprehensive <span className="text-blue-600">Neurosurgical</span> Services
                     </h2>
 
-                    <p className="md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Offering advanced surgical solutions for complex neurological conditions with precision,
-                        expertise, and compassionate patient care.
+                    <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Offering advanced surgical solutions for complex neurological conditions with precision, expertise, and compassionate patient care.
                     </p>
                 </div>
 
@@ -87,33 +86,33 @@ const Services = () => {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            className="group bg-white rounded-3xl border border-gray-200 shadow-soft hover:shadow-softInset transition-all duration-500 transform hover:-translate-y-2 p-6 flex flex-col h-full relative"
+                            className="group bg-white rounded-3xl border border-gray-200 shadow-soft hover:shadow-softInset transition-all duration-500 transform hover:-translate-y-1 p-6 flex flex-col h-full relative"
                         >
                             {/* Icon Container */}
-                            <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 shadow-neumorphic-inset flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 shadow-neumorphic-inset flex items-center justify-center text-blue-600 mb-4 group-hover:scale-110 transition-transform duration-300">
                                 {service.icon}
                             </div>
 
                             {/* Service Title */}
-                            <h3 className="text-xl font-bold mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                            <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors duration-300">
                                 {service.title}
                             </h3>
 
                             {/* Service Description */}
-                            <p className="text-gray-700 mb-6 leading-relaxed grow">
+                            <p className="text-sm md:text-lg text-gray-700 mb-6 leading-relaxed grow">
                                 {service.description}
                             </p>
 
                             {/* Procedures List */}
-                            <div className="space-y-3 mt-auto">
-                                <h4 className="text-sm font-semibold uppercase tracking-wide">
+                            <div className="grow">
+                                <h4 className="text-sm font-semibold uppercase tracking-wide mb-3">
                                     Common Procedures:
                                 </h4>
-                                <div className="flex flex-wrap gap-2">
+                                <div className="flex flex-wrap gap-3">
                                     {service.procedures.map((procedure, idx) => (
                                         <span
                                             key={idx}
-                                            className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-100 shadow-neumorphic-inset"
+                                            className="px-2 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold border border-blue-100 shadow-neumorphic-inset"
                                         >
                                             {procedure}
                                         </span>

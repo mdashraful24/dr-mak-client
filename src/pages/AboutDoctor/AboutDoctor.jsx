@@ -1,6 +1,6 @@
 import { HashLink as Link } from 'react-router-hash-link'; 
 import dr from "../../assets/dr/dr.png"
-import Button from "../common/Button";
+import Button from "../../components/common/Button";
 
 const AboutDoctor = () => {
     const specialties = [
@@ -42,20 +42,20 @@ const AboutDoctor = () => {
     ];
 
     return (
-        <div className="py-20 bg-gray-50">
+        <div className="py-24 bg-gray-50">
             <div className="container mx-auto px-4">
                 {/* Header Section */}
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
+                <div className="text-center mb-10">
+                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-head-badge mb-6">
                         <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
                         <span className="text-sm font-medium text-blue-700">Meet Our Expert</span>
                     </div>
 
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 bg-linear-to-r from-gray-800 to-blue-600 bg-clip-text text-transparent">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 bg-linear-to-r from-gray-800 to-blue-600 bg-clip-text text-transparent">
                         Dr. MAK
                     </h2>
 
-                    <p className="md:text-lg max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
                         Pioneering minimally invasive neurosurgical techniques with over 12 years of specialized experience
                         in complex brain and spinal procedures.
                     </p>
@@ -127,7 +127,7 @@ const AboutDoctor = () => {
                             {/* Introduction */}
                             <div className="bg-white rounded-3xl p-6 shadow-soft border border-gray-200">
                                 <h3 className="text-2xl font-bold mb-4">Professional Overview</h3>
-                                <p className="leading-relaxed mb-6">
+                                <p className="leading-relaxed mb-3">
                                     Dr. Michael Chen is a renowned neurosurgeon specializing in complex brain and spinal
                                     procedures. With over 15 years of experience, he has dedicated his career to advancing
                                     neurosurgical techniques and providing compassionate care to patients with neurological disorders.

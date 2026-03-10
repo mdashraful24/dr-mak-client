@@ -25,16 +25,18 @@ const DashboardSidebar = ({
         { path: "/dashboard/doctors", label: "Doctors", icon: Stethoscope },
         { path: "/dashboard/departments", label: "Departments", icon: Hospital },
         { path: "/dashboard/schedule", label: "Schedule", icon: Clock },
-        { path: "/dashboard/settings", label: "Settings", icon: Settings },
         // Add conditionally
-        ...(!isSidebarCollapsed ? [{ path: "/", label: "Home", icon: Home }] : []),
+        ...(!isSidebarCollapsed ? [
+            { path: "/dashboard/settings", label: "Settings", icon: Settings },
+            { path: "/", label: "Home", icon: Home },
+        ] : []),
     ];
 
     // Dropdown menu items for profile
     const dropMenuItems = [
         { path: "/profile", label: "View Profile", icon: User },
-        { path: "/settings", label: "Settings", icon: SettingsIcon },
         { path: "/help", label: "Help", icon: HelpCircle },
+        { path: "/settings", label: "Settings", icon: SettingsIcon },
         { path: "/", label: "Home", icon: Home },
     ];
 

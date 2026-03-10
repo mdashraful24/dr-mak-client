@@ -8,53 +8,53 @@ const HeroSection = () => {
             {/* Left Text Section */}
             <div className="space-y-4 lg:space-y-6 max-w-3xl">
                 {/* Badge */}
-                <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft">
+                <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-head-badge">
                     <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
                     <span className="text-sm font-medium">Trusted Healthcare Since 2010</span>
                 </div>
 
                 {/* Main Heading */}
                 <div className="space-y-4">
-                    <h1 className="text-2xl lg:text-6xl font-bold leading-tight">
+                    <h1 className="text-3xl lg:text-6xl font-bold leading-tight">
                         Exceptional
                         <span className="text-blue-600"> Medical Care</span>
                         {" "}for Your Entire Family
                     </h1>
 
-                    <p className="text-sm lg:text-xl text-gray-700 leading-relaxed max-w-3xl">
+                    <p className="text-lg lg:text-xl text-gray-700 leading-relaxed max-w-3xl">
                         Our team of board-certified physicians provides comprehensive,
                         personalized healthcare with cutting-edge technology and compassionate service.
                     </p>
                 </div>
 
                 {/* Stats */}
-                <div className="flex flex-wrap justify-center md:justify-start gap-6 py-2">
+                <div className="flex flex-wrap justify-center md:justify-start gap-6 pb-3">
                     <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600">50+</div>
+                        <div className="text-xl lg:text-2xl font-bold text-blue-600">50+</div>
                         <div className="text-sm text-gray-500">Expert Doctors</div>
                     </div>
                     <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600">10K+</div>
+                        <div className="text-xl lg:text-2xl font-bold text-blue-600">10K+</div>
                         <div className="text-sm text-gray-500">Happy Patients</div>
                     </div>
                     <div className="text-center">
-                        <div className="text-2xl font-bold text-blue-600">24/7</div>
+                        <div className="text-xl lg:text-2xl font-bold text-blue-600">24/7</div>
                         <div className="text-sm text-gray-500">Support</div>
                     </div>
                 </div>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-row justify-center md:justify-start gap-4">
-                    <Link to="/appointments">
-                        <button className="px-6 py-2.5 rounded-lg bg-blue-700 text-white text-sm lg:text-lg font-semibold shadow-neumorphic-soft hover:shadow-neumorphic-soft-inset transition-all duration-300 transform hover:-translate-y-1">
-                            <span className="flex justify-center items-center gap-0 md:gap-1">
-                                <span>Appointment Now</span>
-                            </span>
-                        </button>
+                    <Link to="/appointments" className="px-6 py-2.5 rounded-lg bg-blue-700 text-white text-sm lg:text-lg font-semibold shadow-neumorphic-soft hover:shadow-neumorphic-soft-inset transition-all duration-300 transform hover:-translate-y-1">
+                        <span className="flex justify-center items-center gap-0 md:gap-1">
+                            <span>Appointment Now</span>
+                        </span>
                     </Link>
-                    <button className="text-sm lg:text-lg font-semibold px-4 py-2.5 rounded-lg bg-neumorphic shadow-neumorphic-soft hover:shadow-neumorphic-soft-inset transition-all duration-300 hover:-translate-y-1">
+                    <Link
+                        to="/services"
+                        className="text-sm lg:text-lg font-semibold px-4 py-2.5 rounded-lg bg-neumorphic shadow-neumorphic-soft hover:shadow-neumorphic-soft-inset transition-all duration-300 hover:-translate-y-1">
                         All Service
-                    </button>
+                    </Link>
                 </div>
             </div>
 

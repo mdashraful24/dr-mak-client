@@ -59,8 +59,8 @@ const FAQ = () => {
         <div className="bg-gray-50 py-20 px-4">
             <div className="container max-w-5xl mx-auto">
                 {/* Header Section */}
-                <div className="text-center mb-8">
-                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-neumorphic-soft mb-6">
+                <div className="text-center mb-10">
+                    <div className="inline-flex items-center px-4 py-2 rounded-2xl bg-neumorphic shadow-head-badge mb-6">
                         <div className="w-2 h-2 bg-blue-600 rounded-full mr-2"></div>
                         <span className="text-sm font-medium text-blue-700">FAQ</span>
                     </div>
@@ -69,7 +69,7 @@ const FAQ = () => {
                         Frequently Asked <span className="text-blue-600">Questions</span>
                     </h1>
 
-                    <p className="md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                         Find answers to common questions about our services, appointments,
                         and healthcare procedures. Can't find what you're looking for?
                         Contact us directly.
