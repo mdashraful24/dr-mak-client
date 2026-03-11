@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { Home, Users, Calendar, FileText, BarChart3, Settings, LayoutDashboard, Info, Briefcase, BookOpen } from 'lucide-react';
+import { Home, Users, Calendar, FileText, BarChart3, Settings, LayoutDashboard, Info, Briefcase, BookOpen, User } from 'lucide-react';
 import useAuth from "../../hooks/useAuth";
 import useAdmin from "../../hooks/admin/useAdmin";
 
@@ -9,7 +9,8 @@ const Sidebar = () => {
 
     const menuItems = [
         { path: "/", label: "Home", icon: Home },
-        { path: "/about", label: "About", icon: Info },
+        { path: "/profile", label: "My Profile", icon: User },
+        { path: "/about-doctor", label: "About Doctor", icon: Info },
         { path: "/services", label: "Services", icon: Briefcase },
 
         ...(user ? [

@@ -22,6 +22,7 @@ import EmailPreferences from "../pages/Control/components/EmailPreferences";
 import NotificationSettings from "../pages/Control/components/NotificationSettings";
 import PrivacySettings from "../pages/Control/components/PrivacySettings";
 import DangerZone from "../pages/Control/components/DangerZone";
+import Profile from "../pages/Profile/Profile";
 
 export const router = createBrowserRouter([
     // Public Layout
@@ -31,7 +32,8 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { index: true, Component: Home },
-            { path: "about", Component: AboutDoctor },
+            { path: "profile", Component: Profile },
+            { path: "about-doctor", Component: AboutDoctor },
             { path: "services", Component: Services },
             { path: "reports", Component: Reports },
             { path: "blog", Component: Blogs },
