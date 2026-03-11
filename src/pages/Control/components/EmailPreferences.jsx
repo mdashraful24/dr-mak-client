@@ -1,9 +1,10 @@
-import { Mail,  Sparkles, Clock, Shield, Tag, Calendar } from 'lucide-react';
+import { Mail, Sparkles, Clock, Shield, Tag, Calendar } from 'lucide-react';
 import { useOutletContext } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const EmailPreferences = () => {
     const { emailNotifications, handleNotificationToggle, updateNotificationsMutation } = useOutletContext();
+    const activeCount = Object.values(emailNotifications).filter(Boolean).length;
 
     const emailTypes = [
         {
@@ -14,7 +15,8 @@ const EmailPreferences = () => {
             color: 'from-blue-500 to-blue-600',
             bgColor: 'bg-blue-50',
             iconBg: 'bg-blue-100',
-            iconColor: 'text-blue-600'
+            iconColor: 'text-blue-600',
+            buttonColor: 'from-blue-500 to-blue-600',
         },
         {
             key: 'promotions',
@@ -24,7 +26,8 @@ const EmailPreferences = () => {
             color: 'from-purple-500 to-purple-600',
             bgColor: 'bg-purple-50',
             iconBg: 'bg-purple-100',
-            iconColor: 'text-purple-600'
+            iconColor: 'text-purple-600',
+            buttonColor: 'from-blue-500 to-blue-600',
         },
         {
             key: 'reminders',
@@ -34,7 +37,8 @@ const EmailPreferences = () => {
             color: 'from-green-500 to-green-600',
             bgColor: 'bg-green-50',
             iconBg: 'bg-green-100',
-            iconColor: 'text-green-600'
+            iconColor: 'text-green-600',
+            buttonColor: 'from-blue-500 to-blue-600',
         },
         {
             key: 'security',
@@ -44,7 +48,8 @@ const EmailPreferences = () => {
             color: 'from-amber-500 to-amber-600',
             bgColor: 'bg-amber-50',
             iconBg: 'bg-amber-100',
-            iconColor: 'text-amber-600'
+            iconColor: 'text-amber-600',
+            buttonColor: 'from-blue-500 to-blue-600',
         }
     ];
 
@@ -96,7 +101,7 @@ const EmailPreferences = () => {
                                 ))}
                             </div>
 
-                            <p className="text-xs text-gray-500 mt-3 flex items-center">
+                            <p className="text-xs text-gray-600 mt-3 flex items-center">
                                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-500 mr-2" />
                                 Instant emails are sent immediately for time-sensitive updates
                             </p>
@@ -115,7 +120,7 @@ const EmailPreferences = () => {
                 </div>
 
                 <div className="space-y-3">
-                    {emailTypes.map(({ key, title, description, icon, color, bgColor, iconBg, iconColor }) => {
+                    {emailTypes.map(({ key, title, description, icon, color, iconBg, iconColor, buttonColor }) => {
                         const isLoading = updateNotificationsMutation.isLoading &&
                             updateNotificationsMutation.variables?.key === key;
 
@@ -124,19 +129,22 @@ const EmailPreferences = () => {
                                 key={key}
                                 className={`group relative overflow-hidden rounded-xl 
                                     ${emailNotifications[key]
-                                    ? 'bg-linear-to-r from-blue-50 to-white border-l-4 border-blue-600'
-                                    : 'bg-white hover:bg-gray-50/80 border-gray-200/80 hover:border-gray-300/80'
-                                    } border hover:shadow-md`}
+                                        ? 'bg-linear-to-r from-blue-50 to-white border-blue-600'
+                                    : 'bg-linear-to-br from-gray-50 to-gray-100 border-gray-200/80 hover:border-gray-300/80'
+                                    } border hover:shadow-md cursor-pointer`}
                                 style={emailNotifications[key] ? { borderLeftColor: color.split(' ')[1] } : {}}
                             >
                                 {/* Background decoration */}
                                 {/* <div className={`absolute inset-0 ${bgColor} opacity-0 group-hover:opacity-30 transition-opacity duration-300`} /> */}
 
-                                <div className="relative p-3 md:p-4">
+                                <div
+                                    onClick={() => handleNotificationToggle(key)}
+                                    className="relative p-3 md:p-4"
+                                >
                                     <div className="flex items-center justify-between gap-3">
-                                        <div className="flex items-start space-x-4">
+                                        <div className="flex items-center justify-center space-x-4">
                                             {/* Icon with gradient */}
-                                            <div className={`relative ${iconBg} p-3 rounded-xl shadow-sm`}>
+                                            <div className={`relative ${iconBg} p-2 md:p-3 rounded-lg md:rounded-xl shadow-head-badge`}>
                                                 <div className={`absolute inset-0 bg-linear-to-br ${color} opacity-0 group-hover:opacity-10 rounded-xl`} />
                                                 <div className={iconColor}>
                                                     {icon}
@@ -157,11 +165,11 @@ const EmailPreferences = () => {
                                         {/* Toggle Switch - Professional Design */}
                                         <div className="relative flex items-center">
                                             <button
-                                                onClick={() => handleNotificationToggle(key)}
+                                                // onClick={() => handleNotificationToggle(key)}
                                                 disabled={isLoading}
                                                 className={`relative inline-flex h-7 w-12 items-center rounded-full ease-in-out focus:outline-none
                                                         ${emailNotifications[key]
-                                                        ? `bg-linear-to-r ${color}`
+                                                        ? `bg-linear-to-r ${buttonColor}`
                                                         : 'bg-gray-200 hover:bg-gray-300'
                                                     }
                                                         ${isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} shadow-inner`}
@@ -190,9 +198,17 @@ const EmailPreferences = () => {
 
             {/* Footer Actions */}
             <div className="pt-5 border-t border-gray-200">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-3">
+                    {/* Important Note */}
+                    <div className="flex items-center space-x-2 text-xs text-gray-700 bg-gray-50 px-4 py-2 rounded-lg">
+                        <Sparkles className="w-4 h-4 text-blue-500" />
+                        <span>Essential account emails are always sent</span>
+                    </div>
+
+
                     {/* Unsubscribe All Button */}
                     <button
+                        disabled={activeCount === 0}
                         onClick={() => {
                             const activeKeys = Object.entries(emailNotifications)
                                 .filter(([_, value]) => value)
@@ -206,20 +222,20 @@ const EmailPreferences = () => {
                                 toast.error('No active subscriptions to unsubscribe');
                             }
                         }}
-                        className="group relative px-4 py-2 rounded-lg overflow-hidden cursor-pointer"
+                        className={`group relative px-4 py-2 border border-red-200 rounded-lg overflow-hidden ${activeCount === 0
+                            ? 'opacity-50 cursor-not-allowed'
+                            : 'cursor-pointer'
+                            }`}
                     >
-                        <div className="absolute inset-0 bg-linear-to-r from-red-500 to-red-600 opacity-0 group-hover:opacity-100" />
-                        <div className="absolute inset-0 bg-red-50 group-hover:opacity-0" />
-                        <span className="relative text-sm font-medium text-red-600 group-hover:text-white">
+                        <div className={`absolute inset-0 bg-linear-to-r from-red-500 to-red-600 ${activeCount === 0 ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}`}
+                        />
+
+                        <div className={`absolute inset-0 bg-red-50 ${activeCount === 0 ? 'opacity-100' : 'group-hover:opacity-0'}`} />
+
+                        <span className={`relative text-sm font-semibold ${activeCount === 0 ? 'text-red-400' : 'text-red-600 group-hover:text-white'}`}>
                             Unsubscribe all
                         </span>
                     </button>
-
-                    {/* Important Note */}
-                    <div className="flex items-center space-x-2 text-xs text-gray-600 bg-gray-50 px-4 py-2 rounded-lg">
-                        <Sparkles className="w-4 h-4 text-blue-500" />
-                        <span>Essential account emails are always sent</span>
-                    </div>
                 </div>
             </div>
         </div>

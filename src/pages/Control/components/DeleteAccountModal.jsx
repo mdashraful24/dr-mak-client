@@ -42,7 +42,7 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
     if (!showDeleteModal) return null;
 
     return (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 backdrop-blur-sm animate-fadeIn">
+        <div className="fixed inset-0 bg-black flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-2xl p-4 md:p-6 max-w-md w-full shadow-2xl">
                 {/* Header */}
                 <div className="flex justify-between items-center mb-6">
@@ -120,8 +120,8 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
                                 type="text"
                                 value={confirmText}
                                 onChange={(e) => setConfirmText(e.target.value)}
-                                placeholder="DELETE"
-                                className="w-full px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-300 font-medium placeholder-gray-500 focus:shadow-soft focus:outline-none focus:border-red-400"
+                                placeholder="Enter DELETE"
+                                className="w-full px-4 py-3 rounded-xl bg-linear-to-br from-gray-50 to-gray-100 border border-gray-300 font-medium placeholder-gray-600 shadow-neumorphic-inset focus:shadow-soft focus:outline-none focus:border-red-400"
                                 autoFocus
                             />
                         </div>
@@ -130,19 +130,18 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
 
                 {step === 2 && (
                     <>
-                        <p className="text-gray-600 mb-6">
-                            We're sorry to see you go. Could you tell us why you're leaving?
-                            (Optional)
+                        <p className="mb-6">
+                            We're sorry to see you go. Could you tell us why you're leaving? (Optional)
                         </p>
 
                         <div className="space-y-3 mb-8">
                             {reasons.map((reason) => (
                                 <label
                                     key={reason.id}
-                                    className={`flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all
+                                    className={`flex items-center p-3 rounded-xl border-2 cursor-pointer
                                         ${selectedReason === reason.id
                                             ? 'border-red-500 bg-red-50'
-                                            : 'border-gray-200 hover:border-gray-300'
+                                            : 'border-gray-200 hover:border-red-300 hover:bg-red-50'
                                         }`}
                                 >
                                     <input
@@ -153,14 +152,14 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
                                         onChange={(e) => setSelectedReason(e.target.value)}
                                         className="w-4 h-4 text-red-600"
                                     />
-                                    <span className="ml-3 text-sm text-gray-700">{reason.label}</span>
+                                    <span className="ml-3 text-sm">{reason.label}</span>
                                 </label>
                             ))}
 
                             {selectedReason === 'other' && (
                                 <textarea
                                     placeholder="Please tell us more..."
-                                    className="w-full mt-3 p-3 rounded-lg border border-gray-300 focus:border-red-400 focus:outline-none"
+                                    className="w-full mt-3 p-3 rounded-xl border border-gray-300 focus:border-red-400 focus:outline-none resize-none"
                                     rows="3"
                                 />
                             )}
@@ -170,27 +169,21 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
 
                 {step === 3 && (
                     <>
-                        <div className="text-center mb-8">
-                            <div className="w-20 h-20 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
-                                <Shield className="w-10 h-10 text-red-600" />
+                        <div className="text-center mb-6">
+                            <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+                                <Shield size={26} className="text-red-600" />
                             </div>
-                            <h4 className="text-lg font-bold text-gray-900 mb-2">
+                            <h3 className="text-xl md:text-2xl font-bold mb-2">
                                 Are you absolutely sure?
-                            </h4>
-                            <p className="text-gray-600">
+                            </h3>
+                            <p className="text-gray-700">
                                 This is your last chance. Once you delete your account, there's no going back.
                             </p>
                         </div>
 
-                        <div className="bg-gray-50 p-4 rounded-xl mb-6">
-                            <div className="flex items-center space-x-3 mb-3">
-                                <Mail className="w-4 h-4 text-gray-600" />
-                                <span className="text-sm text-gray-600">
-                                    We'll send a confirmation email to your registered email address
-                                </span>
-                            </div>
-                            <p className="text-xs text-gray-500">
-                                You'll have 24 hours to cancel this deletion by clicking the link in the email.
+                        <div className="bg-gray-50 p-3 rounded-xl mb-6">
+                            <p className="text-[0.8rem] text-gray-700 leading-relaxed">
+                                We'll send a confirmation email to your registered email address. You'll have 24 hours to cancel this deletion by clicking the link in the email.
                             </p>
                         </div>
                     </>
@@ -203,9 +196,7 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
                             <button
                                 type="button"
                                 onClick={handleClose}
-                                className="flex-1 px-4 py-2 rounded-lg bg-gray-100 border border-gray-200 
-                                    font-semibold hover:bg-gray-200 
-                                    transition-all duration-200"
+                                className="flex-1 px-4 py-2 rounded-lg bg-gray-100 border border-gray-200 font-semibold hover:bg-gray-200 cursor-pointer"
                             >
                                 Cancel
                             </button>
@@ -213,10 +204,7 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
                                 type="button"
                                 onClick={handleNextStep}
                                 disabled={step === 1 && confirmText !== 'DELETE'}
-                                className="flex-1 px-4 py-2 rounded-lg bg-red-600 
-                                    text-white font-semibold shadow-md hover:bg-red-700 
-                                    active:shadow-neumorphic-pressed transition-all duration-200
-                                    disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 px-4 py-2 rounded-lg bg-red-600 text-white font-semibold shadow-md hover:bg-red-700 active:shadow-neumorphic-pressed cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 Continue
                             </button>
@@ -226,9 +214,7 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
                             <button
                                 type="button"
                                 onClick={handleClose}
-                                className="flex-1 px-4 py-2 rounded-lg bg-gray-100 border border-gray-200 
-                                    font-semibold hover:bg-gray-200 
-                                    transition-all duration-200"
+                                className="flex-1 px-4 py-2 rounded-lg bg-gray-100 border border-gray-200 font-semibold hover:bg-gray-200 cursor-pointer"
                             >
                                 No, Keep Account
                             </button>
@@ -236,10 +222,7 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
                                 type="button"
                                 onClick={handleDelete}
                                 disabled={deleteAccountMutation.isLoading}
-                                className="flex-1 px-4 py-2 rounded-lg bg-linear-to-r from-red-600 to-red-700 
-                                    text-white font-semibold shadow-md hover:shadow-lg 
-                                    transition-all duration-200 disabled:opacity-50 
-                                    disabled:cursor-not-allowed flex items-center justify-center"
+                                    className="flex-1 px-4 py-2 rounded-lg bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 text-white font-semibold shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center cursor-pointer"
                             >
                                 {deleteAccountMutation.isLoading ? (
                                     <>
@@ -255,9 +238,9 @@ const DeleteAccountModal = ({ showDeleteModal, setShowDeleteModal, deleteAccount
                 </div>
 
                 {/* Security Note */}
-                <p className="text-xs text-gray-600 text-center mt-4">
+                {/* <p className="text-xs text-gray-600 text-center mt-4">
                     For your security, this action is logged and verified.
-                </p>
+                </p> */}
             </div>
         </div>
     );

@@ -58,25 +58,27 @@ const PrivacySettings = () => {
 
             {/* Two-Factor Authentication */}
             <div className="p-3 md:p-4 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200">
-                <div className="flex items-center justify-between">
+                <div
+                    onClick={() => toggleSetting('twoFactorEnabled')}
+                    className="flex items-center justify-between gap-2 cursor-pointer"
+                >
                     <div className="flex items-center space-x-3">
-                        <div className="p-2 bg-blue-100 rounded-lg shadow-head-badge">
+                        <div className="hidden md:block p-2 bg-blue-100 rounded-lg shadow-head-badge">
                             <ShieldCheck className="w-6 h-6 text-blue-600" />
                         </div>
                         <div>
                             <h3 className="font-semibold">Two-Factor Authentication</h3>
-                            <p className="text-sm text-gray-600">Add an extra layer of security to your account</p>
+                            <p className="text-xs md:text-sm text-gray-600">Add an extra layer of security to your account</p>
                         </div>
                     </div>
                     <button
-                        onClick={() => toggleSetting('twoFactorEnabled')}
-                        className={`relative w-14 h-8 rounded-full transition-all duration-300 ${privacySettings.twoFactorEnabled
-                                ? 'bg-linear-to-r from-green-500 to-green-600'
-                                : 'bg-linear-to-br from-gray-200 to-gray-300'
+                        className={`relative h-7 w-12 rounded-full transition-all duration-300 ${privacySettings.twoFactorEnabled
+                            ? 'bg-linear-to-r from-blue-500 to-blue-600'
+                            : 'bg-linear-to-br from-gray-200 to-gray-300'
                             }`}
                     >
                         <div
-                            className={`absolute top-1 w-6 h-6 rounded-full bg-white transform transition-transform duration-300 shadow-lg ${privacySettings.twoFactorEnabled ? 'left-7' : 'left-1'
+                            className={`absolute top-1 w-5 h-5 rounded-full bg-white transform transition-transform duration-300 shadow-lg ${privacySettings.twoFactorEnabled ? 'left-6' : 'left-1'
                                 }`}
                         />
                     </button>
@@ -85,26 +87,28 @@ const PrivacySettings = () => {
 
             {/* Biometric Authentication */}
             <div className="p-3 md:p-4 bg-linear-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200">
-                <div className="flex items-center justify-between">
+                <div
+                    onClick={() => toggleSetting('biometricEnabled')}
+                    className="flex items-center justify-between gap-2 cursor-pointer"
+                >
                     <div className="flex items-center space-x-3">
-                        <div className="p-2 bg-purple-100 rounded-lg shadow-head-badge">
+                        <div className="hidden md:block p-2 bg-purple-100 rounded-lg shadow-head-badge">
                             <Fingerprint className="w-6 h-6 text-purple-600" />
                         </div>
                         <div>
                             <h3 className="font-semibold">Biometric Authentication</h3>
-                            <p className="text-sm text-gray-600">Use fingerprint or face recognition to log in</p>
+                            <p className="text-xs md:text-sm text-gray-600">Use fingerprint or face recognition to log in</p>
                         </div>
                     </div>
                     <button
-                        onClick={() => toggleSetting('biometricEnabled')}
                         disabled={!window.PublicKeyCredential}
-                        className={`relative w-14 h-8 rounded-full transition-all duration-300 ${privacySettings.biometricEnabled
-                                ? 'bg-linear-to-r from-green-500 to-green-600'
-                                : 'bg-linear-to-br from-gray-200 to-gray-300'
+                        className={`relative h-7 w-12 rounded-full transition-all duration-300 ${privacySettings.biometricEnabled
+                            ? 'bg-linear-to-r from-blue-500 to-blue-600'
+                            : 'bg-linear-to-br from-gray-200 to-gray-300'
                             } ${!window.PublicKeyCredential ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
                         <div
-                            className={`absolute top-1 w-6 h-6 rounded-full bg-white transform transition-transform duration-300 shadow-lg ${privacySettings.biometricEnabled ? 'left-7' : 'left-1'
+                            className={`absolute top-1 w-5 h-5 rounded-full bg-white transform transition-transform duration-300 shadow-lg ${privacySettings.biometricEnabled ? 'left-6' : 'left-1'
                                 }`}
                         />
                     </button>

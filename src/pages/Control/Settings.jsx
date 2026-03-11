@@ -44,7 +44,7 @@ const Settings = () => {
 
                 {/* Main Content - Renders child routes */}
                 <div className="flex-1">
-                    <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+                    <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-4 lg:p-6">
                         <Outlet context={{
                             userData,
                             emailNotifications,

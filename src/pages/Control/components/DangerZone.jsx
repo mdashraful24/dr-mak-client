@@ -58,7 +58,7 @@ const DangerZone = () => {
     ];
 
     const getButtonClasses = (color, destructive = false) => {
-        const baseClasses = "px-3 py-2 rounded-lg text-white text-sm font-semibold transition-colors  shadow-head-badge";
+        const baseClasses = "px-3 py-2 rounded-lg text-white text-sm font-semibold transition-colors shadow-head-badge cursor-pointer";
         const colorClasses = {
             blue: "bg-blue-600 hover:bg-blue-700",
             yellow: "bg-yellow-600 hover:bg-yellow-700",
