@@ -66,9 +66,9 @@ const SettingsSidebar = ({ userData, user }) => {
                             {({ isActive }) => (
                                 <>
                                     <div
-                                        className={`p-2 rounded-lg transition-colors duration-300 shadow-head-badge ${isActive
+                                        className={`p-2 rounded-lg transition-colors duration-300 settings-sidebar ${isActive
                                             ? item.path === 'danger-zone'
-                                                ? 'bg-red-200 text-red-700'
+                                                ? 'bg-red-200 text-red-700 settings-danger-zone'
                                                 : 'bg-blue-100 text-blue-600'
                                             : 'bg-gray-100 text-gray-600'
                                             }`}

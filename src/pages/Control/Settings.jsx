@@ -2,7 +2,7 @@ import { Outlet, useNavigate, useLocation } from "react-router";
 import { useEffect } from "react";
 import useAuth from '../../hooks/useAuth';
 import { useSettingsData } from '../../hooks/setting/useSettingsData';
-import SettingsSidebar from "./components/SettingsSidebar";
+import SettingsSidebar from "../../components/layout/SettingsSidebar";
 import DeleteAccountModal from "./components/DeleteAccountModal";
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
