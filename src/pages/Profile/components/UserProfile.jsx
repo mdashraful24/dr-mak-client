@@ -23,7 +23,7 @@ const UserProfile = () => {
     });
 
     // Neumorphic style classes
-    const neumorphCard = "rounded-2xl shadow-[20px_20px_40px_#d1d9e6,-20px_-20px_40px_#ffffff]";
+    const neumorphCard = "rounded-2xl shadow-[5px_5px_10px_#d1d9e6,-5px_-5px_10px_#d1d9e6]";
     const neumorphInset = "rounded-xl shadow-[inset_3px_3px_5px_#d1d9e6,inset_-3px_-3px_5px_#ffffff]";
     const neumorphIcon = "rounded-xl shadow-head-badge p-3";
 
@@ -64,175 +64,171 @@ const UserProfile = () => {
     // Error state
     if (error) {
         return (
-            <div className="bg-gray-100">
-                <div className="max-w-4xl mx-auto">
-                    <div className={`${neumorphCard} p-8 text-center`}>
-                        <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-                        <h2 className="text-2xl font-bold mb-2">Error Loading Profile</h2>
-                        <p className="text-gray-600 mb-6">{error.message || 'Failed to load profile data'}</p>
-                        <button
-                            onClick={() => refetch()}
-                            className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
-                        >
-                            Try Again
-                        </button>
-                    </div>
+            <div className="max-w-4xl mx-auto">
+                <div className={`${neumorphCard} p-8 text-center`}>
+                    <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+                    <h2 className="text-2xl font-bold mb-2">Error Loading Profile</h2>
+                    <p className="text-gray-600 mb-6">{error.message || 'Failed to load profile data'}</p>
+                    <button
+                        onClick={() => refetch()}
+                        className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
+                    >
+                        Try Again
+                    </button>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="bg-gray-100">
-            <div className="max-w-4xl mx-auto">
-                {/* Profile Card */}
-                <div className={neumorphCard}>
-                    <div className="p-4 md:p-8">
-                        {/* Profile Picture Section */}
-                        <div className="flex flex-col items-center gap-4">
-                            {isLoading ? (
-                                <>
-                                    <div className="h-8 w-48 bg-gray-200 rounded animate-pulse"></div>
-                                    <SkeletonRole />
-                                </>
-                            ) : (
-                                <>
-                                    {/* Profile Image/Avatar */}
-                                    <div className={`${neumorphIcon} p-4`}>
-                                        <User className="w-12 h-12 text-gray-600" />
-                                    </div>
-
-                                    <h1 className="text-3xl font-bold text-gray-800">
-                                        {profileData?.name || user?.displayName || 'User'}
-                                    </h1>
-
-                                    <div className={`${neumorphInset} px-4 py-2 flex items-center space-x-2`}>
-                                        <Shield className={`w-4 h-4 ${profileData?.role === 'admin' ? 'text-purple-600' : 'text-blue-600'
-                                            }`} />
-                                        <span className="text-sm font-medium capitalize text-gray-700">
-                                            {profileData?.role || 'User'}
-                                        </span>
-                                    </div>
-                                </>
-                            )}
-                        </div>
-
-                        {/* User Details Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                            {/* Email */}
-                            {isLoading ? (
-                                <SkeletonItem />
-                            ) : (
-                                <div className={neumorphInset}>
-                                    <div className="p-4">
-                                        <div className="flex items-center space-x-3">
-                                            <div className={neumorphIcon}>
-                                                <Mail className="w-5 h-5 text-blue-600" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-600">Email Address</p>
-                                                <p className="font-semibold">{profileData?.email || user?.email}</p>
-                                            </div>
-                                        </div>
-                                    </div>
+        <div className="max-w-4xl mx-auto md:pt-8">
+            {/* Profile Card */}
+            <div className={neumorphCard}>
+                <div className="rounded-2xl p-6 md:p-8">
+                    {/* Profile Picture Section */}
+                    <div className="flex flex-col items-center gap-4">
+                        {isLoading ? (
+                            <>
+                                <div className="h-8 w-48 bg-gray-200 rounded animate-pulse"></div>
+                                <SkeletonRole />
+                            </>
+                        ) : (
+                            <>
+                                {/* Profile Image/Avatar */}
+                                <div className={`${neumorphIcon} p-4`}>
+                                    <User className=" md:w-12 md:h-12" />
                                 </div>
-                            )}
 
-                            {/* Phone */}
-                            {isLoading ? (
-                                <SkeletonItem />
-                            ) : (
-                                <div className={neumorphInset}>
-                                    <div className="p-4">
-                                        <div className="flex items-center space-x-3">
-                                            <div className={neumorphIcon}>
-                                                <Phone className="w-5 h-5 text-green-600" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-600">Phone Number</p>
-                                                <p className="font-semibold">{profileData?.phone || 'Not provided'}</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <h1 className="text-3xl font-bold text-gray-800">
+                                    {profileData?.name || user?.displayName || 'User'}
+                                </h1>
+
+                                <div className={`${neumorphInset} px-4 py-2 flex items-center space-x-2`}>
+                                    <Shield className={`w-4 h-4 ${profileData?.role === 'admin' ? 'text-purple-600' : 'text-blue-600'
+                                        }`} />
+                                    <span className="text-sm font-medium capitalize text-gray-700">
+                                        {profileData?.role || 'User'}
+                                    </span>
                                 </div>
-                            )}
+                            </>
+                        )}
+                    </div>
 
-                            {/* Member Since */}
-                            {isLoading ? (
-                                <SkeletonItem />
-                            ) : (
-                                <div className={neumorphInset}>
-                                    <div className="p-4">
-                                        <div className="flex items-center space-x-3">
-                                            <div className={neumorphIcon}>
-                                                <Calendar className="w-5 h-5 text-purple-600" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-600">Member Since</p>
-                                                <p className="font-semibold">
-                                                    {profileData?.createdAt
-                                                        ? formatDateFns(profileData.createdAt, "MMMM do, yyyy 'at' h:mm a")
-                                                        : 'N/A'}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Last Login */}
-                            {isLoading ? (
-                                <SkeletonItem />
-                            ) : (
-                                <div className={neumorphInset}>
-                                    <div className="p-4">
-                                        <div className="flex items-center space-x-3">
-                                            <div className={neumorphIcon}>
-                                                <Clock className="w-5 h-5 text-orange-600" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-600">Last Login</p>
-                                                <p className="font-semibold">
-                                                    {profileData?.lastLogin
-                                                        ? formatDateFns(profileData.lastLogin, "MMMM do, yyyy 'at' h:mm a")
-                                                        : 'N/A'}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Newsletter Preference */}
-                        {!isLoading && profileData?.newsletter !== undefined && (
-                            <div className={`${neumorphInset} mt-6`}>
+                    {/* User Details Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                        {/* Email */}
+                        {isLoading ? (
+                            <SkeletonItem />
+                        ) : (
+                            <div className={neumorphInset}>
                                 <div className="p-4">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center space-x-3">
-                                            <div className={neumorphIcon}>
-                                                <Mail className="w-5 h-5 text-indigo-600" />
-                                            </div>
-                                            <div>
-                                                <p className="font-semibold">Newsletter Subscription</p>
-                                                <p className="text-sm text-gray-600">
-                                                    {profileData.newsletter
-                                                        ? 'You are subscribed to our newsletter'
-                                                        : 'You are not subscribed to our newsletter'}
-                                                </p>
-                                            </div>
+                                    <div className="flex items-center space-x-3">
+                                        <div className={neumorphIcon}>
+                                            <Mail className="w-5 h-5 text-blue-600" />
                                         </div>
-                                        <div className={`${neumorphInset} px-3 py-1`}>
-                                            <span className={`text-sm font-medium
-                                                ${profileData.newsletter ? 'text-green-600' : 'text-gray-600'}`}>
-                                                {profileData.newsletter ? 'Active' : 'Inactive'}
-                                            </span>
+                                        <div>
+                                            <p className="text-sm text-gray-600">Email Address</p>
+                                            <p className="font-semibold">{profileData?.email || user?.email}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Phone */}
+                        {isLoading ? (
+                            <SkeletonItem />
+                        ) : (
+                            <div className={neumorphInset}>
+                                <div className="p-4">
+                                    <div className="flex items-center space-x-3">
+                                        <div className={neumorphIcon}>
+                                            <Phone className="w-5 h-5 text-green-600" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-gray-600">Phone Number</p>
+                                            <p className="font-semibold">{profileData?.phone || 'Not provided'}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Member Since */}
+                        {isLoading ? (
+                            <SkeletonItem />
+                        ) : (
+                            <div className={neumorphInset}>
+                                <div className="p-4">
+                                    <div className="flex items-center space-x-3">
+                                        <div className={neumorphIcon}>
+                                            <Calendar className="w-5 h-5 text-purple-600" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-gray-600">Member Since</p>
+                                            <p className="font-semibold">
+                                                {profileData?.createdAt
+                                                    ? formatDateFns(profileData.createdAt, "MMMM do, yyyy 'at' h:mm a")
+                                                    : 'N/A'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Last Login */}
+                        {isLoading ? (
+                            <SkeletonItem />
+                        ) : (
+                            <div className={neumorphInset}>
+                                <div className="p-4">
+                                    <div className="flex items-center space-x-3">
+                                        <div className={neumorphIcon}>
+                                            <Clock className="w-5 h-5 text-orange-600" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-gray-600">Last Login</p>
+                                            <p className="font-semibold">
+                                                {profileData?.lastLogin
+                                                    ? formatDateFns(profileData.lastLogin, "MMMM do, yyyy 'at' h:mm a")
+                                                    : 'N/A'}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         )}
                     </div>
+
+                    {/* Newsletter Preference */}
+                    {!isLoading && profileData?.newsletter !== undefined && (
+                        <div className={`${neumorphInset} mt-6`}>
+                            <div className="p-4">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center space-x-3">
+                                        <div className={neumorphIcon}>
+                                            <Mail className="w-5 h-5 text-indigo-600" />
+                                        </div>
+                                        <div>
+                                            <p className="font-semibold">Newsletter Subscription</p>
+                                            <p className="text-sm text-gray-600">
+                                                {profileData.newsletter
+                                                    ? 'You are subscribed to our newsletter'
+                                                    : 'You are not subscribed to our newsletter'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className={`${neumorphInset} px-3 py-1`}>
+                                        <span className={`text-sm font-medium
+                                                ${profileData.newsletter ? 'text-green-600' : 'text-gray-600'}`}>
+                                            {profileData.newsletter ? 'Active' : 'Inactive'}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
