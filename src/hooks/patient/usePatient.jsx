@@ -12,8 +12,8 @@ const usePatient = () => {
         enabled: !!user?.email && !loading,
         queryFn: async () => {
             try {
-                const res = await axiosSecure.get(`/users/normal-user/${user.email}`);
-                return res.data?.normalUsers || false;
+                const res = await axiosSecure.get(`/users/patient/${user.email}`);
+                return res.data?.patient || false;
             } catch (error) {
                 console.error('Error checking patient status:', error);
                 return false;

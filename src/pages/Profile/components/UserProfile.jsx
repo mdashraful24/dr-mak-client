@@ -95,8 +95,8 @@ const UserProfile = () => {
                         ) : (
                             <>
                                 {/* Profile Image/Avatar */}
-                                <div className={`${neumorphIcon} p-4`}>
-                                    <User className=" md:w-12 md:h-12" />
+                                <div className={`${neumorphIcon} p-3`}>
+                                    <User size={24} />
                                 </div>
 
                                 <h1 className="text-3xl font-bold text-gray-800">
