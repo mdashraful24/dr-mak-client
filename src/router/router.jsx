@@ -1,43 +1,78 @@
 import { createBrowserRouter } from "react-router";
+
 import PublicLayout from "../layouts/PublicLayout";
-import Home from "../pages/Home/Home";
-import ErrorPage from "../components/common/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AuthLayout from "../layouts/AuthLayout";
-import Login from "../pages/Auth/Login";
-import Register from "../pages/Auth/Register";
+
+import Home from "../pages/Home/Home";
 import AboutDoctor from "../pages/AboutDoctor/AboutDoctor";
-import DoctorDashboard from "../pages/Dashboard/DoctorDashboard/DoctorDashboard";
 import Services from "../pages/Services/Services";
 import Blogs from "../pages/Blogs/Blogs";
+
+import MyProfile from "../pages/MyProfile/MyProfile";
 import Appointments from "../pages/Appointments/Appointments";
-import ForgotPassword from "../pages/Auth/ForgotPassword";
-import Settings from "../pages/Control/Settings";
 import Reports from "../pages/Reports/Reports";
-import PrivateRoute from "./Secure/PrivateRoute";
-import AuthRouter from "./Secure/AuthRouter";
+
+import DoctorDashboard from "../pages/Dashboard/DoctorDashboard/DoctorDashboard";
+
+import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
+
+import Settings from "../pages/Control/Settings";
 import ProfileSettings from "../pages/Control/components/ProfileSettings";
 import PasswordSettings from "../pages/Control/components/PasswordSettings";
 import EmailPreferences from "../pages/Control/components/EmailPreferences";
 import NotificationSettings from "../pages/Control/components/NotificationSettings";
 import PrivacySettings from "../pages/Control/components/PrivacySettings";
 import DangerZone from "../pages/Control/components/DangerZone";
-import Profile from "../pages/Profile/Profile";
+
+import ErrorPage from "../components/common/ErrorPage";
+
+import PrivateRoute from "./Secure/PrivateRoute";
+import AuthRouter from "./Secure/AuthRouter";
 
 export const router = createBrowserRouter([
-    // Public Layout
+
+    // PUBLIC ROUTES
     {
         path: "/",
-        Component: PublicLayout,
+        element: <PublicLayout />,
         errorElement: <ErrorPage />,
         children: [
-            { index: true, Component: Home },
-            { path: "profile", Component: Profile },
-            { path: "about-doctor", Component: AboutDoctor },
-            { path: "services", Component: Services },
-            { path: "reports", Component: Reports },
-            { path: "blog", Component: Blogs },
-            { path: "appointments", Component: Appointments },
+            { index: true, element: <Home /> },
+
+            { path: "about-doctor", element: <AboutDoctor /> },
+            { path: "services", element: <Services /> },
+            { path: "blog", element: <Blogs /> },
+
+            {
+                path: "profile",
+                element: (
+                    <PrivateRoute>
+                        <MyProfile />
+                    </PrivateRoute>
+                ),
+            },
+
+            {
+                path: "appointments",
+                element: (
+                    <PrivateRoute>
+                        <Appointments />
+                    </PrivateRoute>
+                ),
+            },
+
+            {
+                path: "reports",
+                element: (
+                    <PrivateRoute>
+                        <Reports />
+                    </PrivateRoute>
+                ),
+            },
+
             {
                 path: "settings",
                 element: (
@@ -46,20 +81,20 @@ export const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
                 children: [
-                    { path: "profile-setting", Component: ProfileSettings },
-                    { path: "password-setting", Component: PasswordSettings },
-                    { path: "email-preferences", Component: EmailPreferences },
-                    { path: "notification-setting", Component: NotificationSettings },
-                    { path: "privacy-setting", Component: PrivacySettings },
-                    { path: "danger-zone", Component: DangerZone },
-                ]
+                    { path: "profile-setting", element: <ProfileSettings /> },
+                    { path: "password-setting", element: <PasswordSettings /> },
+                    { path: "email-preferences", element: <EmailPreferences /> },
+                    { path: "notification-setting", element: <NotificationSettings /> },
+                    { path: "privacy-setting", element: <PrivacySettings /> },
+                    { path: "danger-zone", element: <DangerZone /> },
+                ],
             },
         ],
     },
 
-    // Dashboard Layout
+    // DASHBOARD ROUTES
     {
-        path: "dashboard",
+        path: "/dashboard",
         element: (
             <PrivateRoute>
                 <DashboardLayout />
@@ -71,24 +106,24 @@ export const router = createBrowserRouter([
         ],
     },
 
-    // Auth Layout
+    // AUTH ROUTES
     {
-        path: "auth",
-        Component: AuthLayout,
+        path: "/auth",
+        element: <AuthLayout />,
         errorElement: <ErrorPage />,
         children: [
             {
                 element: <AuthRouter />,
                 children: [
-                    { path: "login", Component: Login },
-                    { path: "register", Component: Register },
-                    { path: "forgot-password", Component: ForgotPassword }
-                ]
+                    { path: "login", element: <Login /> },
+                    { path: "register", element: <Register /> },
+                    { path: "forgot-password", element: <ForgotPassword /> },
+                ],
             },
         ],
     },
 
-    // Fallback 404
+    // 404 ROUTE
     {
         path: "*",
         element: <ErrorPage />,

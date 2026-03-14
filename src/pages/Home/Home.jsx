@@ -7,6 +7,8 @@ import ServicesOverview from "../../components/home/ServicesOverview";
 const Home = () => {
     return (
         <div className="pt-24">
+            <title>Home | Dr. MAK</title>
+
             <HeroSection />
             <ServicesOverview />
             <ContactInfo />

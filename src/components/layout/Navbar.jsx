@@ -201,7 +201,7 @@ const Navbar = () => {
                             <Link
                                 to="/auth/login"
                                 onClick={closeSidebar}
-                                className="w-full text-left px-4 py-3 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-blue-600 font-medium transition duration-200 flex items-center gap-3 cursor-pointer"
+                                className="w-full text-left px-4 py-2 rounded-xl bg-[#e0e5ec] shadow-[3px_3px_8px_#babecc,-3px_-3px_8px_#ffffff] hover:shadow-inner text-blue-600 font-medium transition duration-200 flex items-center gap-3 cursor-pointer"
                             >
                                 <User size={18} />
                                 <span>Login</span>

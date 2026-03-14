@@ -328,7 +328,7 @@ const ForgotPassword = () => {
                         <button
                             onClick={handleResendEmail}
                             disabled={isLoading || countdown > 0}
-                            className="w-full py-2.5 font-medium bg-linear-to-br from-gray-50 to-gray-100 border border-gray-300 rounded-lg shadow-sm hover:shadow-md active:shadow-[inset_3px_3px_6px_#bebebe,inset_-3px_-3px_6px_#ffffff] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full py-2.5 font-medium bg-linear-to-br from-gray-50 to-gray-100 border border-gray-300 rounded-lg shadow-sm hover:shadow-md active:shadow-[inset_3px_3px_6px_#bebebe,inset_-3px_-3px_6px_#ffffff] transition-all duration-200 disabled:opacity-60 disabled:cursor-none"
                         >
                             {isLoading ? (
                                 <span className="flex items-center justify-center">
@@ -336,7 +336,9 @@ const ForgotPassword = () => {
                                     Resending...
                                 </span>
                             ) : countdown > 0 ? (
-                                <span>Resend email in {countdown}s</span>
+                                <span>
+                                    Resend email in <span className="font-semibold">{countdown}</span> s
+                                </span>
                             ) : (
                                 <span>Resend reset link</span>
                             )}
